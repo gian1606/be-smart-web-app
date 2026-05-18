@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { Bell, ChevronDown, UserCircle } from "lucide-react";
-import { NOTIFICATIONS } from "../../mock/data";
+import { NOTIFICATIONS } from "../../../mock/data";
 
 const ROUTE_LABELS = {
   "/dashboard":     "Dashboard",
@@ -37,25 +37,18 @@ export default function TopHeader() {
 
       {/* Right controls */}
       <div className="flex items-center gap-4">
-        {/* Notification bell */}
         <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
           <Bell size={18} className="text-text-secondary" />
           {unread > 0 && (
             <span
               className="absolute top-1 right-1 flex items-center justify-center rounded-full text-white font-bold"
-              style={{
-                width: 16,
-                height: 16,
-                fontSize: 9,
-                background: "#D32F2F",
-              }}
+              style={{ width: 16, height: 16, fontSize: 9, background: "#D32F2F" }}
             >
               {unread}
             </span>
           )}
         </button>
 
-        {/* Admin info */}
         <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 rounded-lg px-2 py-1.5 transition-colors">
           <div
             className="flex items-center justify-center rounded-full"

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CheckCircle, Send, MapPin, Clock, Ruler, Cpu } from "lucide-react";
 import MapView from "../../components/ui/MapView";
-import { BINS, TRUCKS, OPTIMIZED_ROUTE, CLUSTER_ADMINS, CLUSTERS } from "../mock/data";
+import { BINS, TRUCKS, OPTIMIZED_ROUTE, CLUSTER_ADMINS, CLUSTERS } from "../../mock/data";
 
 export default function MapCollection() {
   const [optimized, setOptimized] = useState(false);
@@ -9,7 +9,6 @@ export default function MapCollection() {
   const [sending, setSending] = useState(false);
 
   const route = OPTIMIZED_ROUTE;
-  const routeBins = route.bins.map((id) => BINS.find((b) => b.id === id)).filter(Boolean);
   const clusterLabel = CLUSTERS.find((c) => c.id === route.cluster)?.label ?? route.cluster;
   const sentToAdmin = CLUSTER_ADMINS.find((u) => u.assignedCluster === route.cluster);
 

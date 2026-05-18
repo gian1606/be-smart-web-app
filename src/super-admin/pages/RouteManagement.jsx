@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Plus, Eye, Send, ChevronLeft, ChevronRight } from "lucide-react";
 import StatusBadge from "../../components/ui/StatusBadge";
-import { ROUTES, CLUSTERS } from "../mock/data";
+import { ROUTES, CLUSTERS } from "../../mock/data";
 
 const PAGE_SIZE = 5;
 

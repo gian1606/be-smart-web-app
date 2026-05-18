@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // ── Single shared login ────────────────────────────────────────────────────────
-import Login from "./pages/Login";
+import Login from "./super-admin/pages/Login";
 
 // ── Super Admin ────────────────────────────────────────────────────────────────
-import SuperAdminShell   from "./super-admin/layout/AppShell";
+import SuperAdminShell   from "./super-admin/components/layout/AppShell";
 import SADashboard       from "./super-admin/pages/Dashboard";
 import SAMapCollection   from "./super-admin/pages/MapCollection";
 import SARouteManagement from "./super-admin/pages/RouteManagement";
@@ -22,6 +22,15 @@ import CAUserManagement     from "./cluster-admin/pages/UserManagement";
 import CAReports            from "./cluster-admin/pages/Reports";
 import CANotifications      from "./cluster-admin/pages/Notifications";
 
+// ── Collector Admin ────────────────────────────────────────────────────────────
+import CollectorAdminShell    from "./collector-admin/components/layout/AppShell";
+import CollectorDashboard     from "./collector-admin/pages/Dashboard";
+import CollectorMapCollection from "./collector-admin/pages/MapCollection";
+import CollectorReports       from "./collector-admin/pages/Reports";
+import CollectorUnits         from "./collector-admin/pages/CollectorUnitManagement";
+import CollectorUserMgmt      from "./collector-admin/pages/UserManagement";
+import CollectorSettings      from "./collector-admin/pages/Settings";
+
 // ── Shared ─────────────────────────────────────────────────────────────────────
 import ComingSoon from "./components/ui/ComingSoon";
 
@@ -29,7 +38,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* ── Login (shared, role determined by credentials) ────────────────── */}
+
+        {/* ── Login (shared — role determined by credentials) ───────────────── */}
         <Route path="/"      element={<Login />} />
         <Route path="/login" element={<Login />} />
 
@@ -76,6 +86,17 @@ export default function App() {
               </div>
             }
           />
+        </Route>
+
+        {/* ── Collector Admin ───────────────────────────────────────────────── */}
+        <Route path="/ca" element={<CollectorAdminShell />}>
+          <Route index element={<Navigate to="/ca/dashboard" replace />} />
+          <Route path="dashboard" element={<CollectorDashboard />} />
+          <Route path="map"       element={<CollectorMapCollection />} />
+          <Route path="reports"   element={<CollectorReports />} />
+          <Route path="units"     element={<CollectorUnits />} />
+          <Route path="users"     element={<CollectorUserMgmt />} />
+          <Route path="settings"  element={<CollectorSettings />} />
         </Route>
 
         {/* ── Catch-all ─────────────────────────────────────────────────────── */}

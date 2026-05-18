@@ -1,0 +1,61 @@
+import { NavLink, useNavigate } from "react-router-dom";
+import { LayoutGrid, Map, BarChart2, Truck, Users, Settings, Leaf, ChevronLeft } from "lucide-react";
+import { CA_CREDENTIALS } from "../../../mock/data";
+
+const NAV_ITEMS = [
+  { to: "/ca/dashboard", icon: LayoutGrid, label: "Dashboard" },
+  { to: "/ca/map",       icon: Map,        label: "Map & Collection" },
+  { to: "/ca/reports",   icon: BarChart2,  label: "Reports & Analytics", soon: true },
+  { to: "/ca/units",     icon: Truck,      label: "Collector Unit Mgmt." },
+  { to: "/ca/users",     icon: Users,      label: "User Management" },
+  { to: "/ca/settings",  icon: Settings,   label: "Settings",            soon: true },
+];
+
+export default function CASidebar() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    sessionStorage.removeItem("bs_ca_auth");
+    navigate("/ca/login");
+  }
+
+  return (
+    <aside className="fixed left-0 top-0 h-screen flex flex-col z-30" style={{ width: 240, background: "#1B5E20" }}>
+      <div className="px-4 pt-6 pb-4 border-b border-white/10">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="flex items-center justify-center rounded-lg flex-shrink-0" style={{ width: 36, height: 36, background: "#2E7D32" }}>
+            <Leaf size={20} color="#fff" />
+          </div>
+          <div>
+            <div className="font-bold text-white leading-tight" style={{ fontSize: 17 }}>BE-SMART</div>
+            <div className="text-white/50 leading-tight" style={{ fontSize: 11 }}>Batangas City</div>
+          </div>
+        </div>
+        <div className="rounded-lg px-3 py-2 flex flex-col gap-0.5" style={{ background: "rgba(255,255,255,0.08)" }}>
+          <div className="text-white/50 uppercase tracking-widest" style={{ fontSize: 9 }}>Logged in as</div>
+          <div className="text-white font-semibold leading-tight" style={{ fontSize: 12 }}>{CA_CREDENTIALS.name}</div>
+          <div className="text-white/50 leading-tight" style={{ fontSize: 11 }}>Collector Admin · Cluster 1</div>
+        </div>
+      </div>
+
+      <nav className="flex-1 overflow-y-auto py-3 px-2">
+        {NAV_ITEMS.map(({ to, icon: Icon, label, soon }) => (
+          <NavLink key={to} to={to}
+            className={({ isActive }) => `flex items-center gap-3 px-3 py-2.5 rounded-lg mb-0.5 transition-colors relative ${isActive ? "text-white font-semibold" : "text-white/65 hover:text-white hover:bg-white/10"}`}
+            style={({ isActive }) => (isActive ? { background: "#2E7D32" } : {})}
+          >
+            <Icon size={17} />
+            <span style={{ fontSize: 14 }}>{label}</span>
+            {soon && <span className="ml-auto rounded-full px-2 py-0.5 font-medium" style={{ fontSize: 10, background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}>Soon</span>}
+          </NavLink>
+        ))}
+      </nav>
+
+      <div className="px-2 pb-5 border-t border-white/10 pt-3">
+        <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-white/60 hover:text-white hover:bg-white/10 transition-colors" style={{ fontSize: 13 }}>
+          <ChevronLeft size={15} />Sign Out
+        </button>
+      </div>
+    </aside>
+  );
+}
