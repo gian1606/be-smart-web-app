@@ -2,33 +2,31 @@ import { NavLink, useNavigate } from "react-router-dom";
 import {
   LayoutGrid,
   Map,
-  Route,
-  BarChart2,
-  Building2,
+  Gift,
+  Trophy,
   Users,
+  Bell,
   Settings,
   Leaf,
   ChevronLeft,
-  Bell,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { to: "/dashboard",     icon: LayoutGrid, label: "Dashboard" },
-  { to: "/map",           icon: Map,        label: "Map & Collection" },
-  { to: "/routes",        icon: Route,      label: "Route Management" },
-  { to: "/reports",       icon: BarChart2,  label: "Reports & Analytics", soon: true },
-  { to: "/mrf",           icon: Building2,  label: "MRF Management",      soon: true },
-  { to: "/users",         icon: Users,      label: "User Management" },
-  { to: "/notifications", icon: Bell,       label: "Notifications" },
-  { to: "/settings",      icon: Settings,   label: "Settings",            soon: true },
+  { to: "/pb/dashboard",      icon: LayoutGrid, label: "Dashboard" },
+  { to: "/pb/map",            icon: Map,        label: "Live Map" },
+  { to: "/pb/rewards",        icon: Gift,       label: "Rewards Management" },
+  { to: "/pb/leaderboard",    icon: Trophy,     label: "Leaderboard" },
+  { to: "/pb/users",          icon: Users,      label: "MRF Personnel" },
+  { to: "/pb/notifications",  icon: Bell,       label: "Notifications" },
+  { to: "/pb/settings",       icon: Settings,   label: "Settings", soon: true },
 ];
 
-export default function Sidebar() {
+export default function PBSidebar() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    sessionStorage.removeItem("bs_auth");
-    navigate("/login");
+    sessionStorage.removeItem("bs_pb_auth");
+    navigate("/pb/login");
   }
 
   return (
@@ -57,14 +55,16 @@ export default function Sidebar() {
 
         {/* Logged-in chip */}
         <div
-          className="rounded-lg px-3 py-2 flex flex-col gap-0.5"
+          className="rounded-full px-3 py-1.5 flex items-center gap-2"
           style={{ background: "rgba(255,255,255,0.08)" }}
         >
-          <div className="text-white/50 uppercase tracking-widest" style={{ fontSize: 9 }}>
-            Logged in as
-          </div>
-          <div className="text-white font-semibold leading-tight" style={{ fontSize: 12 }}>
-            Super Admin
+          <div>
+            <div className="text-white/50 uppercase tracking-widest" style={{ fontSize: 9 }}>
+              Logged in as
+            </div>
+            <div className="text-white font-semibold" style={{ fontSize: 12 }}>
+              Punong Barangay
+            </div>
           </div>
         </div>
       </div>
@@ -82,7 +82,9 @@ export default function Sidebar() {
                   : "text-white/65 hover:text-white hover:bg-white/10"
               }`
             }
-            style={({ isActive }) => (isActive ? { background: "#2E7D32" } : {})}
+            style={({ isActive }) =>
+              isActive ? { background: "#2E7D32" } : {}
+            }
           >
             <Icon size={17} />
             <span style={{ fontSize: 14 }}>{label}</span>

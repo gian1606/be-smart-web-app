@@ -4,14 +4,14 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./super-admin/pages/Login";
 
 // ── Super Admin ────────────────────────────────────────────────────────────────
-import SuperAdminShell   from "./super-admin/components/layout/AppShell";
-import SADashboard       from "./super-admin/pages/Dashboard";
-import SAMapCollection   from "./super-admin/pages/MapCollection";
-import SARouteManagement from "./super-admin/pages/RouteManagement";
-import SAUserManagement  from "./super-admin/pages/UserManagement";
-import SAReports         from "./super-admin/pages/Reports";
-import SAMRFManagement   from "./super-admin/pages/MRFManagement";
-import SANotifications   from "./super-admin/pages/Notifications";
+import SuperAdminShell   from "./super-admin/AppShell";
+import SADashboard       from "./super-admin/Dashboard";
+import SAMapCollection   from "./super-admin/MapCollection";
+import SARouteManagement from "./super-admin/RouteManagement";
+import SAUserManagement  from "./super-admin/UserManagement";
+import SAReports         from "./super-admin/Reports";
+import SAMRFManagement   from "./super-admin/MRFManagement";
+import SANotifications   from "./super-admin/Notifications";
 
 // ── Cluster Admin ──────────────────────────────────────────────────────────────
 import ClusterAdminShell    from "./cluster-admin/layout/AppShell";
@@ -30,6 +30,15 @@ import CollectorReports       from "./collector-admin/pages/Reports";
 import CollectorUnits         from "./collector-admin/pages/CollectorUnitManagement";
 import CollectorUserMgmt      from "./collector-admin/pages/UserManagement";
 import CollectorSettings      from "./collector-admin/pages/Settings";
+
+// ── Punong Barangay ────────────────────────────────────────────────────────────
+import PBAppShell       from "./punong-barangay/PBAppShell";
+import PBDashboard      from "./punong-barangay/PBDashboard";
+import PBMapView        from "./punong-barangay/PBMapView";
+import PBNotifications  from "./punong-barangay/PBNotifications";
+import Rewards          from "./punong-barangay/Rewards";
+import Leaderboard      from "./punong-barangay/Leaderboard";
+import MRFPersonnel     from "./punong-barangay/MRFPersonnel";
 
 // ── Shared ─────────────────────────────────────────────────────────────────────
 import ComingSoon from "./components/ui/ComingSoon";
@@ -97,6 +106,28 @@ export default function App() {
           <Route path="units"     element={<CollectorUnits />} />
           <Route path="users"     element={<CollectorUserMgmt />} />
           <Route path="settings"  element={<CollectorSettings />} />
+        </Route>
+
+        {/* ── Punong Barangay ───────────────────────────────────────────────── */}
+        <Route path="/pb" element={<PBAppShell />}>
+          <Route index element={<Navigate to="/pb/dashboard" replace />} />
+          <Route path="dashboard"     element={<PBDashboard />} />
+          <Route path="map"           element={<PBMapView />} />
+          <Route path="rewards"       element={<Rewards />} />
+          <Route path="leaderboard"   element={<Leaderboard />} />
+          <Route path="users"         element={<MRFPersonnel />} />
+          <Route path="notifications" element={<PBNotifications />} />
+          <Route
+            path="settings"
+            element={
+              <div className="flex flex-col gap-6">
+                <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Settings</h1>
+                <div className="bg-white rounded-xl" style={{ border: "1px solid #E5E7EB" }}>
+                  <ComingSoon title="Settings" description="System configuration and preferences are coming in a future update." />
+                </div>
+              </div>
+            }
+          />
         </Route>
 
         {/* ── Catch-all ─────────────────────────────────────────────────────── */}
