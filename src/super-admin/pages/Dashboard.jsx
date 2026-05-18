@@ -12,17 +12,16 @@ import {
   TRUCKS,
   MRF_LOCATIONS,
   RECENT_ACTIVITY,
-  CLUSTERS,
-} from "../mock/data";
+} from "../../mock/data";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [cluster, setCluster] = useState("all");
 
-  const filteredBins  = cluster === "all" ? BINS : BINS.filter((b) => b.cluster === cluster);
+  const filteredBins   = cluster === "all" ? BINS : BINS.filter((b) => b.cluster === cluster);
   const filteredTrucks = TRUCKS;
-  const filteredMRFs  = cluster === "all" ? MRF_LOCATIONS : MRF_LOCATIONS.filter((m) => m.cluster === cluster);
-  const fullBins      = filteredBins.filter((b) => b.status === "full");
+  const filteredMRFs   = cluster === "all" ? MRF_LOCATIONS : MRF_LOCATIONS.filter((m) => m.cluster === cluster);
+  const fullBins       = filteredBins.filter((b) => b.status === "full");
 
   const stats = cluster === "all"
     ? DASHBOARD_STATS
@@ -69,7 +68,7 @@ export default function Dashboard() {
       </div>
 
       {/* Cluster filter */}
-      <ClusterFilter value={cluster} onChange={setCluster} clusters={CLUSTERS} />
+      <ClusterFilter value={cluster} onChange={setCluster} />
 
       {/* Stats row */}
       <div className="grid grid-cols-4 gap-4">

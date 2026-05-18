@@ -219,3 +219,98 @@ export const MOCK_CREDENTIALS = {
   email: "superadmin@besmart.gov.ph",
   password: "admin123",
 };
+
+// ─── Collector Admin Mock Data ─────────────────────────────────────────────────
+
+// ── Collector Admin credential ─────────────────────────────────────────────────
+export const CA_CREDENTIALS = {
+  email: "collector.admin@besmart.gov.ph",
+  password: "collector123",
+  name: "Juan dela Cruz",
+  assignedCluster: "c1",
+};
+
+// ── Collectors (field workers) ─────────────────────────────────────────────────
+// role: 'collector'
+// status: 'active' | 'inactive'
+export const COLLECTORS = [
+  { id: "col1", name: "Ramon Dela Torre",  email: "ramon.delatorre@besmart.gov.ph",  cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T07:00:00Z", assignedTruck: "ct1" },
+  { id: "col2", name: "Efren Magpayo",     email: "efren.magpayo@besmart.gov.ph",    cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T06:50:00Z", assignedTruck: "ct1" },
+  { id: "col3", name: "Dante Villanueva",  email: "dante.villanueva@besmart.gov.ph", cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-17T18:00:00Z", assignedTruck: "ct2" },
+  { id: "col4", name: "Noel Castillo",     email: "noel.castillo@besmart.gov.ph",    cluster: "c1", role: "collector", status: "inactive", lastLogin: "2025-05-10T08:00:00Z", assignedTruck: null  },
+  { id: "col5", name: "Arnel Bautista",    email: "arnel.bautista@besmart.gov.ph",   cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T07:10:00Z", assignedTruck: "ct3" },
+  { id: "col6", name: "Rodel Fernandez",   email: "rodel.fernandez@besmart.gov.ph",  cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T07:05:00Z", assignedTruck: "ct3" },
+];
+
+// ── Collector Units (garbage trucks + assigned collectors) ─────────────────────
+// status: 'en_route' | 'idle' | 'at_depot'
+export const COLLECTOR_UNITS = [
+  {
+    id: "ct1",
+    name: "Unit Alpha",
+    plateNumber: "BTC-1021",
+    cluster: "c1",
+    status: "en_route",
+    collectorIds: ["col1", "col2"],
+    posX: 0.35,
+    posY: 0.26,
+  },
+  {
+    id: "ct2",
+    name: "Unit Bravo",
+    plateNumber: "BTC-1034",
+    cluster: "c1",
+    status: "idle",
+    collectorIds: ["col3"],
+    posX: 0.20,
+    posY: 0.50,
+  },
+  {
+    id: "ct3",
+    name: "Unit Charlie",
+    plateNumber: "BTC-1047",
+    cluster: "c1",
+    status: "at_depot",
+    collectorIds: ["col5", "col6"],
+    posX: 0.10,
+    posY: 0.85,
+  },
+];
+
+// ── Incoming Optimized Route (sent by Super Admin to this Collector Admin) ──────
+export const CA_INCOMING_ROUTE = {
+  routeId: "RT-2025-006",
+  cluster: "c1",
+  sentBy: "Super Admin",
+  sentAt: "2025-05-18T10:30:00Z",
+  bins: ["b1", "b3", "b12"],
+  distanceKm: 4.7,
+  estimatedMinutes: 38,
+  algorithm: "Nearest Neighbor",
+  optimizedAt: "2025-05-18T10:30:00Z",
+  status: "delivered", // delivered | scheduled | in_progress | completed
+  order: [
+    { label: "Truck Depot", type: "depot", posX: 0.10, posY: 0.85 },
+    { binId: "b3", label: "Bin B-01", street: "Evangelista St.", posX: 0.45, posY: 0.18 },
+    { binId: "b1", label: "Bin A-01", street: "P. Burgos St.",   posX: 0.28, posY: 0.22 },
+    { binId: "b12", label: "Bin F-02", street: "Pallocan West Ave.", posX: 0.18, posY: 0.70 },
+  ],
+};
+
+// ── Collector Admin Dashboard Stats ───────────────────────────────────────────
+export const CA_DASHBOARD_STATS = {
+  totalBins: 16,       // bins in cluster c1
+  fullBins: 5,
+  collectedToday: 4,
+  activeUnits: 3,
+};
+
+// ── Collector Admin Recent Activity ───────────────────────────────────────────
+export const CA_RECENT_ACTIVITY = [
+  { id: "ca1", event: "route_sent",          description: "Optimized route RT-2025-006 received from Super Admin",      timestamp: "2025-05-18T10:30:00Z" },
+  { id: "ca2", event: "collection_confirmed",description: "Bin B-02 (Cuta) marked as collected by Unit Alpha",          timestamp: "2025-05-18T08:20:00Z" },
+  { id: "ca3", event: "bin_reported",        description: "Bin A-01 (Alangilan) reported full by resident",             timestamp: "2025-05-18T06:12:00Z" },
+  { id: "ca4", event: "collection_confirmed",description: "Bin F-01 (Pallocan West) marked as collected by Unit Bravo", timestamp: "2025-05-18T07:15:00Z" },
+  { id: "ca5", event: "route_completed",     description: "Route RT-2025-005 completed — all bins collected",           timestamp: "2025-05-17T14:00:00Z" },
+  { id: "ca6", event: "bin_reported",        description: "Bin B-01 (Cuta) reported full by resident",                  timestamp: "2025-05-18T07:45:00Z" },
+];

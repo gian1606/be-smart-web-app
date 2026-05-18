@@ -9,12 +9,21 @@ const MOCK_USERS = [
     password: "admin123",
     role: "super_admin",
     redirect: "/super-admin/dashboard",
+    sessionKey: "bs_auth",
   },
   {
     email: "cluster1@besmart.gov.ph",
     password: "cluster123",
     role: "cluster_admin",
     redirect: "/cluster-admin/dashboard",
+    sessionKey: "bs_auth",  // ClusterAdminAppShell checks bs_auth + bs_role === "cluster_admin"
+  },
+  {
+    email: "collector.admin@besmart.gov.ph",
+    password: "collector123",
+    role: "collector_admin",
+    redirect: "/ca/dashboard",
+    sessionKey: "bs_ca_auth",
   },
 ];
 
@@ -47,7 +56,7 @@ export default function Login() {
         (u) => u.email === email && u.password === password
       );
       if (match) {
-        sessionStorage.setItem("bs_auth", "true");
+        sessionStorage.setItem(match.sessionKey, "true");
         sessionStorage.setItem("bs_role", match.role);
         navigate(match.redirect);
       } else {
@@ -207,13 +216,9 @@ export default function Login() {
             type="submit"
             disabled={loading}
             className="w-full rounded-lg py-3 font-semibold text-white transition-opacity mt-1"
-            style={{
-              background: "#2E7D32",
-              fontSize: 15,
-              opacity: loading ? 0.7 : 1,
-            }}
+            style={{ background: "#2E7D32", fontSize: 15, opacity: loading ? 0.7 : 1 }}
           >
-            {loading ? "Signing in…" : "Sign In to Dashboard"}
+            {loading ? "Signing in…" : "Sign In"}
           </button>
         </form>
 
