@@ -11,7 +11,21 @@
  *   height      — CSS height string (default "100%")
  */
 
-import { STATUS_COLORS } from "../../mock/data";
+// Shared status color map — keep in sync with both mock data files
+const STATUS_COLORS = {
+  full:        "#D32F2F",
+  collected:   "#2E7D32",
+  missed:      "#F57C00",
+  ok:          "#2E7D32",
+  available:   "#2E7D32",
+  pending:     "#F57C00",
+  completed:   "#2E7D32",
+  delivered:   "#2E7D32",
+  in_progress: "#1976D2",
+  en_route:    "#1976D2",
+  idle:        "#6B7280",
+  at_depot:    "#9CA3AF",
+};
 
 // Simple SVG polyline connecting route stops
 function RouteLine({ stops }) {

@@ -1,11 +1,27 @@
 /**
  * ClusterFilter — pill row for filtering by cluster
- * Props: value (cluster id or "all"), onChange
+ * Props:
+ *   value    — selected cluster id or "all"
+ *   onChange — callback(id)
+ *   clusters — array of { id, label } (optional, falls back to built-in list)
+ *   allLabel — label for the "all" pill (default "All Clusters")
  */
-import { CLUSTERS } from "../../mock/data";
 
-export default function ClusterFilter({ value, onChange }) {
-  const options = [{ id: "all", label: "All Clusters" }, ...CLUSTERS];
+const DEFAULT_CLUSTERS = [
+  { id: "c1", label: "Cluster 1 (North Zone)" },
+  { id: "c2", label: "Cluster 2" },
+  { id: "c3", label: "Cluster 3" },
+  { id: "c4", label: "Cluster 4" },
+  { id: "c5", label: "Cluster 5" },
+];
+
+export default function ClusterFilter({
+  value,
+  onChange,
+  clusters = DEFAULT_CLUSTERS,
+  allLabel = "All Clusters",
+}) {
+  const options = [{ id: "all", label: allLabel }, ...clusters];
 
   return (
     <div className="flex items-center gap-2 flex-wrap">

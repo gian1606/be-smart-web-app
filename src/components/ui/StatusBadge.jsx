@@ -17,7 +17,8 @@ const CONFIG = {
   en_route:    { bg: "#E3F2FD", color: "#1976D2", label: "En Route" },
   idle:        { bg: "#F3F4F6", color: "#6B7280", label: "Idle" },
   at_depot:    { bg: "#F3F4F6", color: "#9CA3AF", label: "At Depot" },
-  urgent:      { bg: "#FFEBEE", color: "#D32F2F", label: "Urgent" },
+  on_route:    { bg: "#E3F2FD", color: "#1976D2", label: "On Route" },
+  off_duty:    { bg: "#F3F4F6", color: "#9CA3AF", label: "Off Duty" },
   normal:      { bg: "#F3F4F6", color: "#6B7280", label: "Normal" },
 };
 

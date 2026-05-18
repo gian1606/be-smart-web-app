@@ -1,7 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Leaf, Lock, ShieldCheck } from "lucide-react";
-import { MOCK_CREDENTIALS } from "../mock/data";
+import { Eye, EyeOff, Leaf, Lock } from "lucide-react";
+
+// ── Hardcoded credentials (replace with backend auth in production) ────────────
+const MOCK_USERS = [
+  {
+    email: "superadmin@besmart.gov.ph",
+    password: "admin123",
+    role: "super_admin",
+    redirect: "/super-admin/dashboard",
+  },
+  {
+    email: "cluster1@besmart.gov.ph",
+    password: "cluster123",
+    role: "cluster_admin",
+    redirect: "/cluster-admin/dashboard",
+  },
+];
 
 export default function Login() {
   const navigate = useNavigate();
@@ -14,7 +29,8 @@ export default function Login() {
   function validate() {
     const e = {};
     if (!email.trim()) e.email = "Email address is required.";
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Enter a valid email address.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      e.email = "Enter a valid email address.";
     if (!password) e.password = "Password is required.";
     return e;
   }
@@ -25,14 +41,15 @@ export default function Login() {
     if (Object.keys(e).length) { setErrors(e); return; }
 
     setLoading(true);
-    // Simulate async auth
+    // Simulate async auth — swap this block for a real API call later
     setTimeout(() => {
-      if (
-        email === MOCK_CREDENTIALS.email &&
-        password === MOCK_CREDENTIALS.password
-      ) {
+      const match = MOCK_USERS.find(
+        (u) => u.email === email && u.password === password
+      );
+      if (match) {
         sessionStorage.setItem("bs_auth", "true");
-        navigate("/dashboard");
+        sessionStorage.setItem("bs_role", match.role);
+        navigate(match.redirect);
       } else {
         setErrors({ form: "Invalid email or password. Please try again." });
         setLoading(false);
@@ -44,7 +61,8 @@ export default function Login() {
     <div
       className="min-h-screen flex items-center justify-center p-6"
       style={{
-        background: "linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #1B5E20 100%)",
+        background:
+          "linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #1B5E20 100%)",
       }}
     >
       <div
@@ -65,11 +83,14 @@ export default function Login() {
         </div>
 
         {/* Wordmark */}
-        <div className="font-bold text-text-primary text-center" style={{ fontSize: 28 }}>
+        <div
+          className="font-bold text-text-primary text-center"
+          style={{ fontSize: 28 }}
+        >
           BE-SMART
         </div>
         <div
-          className="text-center mt-1 mb-5"
+          className="text-center mt-1 mb-8"
           style={{ fontSize: 12, color: "#388E3C", maxWidth: 320, lineHeight: 1.5 }}
         >
           Batangas Environmental Segregation, Monitoring,
@@ -77,22 +98,12 @@ export default function Login() {
           Analytics &amp; Rewards Technology
         </div>
 
-        {/* Role chip */}
-        <div
-          className="flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-          style={{
-            background: "#E8F5E9",
-            border: "1px solid #A5D6A7",
-            fontSize: 13,
-          }}
-        >
-          <ShieldCheck size={15} color="#2E7D32" />
-          <span className="font-semibold text-primary">Super Admin</span>
-          <span className="text-text-secondary">· Administrative Portal</span>
-        </div>
-
         {/* Form */}
-        <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4" noValidate>
+        <form
+          onSubmit={handleSubmit}
+          className="w-full flex flex-col gap-4"
+          noValidate
+        >
           {errors.form && (
             <div
               className="rounded-lg px-4 py-3 text-center font-medium"
@@ -104,47 +115,77 @@ export default function Login() {
 
           {/* Email */}
           <div className="flex flex-col gap-1">
-            <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>
+            <label
+              className="font-medium text-text-primary"
+              style={{ fontSize: 13 }}
+            >
               Email Address
             </label>
             <input
               type="email"
               value={email}
-              onChange={(e) => { setEmail(e.target.value); setErrors((p) => ({ ...p, email: undefined, form: undefined })); }}
-              placeholder="superadmin@besmart.gov.ph"
+              onChange={(e) => {
+                setEmail(e.target.value);
+                setErrors((p) => ({ ...p, email: undefined, form: undefined }));
+              }}
+              placeholder="your@besmart.gov.ph"
               className="w-full rounded-lg px-4 py-2.5 outline-none transition-colors"
               style={{
                 fontSize: 14,
-                border: errors.email ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                border: errors.email
+                  ? "1.5px solid #D32F2F"
+                  : "1.5px solid #E5E7EB",
                 background: "#F9FAFB",
               }}
               onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
-              onBlur={(e) => (e.target.style.borderColor = errors.email ? "#D32F2F" : "#E5E7EB")}
+              onBlur={(e) =>
+                (e.target.style.borderColor = errors.email
+                  ? "#D32F2F"
+                  : "#E5E7EB")
+              }
             />
             {errors.email && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.email}</span>
+              <span style={{ fontSize: 12, color: "#D32F2F" }}>
+                {errors.email}
+              </span>
             )}
           </div>
 
           {/* Password */}
           <div className="flex flex-col gap-1">
-            <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>
+            <label
+              className="font-medium text-text-primary"
+              style={{ fontSize: 13 }}
+            >
               Password
             </label>
             <div className="relative">
               <input
                 type={showPw ? "text" : "password"}
                 value={password}
-                onChange={(e) => { setPassword(e.target.value); setErrors((p) => ({ ...p, password: undefined, form: undefined })); }}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  setErrors((p) => ({
+                    ...p,
+                    password: undefined,
+                    form: undefined,
+                  }));
+                }}
                 placeholder="••••••••"
                 className="w-full rounded-lg px-4 py-2.5 pr-11 outline-none transition-colors"
                 style={{
                   fontSize: 14,
-                  border: errors.password ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                  border: errors.password
+                    ? "1.5px solid #D32F2F"
+                    : "1.5px solid #E5E7EB",
                   background: "#F9FAFB",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
-                onBlur={(e) => (e.target.style.borderColor = errors.password ? "#D32F2F" : "#E5E7EB")}
+                onBlur={(e) =>
+                  (e.target.style.borderColor = errors.password
+                    ? "#D32F2F"
+                    : "#E5E7EB")
+                }
               />
               <button
                 type="button"
@@ -155,7 +196,9 @@ export default function Login() {
               </button>
             </div>
             {errors.password && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.password}</span>
+              <span style={{ fontSize: 12, color: "#D32F2F" }}>
+                {errors.password}
+              </span>
             )}
           </div>
 
@@ -176,7 +219,7 @@ export default function Login() {
 
         {/* Security note */}
         <div
-          className="flex items-center gap-1.5 mt-5"
+          className="flex items-center gap-1.5 mt-6"
           style={{ fontSize: 12, color: "#9CA3AF" }}
         >
           <Lock size={12} />

@@ -5,7 +5,9 @@ const EVENT_COLORS = {
   bin_reported:         "#D32F2F",
   collection_confirmed: "#2E7D32",
   route_sent:           "#1976D2",
+  route_received:       "#1976D2",
   route_completed:      "#2E7D32",
+  barangay_created:     "#6B7280",
 };
 
 export default function ActivityRow({ event, description, timestamp }) {
