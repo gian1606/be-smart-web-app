@@ -1,4 +1,4 @@
-// ─── BE-SMART Super Admin Mock Data ───────────────────────────────────────────
+﻿// ─── BE-SMART Super Admin Mock Data ───────────────────────────────────────────
 // Mirrors the mobile app's data shapes for seamless future backend integration.
 // Status strings, barangay names, and color mappings must stay in sync with mobile.
 
@@ -220,9 +220,15 @@ export const MOCK_CREDENTIALS = {
   password: "admin123",
 };
 
+
+// ── Punong Barangay Credentials ───────────────────────────────────────────────
+export const PB_CREDENTIALS = {
+  email: "punongbarangay@besmart.gov.ph",
+  password: "pb123",
+};
+
 // ─── Collector Admin Mock Data ─────────────────────────────────────────────────
 
-// ── Collector Admin credential ─────────────────────────────────────────────────
 export const CA_CREDENTIALS = {
   email: "collector.admin@besmart.gov.ph",
   password: "collector123",
@@ -231,8 +237,6 @@ export const CA_CREDENTIALS = {
 };
 
 // ── Collectors (field workers) ─────────────────────────────────────────────────
-// role: 'collector'
-// status: 'active' | 'inactive'
 export const COLLECTORS = [
   { id: "col1", name: "Ramon Dela Torre",  email: "ramon.delatorre@besmart.gov.ph",  cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T07:00:00Z", assignedTruck: "ct1" },
   { id: "col2", name: "Efren Magpayo",     email: "efren.magpayo@besmart.gov.ph",    cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T06:50:00Z", assignedTruck: "ct1" },
@@ -242,42 +246,14 @@ export const COLLECTORS = [
   { id: "col6", name: "Rodel Fernandez",   email: "rodel.fernandez@besmart.gov.ph",  cluster: "c1", role: "collector", status: "active",   lastLogin: "2025-05-18T07:05:00Z", assignedTruck: "ct3" },
 ];
 
-// ── Collector Units (garbage trucks + assigned collectors) ─────────────────────
-// status: 'en_route' | 'idle' | 'at_depot'
+// ── Collector Units ────────────────────────────────────────────────────────────
 export const COLLECTOR_UNITS = [
-  {
-    id: "ct1",
-    name: "Unit Alpha",
-    plateNumber: "BTC-1021",
-    cluster: "c1",
-    status: "en_route",
-    collectorIds: ["col1", "col2"],
-    posX: 0.35,
-    posY: 0.26,
-  },
-  {
-    id: "ct2",
-    name: "Unit Bravo",
-    plateNumber: "BTC-1034",
-    cluster: "c1",
-    status: "idle",
-    collectorIds: ["col3"],
-    posX: 0.20,
-    posY: 0.50,
-  },
-  {
-    id: "ct3",
-    name: "Unit Charlie",
-    plateNumber: "BTC-1047",
-    cluster: "c1",
-    status: "at_depot",
-    collectorIds: ["col5", "col6"],
-    posX: 0.10,
-    posY: 0.85,
-  },
+  { id: "ct1", name: "Unit Alpha",   plateNumber: "BTC-1021", cluster: "c1", status: "en_route", collectorIds: ["col1", "col2"], posX: 0.35, posY: 0.26 },
+  { id: "ct2", name: "Unit Bravo",   plateNumber: "BTC-1034", cluster: "c1", status: "idle",     collectorIds: ["col3"],         posX: 0.20, posY: 0.50 },
+  { id: "ct3", name: "Unit Charlie", plateNumber: "BTC-1047", cluster: "c1", status: "at_depot", collectorIds: ["col5", "col6"], posX: 0.10, posY: 0.85 },
 ];
 
-// ── Incoming Optimized Route (sent by Super Admin to this Collector Admin) ──────
+// ── Incoming Optimized Route (sent by Super Admin to Collector Admin) ──────────
 export const CA_INCOMING_ROUTE = {
   routeId: "RT-2025-006",
   cluster: "c1",
@@ -288,7 +264,7 @@ export const CA_INCOMING_ROUTE = {
   estimatedMinutes: 38,
   algorithm: "Nearest Neighbor",
   optimizedAt: "2025-05-18T10:30:00Z",
-  status: "delivered", // delivered | scheduled | in_progress | completed
+  status: "delivered",
   order: [
     { label: "Truck Depot", type: "depot", posX: 0.10, posY: 0.85 },
     { binId: "b3", label: "Bin B-01", street: "Evangelista St.", posX: 0.45, posY: 0.18 },
@@ -297,20 +273,115 @@ export const CA_INCOMING_ROUTE = {
   ],
 };
 
-// ── Collector Admin Dashboard Stats ───────────────────────────────────────────
 export const CA_DASHBOARD_STATS = {
-  totalBins: 16,       // bins in cluster c1
+  totalBins: 16,
   fullBins: 5,
   collectedToday: 4,
   activeUnits: 3,
 };
 
-// ── Collector Admin Recent Activity ───────────────────────────────────────────
 export const CA_RECENT_ACTIVITY = [
   { id: "ca1", event: "route_sent",          description: "Optimized route RT-2025-006 received from Super Admin",      timestamp: "2025-05-18T10:30:00Z" },
   { id: "ca2", event: "collection_confirmed",description: "Bin B-02 (Cuta) marked as collected by Unit Alpha",          timestamp: "2025-05-18T08:20:00Z" },
   { id: "ca3", event: "bin_reported",        description: "Bin A-01 (Alangilan) reported full by resident",             timestamp: "2025-05-18T06:12:00Z" },
   { id: "ca4", event: "collection_confirmed",description: "Bin F-01 (Pallocan West) marked as collected by Unit Bravo", timestamp: "2025-05-18T07:15:00Z" },
-  { id: "ca5", event: "route_completed",     description: "Route RT-2025-005 completed — all bins collected",           timestamp: "2025-05-17T14:00:00Z" },
+  { id: "ca5", event: "route_completed",     description: "Route RT-2025-005 completed - all bins collected",           timestamp: "2025-05-17T14:00:00Z" },
   { id: "ca6", event: "bin_reported",        description: "Bin B-01 (Cuta) reported full by resident",                  timestamp: "2025-05-18T07:45:00Z" },
+];
+
+// ── Rewards ────────────────────────────────────────────────────────────────────
+export const REWARDS = [
+  { id: "rw1", name: "Lucky Me! Canton (5-pack)",  pointsCost: 30,  stock: 80,  status: "available",   description: "5-pack instant canton noodles, assorted flavors." },
+  { id: "rw2", name: "Rice (1 kg)",                pointsCost: 50,  stock: 60,  status: "available",   description: "1 kilogram of well-milled white rice." },
+  { id: "rw3", name: "Canned Sardines (3-pack)",   pointsCost: 40,  stock: 50,  status: "available",   description: "3 cans of sardines in tomato sauce." },
+  { id: "rw4", name: "Cooking Oil (250 ml)",       pointsCost: 60,  stock: 35,  status: "available",   description: "250 ml bottle of refined cooking oil." },
+  { id: "rw5", name: "Sugar (1 kg)",               pointsCost: 45,  stock: 40,  status: "available",   description: "1 kilogram of refined white sugar." },
+  { id: "rw6", name: "Grocery Voucher (P50)",      pointsCost: 150, stock: 20,  status: "available",   description: "P50 grocery voucher redeemable at partner stores." },
+  { id: "rw7", name: "Eco Bag",                    pointsCost: 25,  stock: 100, status: "available",   description: "Reusable eco-friendly shopping bag." },
+  { id: "rw8", name: "Laundry Detergent (500 g)",  pointsCost: 55,  stock: 0,   status: "unavailable", description: "500 g powder detergent for laundry use." },
+];
+
+// ── Leaderboard — Alangilan Barangay Households ───────────────────────────────
+export const LEADERBOARD_PERIODS = {
+  "2025-05": [
+    { rank: 1,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 42, pointsEarned: 840,  badge: "gold"   },
+    { rank: 2,  residentId: "res_002", name: "Dela Cruz Household",   street: "Rizal Ave.",       reportsSubmitted: 38, pointsEarned: 760,  badge: "gold"   },
+    { rank: 3,  residentId: "res_003", name: "Reyes Household",       street: "M. Almario St.",   reportsSubmitted: 35, pointsEarned: 700,  badge: "gold"   },
+    { rank: 4,  residentId: "res_004", name: "Garcia Household",      street: "P. Burgos St.",    reportsSubmitted: 30, pointsEarned: 600,  badge: "silver" },
+    { rank: 5,  residentId: "res_005", name: "Aquino Household",      street: "Evangelista St.",  reportsSubmitted: 27, pointsEarned: 540,  badge: "silver" },
+    { rank: 6,  residentId: "res_006", name: "Bautista Household",    street: "Rizal Ave.",       reportsSubmitted: 24, pointsEarned: 480,  badge: "silver" },
+    { rank: 7,  residentId: "res_007", name: "Fernandez Household",   street: "M. Almario St.",   reportsSubmitted: 21, pointsEarned: 420,  badge: "bronze" },
+    { rank: 8,  residentId: "res_008", name: "Torres Household",      street: "P. Burgos St.",    reportsSubmitted: 18, pointsEarned: 360,  badge: "bronze" },
+    { rank: 9,  residentId: "res_009", name: "Villanueva Household",  street: "Evangelista St.",  reportsSubmitted: 15, pointsEarned: 300,  badge: "bronze" },
+    { rank: 10, residentId: "res_010", name: "Castillo Household",    street: "Rizal Ave.",       reportsSubmitted: 12, pointsEarned: 240,  badge: null     },
+    { rank: 11, residentId: "res_011", name: "Mendoza Household",     street: "M. Almario St.",   reportsSubmitted: 10, pointsEarned: 200,  badge: null     },
+    { rank: 12, residentId: "res_012", name: "Ramos Household",       street: "P. Burgos St.",    reportsSubmitted: 8,  pointsEarned: 160,  badge: null     },
+  ],
+  "2025-04": [
+    { rank: 1,  residentId: "res_003", name: "Reyes Household",       street: "M. Almario St.",   reportsSubmitted: 50, pointsEarned: 1000, badge: "gold"   },
+    { rank: 2,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 45, pointsEarned: 900,  badge: "gold"   },
+    { rank: 3,  residentId: "res_005", name: "Aquino Household",      street: "Evangelista St.",  reportsSubmitted: 40, pointsEarned: 800,  badge: "gold"   },
+    { rank: 4,  residentId: "res_002", name: "Dela Cruz Household",   street: "Rizal Ave.",       reportsSubmitted: 33, pointsEarned: 660,  badge: "silver" },
+    { rank: 5,  residentId: "res_007", name: "Fernandez Household",   street: "M. Almario St.",   reportsSubmitted: 29, pointsEarned: 580,  badge: "silver" },
+    { rank: 6,  residentId: "res_004", name: "Garcia Household",      street: "P. Burgos St.",    reportsSubmitted: 25, pointsEarned: 500,  badge: "silver" },
+    { rank: 7,  residentId: "res_010", name: "Castillo Household",    street: "Rizal Ave.",       reportsSubmitted: 22, pointsEarned: 440,  badge: "bronze" },
+    { rank: 8,  residentId: "res_006", name: "Bautista Household",    street: "Rizal Ave.",       reportsSubmitted: 19, pointsEarned: 380,  badge: "bronze" },
+    { rank: 9,  residentId: "res_012", name: "Ramos Household",       street: "P. Burgos St.",    reportsSubmitted: 16, pointsEarned: 320,  badge: "bronze" },
+    { rank: 10, residentId: "res_008", name: "Torres Household",      street: "P. Burgos St.",    reportsSubmitted: 13, pointsEarned: 260,  badge: null     },
+    { rank: 11, residentId: "res_009", name: "Villanueva Household",  street: "Evangelista St.",  reportsSubmitted: 10, pointsEarned: 200,  badge: null     },
+    { rank: 12, residentId: "res_011", name: "Mendoza Household",     street: "M. Almario St.",   reportsSubmitted: 7,  pointsEarned: 140,  badge: null     },
+  ],
+  "2025-03": [
+    { rank: 1,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 48, pointsEarned: 960,  badge: "gold"   },
+    { rank: 2,  residentId: "res_006", name: "Bautista Household",    street: "Rizal Ave.",       reportsSubmitted: 44, pointsEarned: 880,  badge: "gold"   },
+    { rank: 3,  residentId: "res_002", name: "Dela Cruz Household",   street: "Rizal Ave.",       reportsSubmitted: 37, pointsEarned: 740,  badge: "gold"   },
+    { rank: 4,  residentId: "res_009", name: "Villanueva Household",  street: "Evangelista St.",  reportsSubmitted: 32, pointsEarned: 640,  badge: "silver" },
+    { rank: 5,  residentId: "res_003", name: "Reyes Household",       street: "M. Almario St.",   reportsSubmitted: 28, pointsEarned: 560,  badge: "silver" },
+    { rank: 6,  residentId: "res_011", name: "Mendoza Household",     street: "M. Almario St.",   reportsSubmitted: 23, pointsEarned: 460,  badge: "silver" },
+    { rank: 7,  residentId: "res_005", name: "Aquino Household",      street: "Evangelista St.",  reportsSubmitted: 20, pointsEarned: 400,  badge: "bronze" },
+    { rank: 8,  residentId: "res_004", name: "Garcia Household",      street: "P. Burgos St.",    reportsSubmitted: 17, pointsEarned: 340,  badge: "bronze" },
+    { rank: 9,  residentId: "res_007", name: "Fernandez Household",   street: "M. Almario St.",   reportsSubmitted: 14, pointsEarned: 280,  badge: "bronze" },
+    { rank: 10, residentId: "res_012", name: "Ramos Household",       street: "P. Burgos St.",    reportsSubmitted: 11, pointsEarned: 220,  badge: null     },
+    { rank: 11, residentId: "res_010", name: "Castillo Household",    street: "Rizal Ave.",       reportsSubmitted: 9,  pointsEarned: 180,  badge: null     },
+    { rank: 12, residentId: "res_008", name: "Torres Household",      street: "P. Burgos St.",    reportsSubmitted: 6,  pointsEarned: 120,  badge: null     },
+  ],
+  "2025-02": [
+    { rank: 1,  residentId: "res_008", name: "Torres Household",      street: "P. Burgos St.",    reportsSubmitted: 52, pointsEarned: 1040, badge: "gold"   },
+    { rank: 2,  residentId: "res_004", name: "Garcia Household",      street: "P. Burgos St.",    reportsSubmitted: 46, pointsEarned: 920,  badge: "gold"   },
+    { rank: 3,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 40, pointsEarned: 800,  badge: "gold"   },
+    { rank: 4,  residentId: "res_010", name: "Castillo Household",    street: "Rizal Ave.",       reportsSubmitted: 35, pointsEarned: 700,  badge: "silver" },
+    { rank: 5,  residentId: "res_003", name: "Reyes Household",       street: "M. Almario St.",   reportsSubmitted: 30, pointsEarned: 600,  badge: "silver" },
+    { rank: 6,  residentId: "res_012", name: "Ramos Household",       street: "P. Burgos St.",    reportsSubmitted: 26, pointsEarned: 520,  badge: "silver" },
+    { rank: 7,  residentId: "res_002", name: "Dela Cruz Household",   street: "Rizal Ave.",       reportsSubmitted: 22, pointsEarned: 440,  badge: "bronze" },
+    { rank: 8,  residentId: "res_005", name: "Aquino Household",      street: "Evangelista St.",  reportsSubmitted: 18, pointsEarned: 360,  badge: "bronze" },
+    { rank: 9,  residentId: "res_006", name: "Bautista Household",    street: "Rizal Ave.",       reportsSubmitted: 15, pointsEarned: 300,  badge: "bronze" },
+    { rank: 10, residentId: "res_007", name: "Fernandez Household",   street: "M. Almario St.",   reportsSubmitted: 12, pointsEarned: 240,  badge: null     },
+    { rank: 11, residentId: "res_009", name: "Villanueva Household",  street: "Evangelista St.",  reportsSubmitted: 9,  pointsEarned: 180,  badge: null     },
+    { rank: 12, residentId: "res_011", name: "Mendoza Household",     street: "M. Almario St.",   reportsSubmitted: 5,  pointsEarned: 100,  badge: null     },
+  ],
+  "2025-01": [
+    { rank: 1,  residentId: "res_011", name: "Mendoza Household",     street: "M. Almario St.",   reportsSubmitted: 55, pointsEarned: 1100, badge: "gold"   },
+    { rank: 2,  residentId: "res_007", name: "Fernandez Household",   street: "M. Almario St.",   reportsSubmitted: 49, pointsEarned: 980,  badge: "gold"   },
+    { rank: 3,  residentId: "res_009", name: "Villanueva Household",  street: "Evangelista St.",  reportsSubmitted: 43, pointsEarned: 860,  badge: "gold"   },
+    { rank: 4,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 38, pointsEarned: 760,  badge: "silver" },
+    { rank: 5,  residentId: "res_006", name: "Bautista Household",    street: "Rizal Ave.",       reportsSubmitted: 33, pointsEarned: 660,  badge: "silver" },
+    { rank: 6,  residentId: "res_002", name: "Dela Cruz Household",   street: "Rizal Ave.",       reportsSubmitted: 28, pointsEarned: 560,  badge: "silver" },
+    { rank: 7,  residentId: "res_004", name: "Garcia Household",      street: "P. Burgos St.",    reportsSubmitted: 24, pointsEarned: 480,  badge: "bronze" },
+    { rank: 8,  residentId: "res_003", name: "Reyes Household",       street: "M. Almario St.",   reportsSubmitted: 20, pointsEarned: 400,  badge: "bronze" },
+    { rank: 9,  residentId: "res_005", name: "Aquino Household",      street: "Evangelista St.",  reportsSubmitted: 16, pointsEarned: 320,  badge: "bronze" },
+    { rank: 10, residentId: "res_010", name: "Castillo Household",    street: "Rizal Ave.",       reportsSubmitted: 13, pointsEarned: 260,  badge: null     },
+    { rank: 11, residentId: "res_008", name: "Torres Household",      street: "P. Burgos St.",    reportsSubmitted: 10, pointsEarned: 200,  badge: null     },
+    { rank: 12, residentId: "res_012", name: "Ramos Household",       street: "P. Burgos St.",    reportsSubmitted: 7,  pointsEarned: 140,  badge: null     },
+  ],
+};
+
+export const LEADERBOARD = LEADERBOARD_PERIODS["2025-05"];
+
+// ── MRF Personnel ─────────────────────────────────────────────────────────────
+export const MRF_PERSONNEL = [
+  { id: "mp1", name: "Roberto Navarro",  email: "roberto.navarro@besmart.gov.ph",  mrf: "MRF Alangilan",       role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T07:00:00Z" },
+  { id: "mp2", name: "Liza Ocampo",      email: "liza.ocampo@besmart.gov.ph",      mrf: "MRF Cuta",            role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T06:30:00Z" },
+  { id: "mp3", name: "Dante Soriano",    email: "dante.soriano@besmart.gov.ph",    mrf: "MRF Kumintang Ibaba", role: "mrf_personnel", status: "inactive", lastLogin: "2025-05-12T09:00:00Z" },
+  { id: "mp4", name: "Cynthia Ramos",    email: "cynthia.ramos@besmart.gov.ph",    mrf: "MRF Libjo",           role: "mrf_personnel", status: "active",   lastLogin: "2025-05-17T15:00:00Z" },
+  { id: "mp5", name: "Ernesto Pascual",  email: "ernesto.pascual@besmart.gov.ph",  mrf: "MRF Pallocan West",   role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T08:15:00Z" },
 ];

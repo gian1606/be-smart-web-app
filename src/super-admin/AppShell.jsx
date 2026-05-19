@@ -1,18 +1,17 @@
-import { Outlet, Navigate } from "react-router-dom";
+﻿import { Outlet, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import TopHeader from "./TopHeader";
 
-export default function SuperAdminAppShell() {
+export default function AppShell() {
   const isAuth =
     sessionStorage.getItem("bs_auth") === "true" &&
     sessionStorage.getItem("bs_role") === "super_admin";
-  if (!isAuth) return <Navigate to="/login" replace />;  // redirects to shared login
+  if (!isAuth) return <Navigate to="/login" replace />;
 
   return (
     <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
       <Sidebar />
       <TopHeader />
-      {/* Main content offset: sidebar 240px, header 60px */}
       <main
         className="overflow-y-auto"
         style={{ marginLeft: 240, paddingTop: 60, minHeight: "100vh" }}

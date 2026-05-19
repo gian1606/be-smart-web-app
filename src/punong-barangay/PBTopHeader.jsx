@@ -1,20 +1,20 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Bell, ChevronDown, UserCircle } from "lucide-react";
-import { NOTIFICATIONS } from "../../../mock/data";
+import { NOTIFICATIONS } from "../mock/data";
 
 const ROUTE_LABELS = {
-  "/dashboard":     "Dashboard",
-  "/map":           "Map & Collection",
-  "/routes":        "Route Management",
-  "/reports":       "Reports & Analytics",
-  "/mrf":           "MRF Management",
-  "/users":         "User Management",
-  "/notifications": "Notifications",
-  "/settings":      "Settings",
+  "/pb/dashboard":     "Dashboard",
+  "/pb/map":           "Live Map",
+  "/pb/rewards":       "Rewards Management",
+  "/pb/leaderboard":   "Leaderboard",
+  "/pb/users":         "MRF Personnel",
+  "/pb/notifications": "Notifications",
+  "/pb/settings":      "Settings",
 };
 
-export default function TopHeader() {
+export default function PBTopHeader() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const pageLabel = ROUTE_LABELS[pathname] ?? "Dashboard";
   const unread = NOTIFICATIONS.filter((n) => !n.read).length;
 
@@ -37,18 +37,28 @@ export default function TopHeader() {
 
       {/* Right controls */}
       <div className="flex items-center gap-4">
-        <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
+        {/* Notification bell */}
+        <button
+          onClick={() => navigate("/pb/notifications")}
+          className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
           <Bell size={18} className="text-text-secondary" />
           {unread > 0 && (
             <span
               className="absolute top-1 right-1 flex items-center justify-center rounded-full text-white font-bold"
-              style={{ width: 16, height: 16, fontSize: 9, background: "#D32F2F" }}
+              style={{
+                width: 16,
+                height: 16,
+                fontSize: 9,
+                background: "#D32F2F",
+              }}
             >
               {unread}
             </span>
           )}
         </button>
 
+        {/* User info */}
         <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 rounded-lg px-2 py-1.5 transition-colors">
           <div
             className="flex items-center justify-center rounded-full"
@@ -58,10 +68,10 @@ export default function TopHeader() {
           </div>
           <div>
             <div className="font-semibold text-text-primary leading-tight" style={{ fontSize: 13 }}>
-              Super Admin
+              Hon. Juan dela Cruz
             </div>
             <div className="text-text-muted leading-tight" style={{ fontSize: 11 }}>
-              Administrator
+              Punong Barangay
             </div>
           </div>
           <ChevronDown size={14} className="text-text-muted ml-1" />

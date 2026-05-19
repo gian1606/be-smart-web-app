@@ -1,16 +1,16 @@
-import { useLocation } from "react-router-dom";
+﻿import { useLocation } from "react-router-dom";
 import { Bell, ChevronDown, UserCircle } from "lucide-react";
 import { NOTIFICATIONS } from "../mock/data";
 
 const ROUTE_LABELS = {
-  "/super-admin/dashboard":     "Dashboard",
-  "/super-admin/map":           "Map & Collection",
-  "/super-admin/routes":        "Route Management",
-  "/super-admin/reports":       "Reports & Analytics",
-  "/super-admin/mrf":           "MRF Management",
-  "/super-admin/users":         "User Management",
-  "/super-admin/notifications": "Notifications",
-  "/super-admin/settings":      "Settings",
+  "/dashboard":     "Dashboard",
+  "/map":           "Map & Collection",
+  "/routes":        "Route Management",
+  "/reports":       "Reports & Analytics",
+  "/mrf":           "MRF Management",
+  "/users":         "User Management",
+  "/notifications": "Notifications",
+  "/settings":      "Settings",
 };
 
 export default function TopHeader() {
@@ -37,7 +37,6 @@ export default function TopHeader() {
 
       {/* Right controls */}
       <div className="flex items-center gap-4">
-        {/* Notification bell */}
         <button className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors">
           <Bell size={18} className="text-text-secondary" />
           {unread > 0 && (
@@ -50,10 +49,6 @@ export default function TopHeader() {
           )}
         </button>
 
-        {/* Divider */}
-        <div style={{ width: 1, height: 28, background: "#E5E7EB" }} />
-
-        {/* Admin info */}
         <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-50 rounded-lg px-2 py-1.5 transition-colors">
           <div
             className="flex items-center justify-center rounded-full"

@@ -1,8 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Plus, Pencil, UserX, Info } from "lucide-react";
-import StatusBadge from "../../components/ui/StatusBadge";
-import Modal from "../../components/ui/Modal";
-import { CLUSTER_ADMINS, CLUSTERS } from "../../mock/data";
+import StatusBadge from "../components/ui/StatusBadge";
+import Modal from "../components/ui/Modal";
+import { CLUSTER_ADMINS, CLUSTERS } from "../mock/data";
 
 const EMPTY_FORM = { name: "", email: "", assignedCluster: "", tempPassword: "" };
 

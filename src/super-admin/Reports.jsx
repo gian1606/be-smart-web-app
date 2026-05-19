@@ -1,11 +1,11 @@
-import ComingSoon from "../../components/ui/ComingSoon";
+﻿import ComingSoon from "../components/ui/ComingSoon";
 
-export default function MRFManagement() {
+export default function Reports() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>
-          MRF Management
+          Reports &amp; Analytics
         </h1>
         <span
           className="rounded-full px-3 py-1 font-semibold"
@@ -19,8 +19,8 @@ export default function MRFManagement() {
         style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
       >
         <ComingSoon
-          title="MRF Management"
-          description="Material Recovery Facility map view, status tracking, and management tools are coming in the next release."
+          title="Reports &amp; Analytics"
+          description="Date range filters, collection bar charts, full bin trend lines, and per-cluster pie charts are coming in the next release."
         />
       </div>
     </div>
