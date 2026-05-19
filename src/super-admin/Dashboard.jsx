@@ -1,18 +1,18 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Truck, CheckCircle, Activity, RefreshCw, Route } from "lucide-react";
-import StatCard from "../../components/ui/StatCard";
-import ClusterFilter from "../../components/ui/ClusterFilter";
-import AlertRow from "../../components/ui/AlertRow";
-import ActivityRow from "../../components/ui/ActivityRow";
-import MapView from "../../components/ui/MapView";
+import StatCard from "../components/ui/StatCard";
+import ClusterFilter from "../components/ui/ClusterFilter";
+import AlertRow from "../components/ui/AlertRow";
+import ActivityRow from "../components/ui/ActivityRow";
+import MapView from "../components/ui/MapView";
 import {
   DASHBOARD_STATS,
   BINS,
   TRUCKS,
   MRF_LOCATIONS,
   RECENT_ACTIVITY,
-} from "../../mock/data";
+} from "../mock/data";
 
 export default function Dashboard() {
   const navigate = useNavigate();

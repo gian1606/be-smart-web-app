@@ -1,4 +1,4 @@
-import ComingSoon from "../../components/ui/ComingSoon";
+﻿import ComingSoon from "../components/ui/ComingSoon";
 
 export default function Reports() {
   return (

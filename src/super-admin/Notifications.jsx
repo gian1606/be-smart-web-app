@@ -1,8 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Plus, Bell, Calendar, CheckCircle, FileText, Megaphone, AlertTriangle } from "lucide-react";
-import StatusBadge from "../../components/ui/StatusBadge";
-import Modal from "../../components/ui/Modal";
-import { NOTIFICATIONS, CLUSTERS } from "../../mock/data";
+import StatusBadge from "../components/ui/StatusBadge";
+import Modal from "../components/ui/Modal";
+import { NOTIFICATIONS, CLUSTERS } from "../mock/data";
 
 const TYPE_CONFIG = {
   task:         { icon: Bell,        color: "#1976D2", bg: "#E3F2FD" },

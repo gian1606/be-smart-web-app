@@ -1,10 +1,6 @@
-import { useLocation } from "react-router-dom";
+﻿import { useLocation } from "react-router-dom";
 import { Bell, ChevronDown, UserCircle } from "lucide-react";
-<<<<<<<< HEAD:src/super-admin/components/layout/TopHeader.jsx
-import { NOTIFICATIONS } from "../../../mock/data";
-========
 import { NOTIFICATIONS } from "../mock/data";
->>>>>>>> 1d6a6b9 (created PB):src/super-admin/TopHeader.jsx
 
 const ROUTE_LABELS = {
   "/dashboard":     "Dashboard",

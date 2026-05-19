@@ -1,7 +1,8 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, Leaf, Lock, ShieldCheck } from "lucide-react";
-import { MOCK_CREDENTIALS } from "../mock/data";
+import { MOCK_CREDENTIALS, PB_CREDENTIALS, CA_CREDENTIALS } from "../mock/data";
+import { MOCK_CREDENTIALS as CLUSTER_CREDENTIALS } from "../cluster-admin/mock/data";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -27,12 +28,20 @@ export default function Login() {
     setLoading(true);
     // Simulate async auth
     setTimeout(() => {
-      if (
-        email === MOCK_CREDENTIALS.email &&
-        password === MOCK_CREDENTIALS.password
-      ) {
+      if (email === MOCK_CREDENTIALS.email && password === MOCK_CREDENTIALS.password) {
         sessionStorage.setItem("bs_auth", "true");
-        navigate("/dashboard");
+        sessionStorage.setItem("bs_role", "super_admin");
+        navigate("/super-admin/dashboard");
+      } else if (email === CLUSTER_CREDENTIALS.email && password === CLUSTER_CREDENTIALS.password) {
+        sessionStorage.setItem("bs_auth", "true");
+        sessionStorage.setItem("bs_role", "cluster_admin");
+        navigate("/cluster-admin/dashboard");
+      } else if (email === CA_CREDENTIALS.email && password === CA_CREDENTIALS.password) {
+        sessionStorage.setItem("bs_ca_auth", "true");
+        navigate("/ca/dashboard");
+      } else if (email === PB_CREDENTIALS.email && password === PB_CREDENTIALS.password) {
+        sessionStorage.setItem("bs_pb_auth", "true");
+        navigate("/pb/dashboard");
       } else {
         setErrors({ form: "Invalid email or password. Please try again." });
         setLoading(false);
@@ -87,8 +96,8 @@ export default function Login() {
           }}
         >
           <ShieldCheck size={15} color="#2E7D32" />
-          <span className="font-semibold text-primary">Super Admin</span>
-          <span className="text-text-secondary">· Administrative Portal</span>
+          <span className="font-semibold text-primary">Staff Portal</span>
+          <span className="text-text-secondary">· Sign in with your role credentials</span>
         </div>
 
         {/* Form */}

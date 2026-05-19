@@ -1,7 +1,7 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { CheckCircle, Send, MapPin, Clock, Ruler, Cpu } from "lucide-react";
-import MapView from "../../components/ui/MapView";
-import { BINS, TRUCKS, OPTIMIZED_ROUTE, CLUSTER_ADMINS, CLUSTERS } from "../../mock/data";
+import MapView from "../components/ui/MapView";
+import { BINS, TRUCKS, OPTIMIZED_ROUTE, CLUSTER_ADMINS, CLUSTERS } from "../mock/data";
 
 export default function MapCollection() {
   const [optimized, setOptimized] = useState(false);

@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 // ── Single shared login ────────────────────────────────────────────────────────
-import Login from "./super-admin/pages/Login";
+import Login from "./super-admin/Login";
 
 // ── Super Admin ────────────────────────────────────────────────────────────────
 import SuperAdminShell   from "./super-admin/AppShell";
