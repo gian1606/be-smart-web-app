@@ -2,7 +2,7 @@
 // Mirrors the mobile app's data shapes for seamless future backend integration.
 // Status strings, barangay names, and color mappings must stay in sync with mobile.
 
-// ── Barangays (Batangas City) ──────────────────────────────────────────────────
+// ── Barangays (Batangas City) — flat name list ────────────────────────────────
 export const BARANGAYS = [
   "Alangilan",
   "Cuta",
@@ -12,6 +12,26 @@ export const BARANGAYS = [
   "Pallocan West",
   "Pallocan East",
   "Sta. Rita Karsada",
+];
+
+// ── Barangay Accounts — full records for CRUD ─────────────────────────────────
+// cluster: matches CLUSTERS id; status: 'active' | 'inactive'
+export const BARANGAY_ACCOUNTS = [
+  { id: "ba1",  name: "Brgy. Alangilan",        captain: "Jose Reyes",       email: "alangilan@besmart.gov.ph",        cluster: "c1", totalBins: 18, activeResidents: 142, status: "active",   lastActivity: "2025-05-18" },
+  { id: "ba2",  name: "Brgy. Cuta",             captain: "Maria Lim",        email: "cuta@besmart.gov.ph",             cluster: "c1", totalBins: 22, activeResidents: 198, status: "active",   lastActivity: "2025-05-18" },
+  { id: "ba3",  name: "Brgy. Kumintang Ibaba",  captain: "Pedro Santos",     email: "kumintang.ibaba@besmart.gov.ph",  cluster: "c1", totalBins: 20, activeResidents: 175, status: "active",   lastActivity: "2025-05-16" },
+  { id: "ba4",  name: "Brgy. Kumintang Ilaya",  captain: "Rosa Dela Cruz",   email: "kumintang.ilaya@besmart.gov.ph",  cluster: "c2", totalBins: 16, activeResidents: 130, status: "active",   lastActivity: "2025-05-17" },
+  { id: "ba5",  name: "Brgy. Libjo",            captain: "Carlos Navarro",   email: "libjo@besmart.gov.ph",            cluster: "c2", totalBins: 14, activeResidents: 118, status: "active",   lastActivity: "2025-05-15" },
+  { id: "ba6",  name: "Brgy. Sta. Clara",       captain: "Lorna Bautista",   email: "sta.clara@besmart.gov.ph",        cluster: "c2", totalBins: 12, activeResidents: 102, status: "inactive", lastActivity: "2025-05-10" },
+  { id: "ba7",  name: "Brgy. Pallocan West",    captain: "Ana Cruz",         email: "pallocan.west@besmart.gov.ph",    cluster: "c3", totalBins: 24, activeResidents: 210, status: "active",   lastActivity: "2025-05-18" },
+  { id: "ba8",  name: "Brgy. Pallocan East",    captain: "Ramon Torres",     email: "pallocan.east@besmart.gov.ph",    cluster: "c3", totalBins: 19, activeResidents: 165, status: "active",   lastActivity: "2025-05-17" },
+  { id: "ba9",  name: "Brgy. Bolbok",           captain: "Nena Villanueva",  email: "bolbok@besmart.gov.ph",           cluster: "c3", totalBins: 11, activeResidents: 95,  status: "inactive", lastActivity: "2025-05-08" },
+  { id: "ba10", name: "Brgy. Sta. Rita Karsada",captain: "Ernesto Pascual",  email: "sta.rita@besmart.gov.ph",         cluster: "c4", totalBins: 15, activeResidents: 128, status: "active",   lastActivity: "2025-05-16" },
+  { id: "ba11", name: "Brgy. Gulod Labac",      captain: "Teresita Ramos",   email: "gulod.labac@besmart.gov.ph",      cluster: "c4", totalBins: 13, activeResidents: 110, status: "active",   lastActivity: "2025-05-14" },
+  { id: "ba12", name: "Brgy. Dumuclay",         captain: "Alfredo Mendoza",  email: "dumuclay@besmart.gov.ph",         cluster: "c4", totalBins: 10, activeResidents: 88,  status: "inactive", lastActivity: "2025-05-05" },
+  { id: "ba13", name: "Brgy. Balagtas",         captain: "Gloria Castillo",  email: "balagtas@besmart.gov.ph",         cluster: "c5", totalBins: 17, activeResidents: 145, status: "active",   lastActivity: "2025-05-18" },
+  { id: "ba14", name: "Brgy. Calicanto",        captain: "Rodrigo Aquino",   email: "calicanto@besmart.gov.ph",        cluster: "c5", totalBins: 15, activeResidents: 132, status: "active",   lastActivity: "2025-05-17" },
+  { id: "ba15", name: "Brgy. Tinga Labac",      captain: "Marites Fernandez",email: "tinga.labac@besmart.gov.ph",      cluster: "c5", totalBins: 12, activeResidents: 98,  status: "active",   lastActivity: "2025-05-15" },
 ];
 
 // ── Clusters ──────────────────────────────────────────────────────────────────

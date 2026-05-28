@@ -4,23 +4,23 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./super-admin/Login";
 
 // ── Super Admin ────────────────────────────────────────────────────────────────
-import SuperAdminShell   from "./super-admin/AppShell";
-import SADashboard       from "./super-admin/Dashboard";
-import SAMapCollection   from "./super-admin/MapCollection";
-import SARouteManagement from "./super-admin/RouteManagement";
-import SAUserManagement  from "./super-admin/UserManagement";
-import SAReports         from "./super-admin/Reports";
-import SAMRFManagement   from "./super-admin/MRFManagement";
-import SANotifications   from "./super-admin/Notifications";
+import SuperAdminShell      from "./super-admin/AppShell";
+import SADashboard          from "./super-admin/Dashboard";
+import SAMapCollection      from "./super-admin/MapCollection";
+import SARouteManagement    from "./super-admin/RouteManagement";
+import SAUserManagement     from "./super-admin/UserManagement";
+import SABarangayManagement from "./super-admin/BarangayManagement";
+import SAReports            from "./super-admin/Reports";
+import SAMRFManagement      from "./super-admin/MRFManagement";
+import SANotifications      from "./super-admin/Notifications";
 
 // ── Cluster Admin ──────────────────────────────────────────────────────────────
-import ClusterAdminShell    from "./cluster-admin/layout/AppShell";
-import CADashboard          from "./cluster-admin/pages/Dashboard";
-import CAMapCollection      from "./cluster-admin/pages/MapCollection";
-import CABarangayManagement from "./cluster-admin/pages/BarangayManagement";
-import CAUserManagement     from "./cluster-admin/pages/UserManagement";
-import CAReports            from "./cluster-admin/pages/Reports";
-import CANotifications      from "./cluster-admin/pages/Notifications";
+import ClusterAdminShell from "./cluster-admin/layout/AppShell";
+import CADashboard       from "./cluster-admin/pages/Dashboard";
+import CAMapCollection   from "./cluster-admin/pages/MapCollection";
+import CAUserManagement  from "./cluster-admin/pages/UserManagement";
+import CAReports         from "./cluster-admin/pages/Reports";
+import CANotifications   from "./cluster-admin/pages/Notifications";
 
 // ── Collector Admin ────────────────────────────────────────────────────────────
 import CollectorAdminShell    from "./collector-admin/components/layout/AppShell";
@@ -39,6 +39,7 @@ import PBNotifications  from "./punong-barangay/PBNotifications";
 import Rewards          from "./punong-barangay/Rewards";
 import Leaderboard      from "./punong-barangay/Leaderboard";
 import MRFPersonnel     from "./punong-barangay/MRFPersonnel";
+import BinQRCodes       from "./punong-barangay/BinQRCodes";
 
 // ── Shared ─────────────────────────────────────────────────────────────────────
 import ComingSoon from "./components/ui/ComingSoon";
@@ -59,6 +60,7 @@ export default function App() {
           <Route path="map"           element={<SAMapCollection />} />
           <Route path="routes"        element={<SARouteManagement />} />
           <Route path="users"         element={<SAUserManagement />} />
+          <Route path="barangays"     element={<SABarangayManagement />} />
           <Route path="reports"       element={<SAReports />} />
           <Route path="mrf"           element={<SAMRFManagement />} />
           <Route path="notifications" element={<SANotifications />} />
@@ -80,7 +82,6 @@ export default function App() {
           <Route index element={<Navigate to="/cluster-admin/dashboard" replace />} />
           <Route path="dashboard"     element={<CADashboard />} />
           <Route path="map"           element={<CAMapCollection />} />
-          <Route path="barangays"     element={<CABarangayManagement />} />
           <Route path="users"         element={<CAUserManagement />} />
           <Route path="reports"       element={<CAReports />} />
           <Route path="notifications" element={<CANotifications />} />
@@ -113,6 +114,7 @@ export default function App() {
           <Route index element={<Navigate to="/pb/dashboard" replace />} />
           <Route path="dashboard"     element={<PBDashboard />} />
           <Route path="map"           element={<PBMapView />} />
+          <Route path="qrcodes"       element={<BinQRCodes />} />
           <Route path="rewards"       element={<Rewards />} />
           <Route path="leaderboard"   element={<Leaderboard />} />
           <Route path="users"         element={<MRFPersonnel />} />

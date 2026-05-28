@@ -1,36 +1,21 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   LayoutGrid,
   Map,
-  Building2,
   Users,
   BarChart2,
-  Bell,
-  Settings,
   Leaf,
-  ChevronLeft,
 } from "lucide-react";
 import { CLUSTER_INFO } from "../mock/data";
 
 const NAV_ITEMS = [
-  { to: "/cluster-admin/dashboard",   icon: LayoutGrid, label: "Dashboard" },
-  { to: "/cluster-admin/map",         icon: Map,        label: "Map & Collection" },
-  { to: "/cluster-admin/barangays",   icon: Building2,  label: "Barangay Management" },
-  { to: "/cluster-admin/users",       icon: Users,      label: "User Management" },
-  { to: "/cluster-admin/reports",     icon: BarChart2,  label: "Reports & Analytics" },
-  { to: "/cluster-admin/notifications", icon: Bell,     label: "Notifications" },
-  { to: "/cluster-admin/settings",    icon: Settings,   label: "Settings", soon: true },
+  { to: "/cluster-admin/dashboard", icon: LayoutGrid, label: "Dashboard" },
+  { to: "/cluster-admin/map",       icon: Map,        label: "Map & Collection" },
+  { to: "/cluster-admin/users",     icon: Users,      label: "User Management" },
+  { to: "/cluster-admin/reports",   icon: BarChart2,  label: "Reports & Analytics" },
 ];
 
 export default function Sidebar() {
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    sessionStorage.removeItem("bs_auth");
-    sessionStorage.removeItem("bs_role");
-    navigate("/login");
-  }
-
   return (
     <aside
       className="fixed left-0 top-0 h-screen flex flex-col z-30"
@@ -100,18 +85,6 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
-
-      {/* Bottom */}
-      <div className="px-2 pb-5 border-t border-white/10 pt-3">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-          style={{ fontSize: 13 }}
-        >
-          <ChevronLeft size={15} />
-          Logout
-        </button>
-      </div>
     </aside>
   );
 }

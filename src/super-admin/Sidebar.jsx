@@ -1,37 +1,24 @@
-﻿import { NavLink, useNavigate } from "react-router-dom";
+﻿import { NavLink } from "react-router-dom";
 import {
   LayoutGrid,
   Map,
   Route,
   BarChart2,
-  Building2,
   Users,
-  Bell,
-  Settings,
+  MapPin,
   Leaf,
-  ChevronLeft,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { to: "/super-admin/dashboard",      icon: LayoutGrid, label: "Dashboard" },
-  { to: "/super-admin/map",            icon: Map,        label: "Map & Collection" },
-  { to: "/super-admin/routes",         icon: Route,      label: "Route Management" },
-  { to: "/super-admin/users",          icon: Users,      label: "User Management" },
-  { to: "/super-admin/reports",        icon: BarChart2,  label: "Reports & Analytics", soon: true },
-  { to: "/super-admin/mrf",            icon: Building2,  label: "MRF Management",      soon: true },
-  { to: "/super-admin/notifications",  icon: Bell,       label: "Notifications" },
-  { to: "/super-admin/settings",       icon: Settings,   label: "Settings",            soon: true },
+  { to: "/super-admin/dashboard", icon: LayoutGrid, label: "Dashboard" },
+  { to: "/super-admin/map",       icon: Map,        label: "Map & Collection" },
+  { to: "/super-admin/routes",    icon: Route,      label: "Route Management" },
+  { to: "/super-admin/users",     icon: Users,      label: "User Management" },
+  { to: "/super-admin/barangays", icon: MapPin,     label: "Barangay Management" },
+  { to: "/super-admin/reports",   icon: BarChart2,  label: "Reports & Analytics" },
 ];
 
 export default function Sidebar() {
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    sessionStorage.removeItem("bs_auth");
-    sessionStorage.removeItem("bs_role");
-    navigate("/login");
-  }
-
   return (
     <aside
       className="fixed left-0 top-0 h-screen flex flex-col z-30"
@@ -104,18 +91,6 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
-
-      {/* Bottom */}
-      <div className="px-2 pb-5 border-t border-white/10 pt-3">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-          style={{ fontSize: 13 }}
-        >
-          <ChevronLeft size={15} />
-          Logout
-        </button>
-      </div>
     </aside>
   );
 }

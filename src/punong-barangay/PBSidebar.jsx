@@ -1,34 +1,24 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   LayoutGrid,
   Map,
   Gift,
   Trophy,
   Users,
-  Bell,
-  Settings,
+  QrCode,
   Leaf,
-  ChevronLeft,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { to: "/pb/dashboard",      icon: LayoutGrid, label: "Dashboard" },
-  { to: "/pb/map",            icon: Map,        label: "Live Map" },
-  { to: "/pb/rewards",        icon: Gift,       label: "Rewards Management" },
-  { to: "/pb/leaderboard",    icon: Trophy,     label: "Leaderboard" },
-  { to: "/pb/users",          icon: Users,      label: "MRF Personnel" },
-  { to: "/pb/notifications",  icon: Bell,       label: "Notifications" },
-  { to: "/pb/settings",       icon: Settings,   label: "Settings", soon: true },
+  { to: "/pb/dashboard",   icon: LayoutGrid, label: "Dashboard" },
+  { to: "/pb/map",         icon: Map,        label: "Live Map" },
+  { to: "/pb/qrcodes",     icon: QrCode,     label: "Bin QR Codes" },
+  { to: "/pb/rewards",     icon: Gift,       label: "Rewards Management" },
+  { to: "/pb/leaderboard", icon: Trophy,     label: "Leaderboard" },
+  { to: "/pb/users",       icon: Users,      label: "MRF Personnel" },
 ];
 
 export default function PBSidebar() {
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    sessionStorage.removeItem("bs_pb_auth");
-    navigate("/pb/login");
-  }
-
   return (
     <aside
       className="fixed left-0 top-0 h-screen flex flex-col z-30"
@@ -82,20 +72,14 @@ export default function PBSidebar() {
                   : "text-white/65 hover:text-white hover:bg-white/10"
               }`
             }
-            style={({ isActive }) =>
-              isActive ? { background: "#2E7D32" } : {}
-            }
+            style={({ isActive }) => (isActive ? { background: "#2E7D32" } : {})}
           >
             <Icon size={17} />
             <span style={{ fontSize: 14 }}>{label}</span>
             {soon && (
               <span
                 className="ml-auto rounded-full px-2 py-0.5 font-medium"
-                style={{
-                  fontSize: 10,
-                  background: "rgba(255,255,255,0.12)",
-                  color: "rgba(255,255,255,0.5)",
-                }}
+                style={{ fontSize: 10, background: "rgba(255,255,255,0.12)", color: "rgba(255,255,255,0.5)" }}
               >
                 Soon
               </span>
@@ -103,18 +87,6 @@ export default function PBSidebar() {
           </NavLink>
         ))}
       </nav>
-
-      {/* Bottom */}
-      <div className="px-2 pb-5 border-t border-white/10 pt-3">
-        <button
-          onClick={handleLogout}
-          className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
-          style={{ fontSize: 13 }}
-        >
-          <ChevronLeft size={15} />
-          Sign Out
-        </button>
-      </div>
     </aside>
   );
 }

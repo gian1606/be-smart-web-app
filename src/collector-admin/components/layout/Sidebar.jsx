@@ -1,5 +1,5 @@
-import { NavLink, useNavigate } from "react-router-dom";
-import { LayoutGrid, Map, BarChart2, Truck, Users, Settings, Leaf, ChevronLeft } from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { LayoutGrid, Map, BarChart2, Truck, Users, Leaf } from "lucide-react";
 import { CA_CREDENTIALS } from "../../../mock/data";
 
 const NAV_ITEMS = [
@@ -8,17 +8,9 @@ const NAV_ITEMS = [
   { to: "/ca/reports",   icon: BarChart2,  label: "Reports & Analytics", soon: true },
   { to: "/ca/units",     icon: Truck,      label: "Collector Unit Mgmt." },
   { to: "/ca/users",     icon: Users,      label: "User Management" },
-  { to: "/ca/settings",  icon: Settings,   label: "Settings",            soon: true },
 ];
 
 export default function CASidebar() {
-  const navigate = useNavigate();
-
-  function handleLogout() {
-    sessionStorage.removeItem("bs_ca_auth");
-    navigate("/ca/login");
-  }
-
   return (
     <aside className="fixed left-0 top-0 h-screen flex flex-col z-30" style={{ width: 240, background: "#1B5E20" }}>
       <div className="px-4 pt-6 pb-4 border-b border-white/10">
@@ -50,12 +42,6 @@ export default function CASidebar() {
           </NavLink>
         ))}
       </nav>
-
-      <div className="px-2 pb-5 border-t border-white/10 pt-3">
-        <button onClick={handleLogout} className="flex items-center gap-2 px-3 py-2 rounded-lg w-full text-white/60 hover:text-white hover:bg-white/10 transition-colors" style={{ fontSize: 13 }}>
-          <ChevronLeft size={15} />Sign Out
-        </button>
-      </div>
     </aside>
   );
 }

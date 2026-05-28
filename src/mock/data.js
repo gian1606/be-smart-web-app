@@ -385,3 +385,310 @@ export const MRF_PERSONNEL = [
   { id: "mp4", name: "Cynthia Ramos",    email: "cynthia.ramos@besmart.gov.ph",    mrf: "MRF Libjo",           role: "mrf_personnel", status: "active",   lastLogin: "2025-05-17T15:00:00Z" },
   { id: "mp5", name: "Ernesto Pascual",  email: "ernesto.pascual@besmart.gov.ph",  mrf: "MRF Pallocan West",   role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T08:15:00Z" },
 ];
+
+// ─── Super Admin — Reports & Analytics (City-Level) ───────────────────────────
+
+// ── KPI Summary Cards ─────────────────────────────────────────────────────────
+export const REPORT_KPI = {
+  totalCollections:      1_284,
+  collectionGrowth:      12.4,   // % vs previous period
+  avgCollectionRate:     78.3,   // % of scheduled bins collected
+  collectionRateChange:  3.1,
+  missedCollections:     87,
+  missedChange:          -8.5,   // negative = improvement
+  activeResidents:       3_412,
+  residentGrowth:        5.7,
+  ecoTokensIssued:       68_240,
+  tokenGrowth:           18.2,
+  totalWasteKg:          24_870,
+  wasteGrowth:           9.3,
+};
+
+// ── Monthly Collections — city-wide (Jan–May 2025) ────────────────────────────
+// Used for the main bar/line chart
+export const MONTHLY_COLLECTIONS = [
+  { month: "Jan", collected: 198, missed: 22, target: 220 },
+  { month: "Feb", collected: 212, missed: 18, target: 225 },
+  { month: "Mar", collected: 235, missed: 15, target: 245 },
+  { month: "Apr", collected: 221, missed: 19, target: 240 },
+  { month: "May", collected: 248, missed: 13, target: 255 },
+];
+
+// ── Weekly Collections — current month (May 2025) ─────────────────────────────
+export const WEEKLY_COLLECTIONS = [
+  { week: "May W1", collected: 58, missed: 4, target: 62 },
+  { week: "May W2", collected: 63, missed: 3, target: 65 },
+  { week: "May W3", collected: 67, missed: 3, target: 68 },
+  { week: "May W4", collected: 60, missed: 3, target: 60 },
+];
+
+// ── Collection Rate by Cluster ────────────────────────────────────────────────
+// Used for the horizontal bar / pie chart
+export const CLUSTER_COLLECTION_RATES = [
+  { cluster: "c1", label: "Cluster 1 (North Zone)", rate: 84.2, collected: 210, total: 249 },
+  { cluster: "c2", label: "Cluster 2",              rate: 79.5, collected: 194, total: 244 },
+  { cluster: "c3", label: "Cluster 3",              rate: 76.1, collected: 186, total: 244 },
+  { cluster: "c4", label: "Cluster 4",              rate: 72.8, collected: 178, total: 244 },
+  { cluster: "c5", label: "Cluster 5",              rate: 68.4, collected: 167, total: 244 },
+];
+
+// ── Full Bin Trend — daily for last 14 days ───────────────────────────────────
+export const FULL_BIN_TREND = [
+  { date: "May 5",  fullBins: 28 },
+  { date: "May 6",  fullBins: 31 },
+  { date: "May 7",  fullBins: 25 },
+  { date: "May 8",  fullBins: 22 },
+  { date: "May 9",  fullBins: 19 },
+  { date: "May 10", fullBins: 17 },
+  { date: "May 11", fullBins: 24 },
+  { date: "May 12", fullBins: 29 },
+  { date: "May 13", fullBins: 33 },
+  { date: "May 14", fullBins: 27 },
+  { date: "May 15", fullBins: 21 },
+  { date: "May 16", fullBins: 18 },
+  { date: "May 17", fullBins: 26 },
+  { date: "May 18", fullBins: 31 },
+];
+
+// ── Waste Volume by Type (kg) — city-wide, current month ─────────────────────
+export const WASTE_BY_TYPE = [
+  { type: "Biodegradable",  kg: 9_840,  color: "#2E7D32" },
+  { type: "Recyclable",     kg: 7_210,  color: "#1976D2" },
+  { type: "Residual",       kg: 5_630,  color: "#F57C00" },
+  { type: "Special Waste",  kg: 2_190,  color: "#D32F2F" },
+];
+
+// ── Eco Token Issuance — monthly ──────────────────────────────────────────────
+export const ECO_TOKEN_MONTHLY = [
+  { month: "Jan", tokens: 10_420 },
+  { month: "Feb", tokens: 11_850 },
+  { month: "Mar", tokens: 13_200 },
+  { month: "Apr", tokens: 14_530 },
+  { month: "May", tokens: 18_240 },
+];
+
+// ── Top Performing Clusters (composite score) ─────────────────────────────────
+export const CLUSTER_PERFORMANCE = [
+  { cluster: "c1", label: "Cluster 1",  collectionRate: 84.2, residentEngagement: 91, avgResponseMin: 38, score: 88 },
+  { cluster: "c2", label: "Cluster 2",  collectionRate: 79.5, residentEngagement: 83, avgResponseMin: 44, score: 81 },
+  { cluster: "c3", label: "Cluster 3",  collectionRate: 76.1, residentEngagement: 78, avgResponseMin: 51, score: 75 },
+  { cluster: "c4", label: "Cluster 4",  collectionRate: 72.8, residentEngagement: 74, avgResponseMin: 57, score: 71 },
+  { cluster: "c5", label: "Cluster 5",  collectionRate: 68.4, residentEngagement: 69, avgResponseMin: 63, score: 66 },
+];
+
+// ── Missed Collection Reasons — city-wide ─────────────────────────────────────
+export const MISSED_REASONS = [
+  { reason: "Truck Breakdown",    count: 28, color: "#D32F2F" },
+  { reason: "Route Not Assigned", count: 22, color: "#F57C00" },
+  { reason: "Bin Not Accessible", count: 19, color: "#1976D2" },
+  { reason: "Weather / Road",     count: 11, color: "#6B7280" },
+  { reason: "Other",              count:  7, color: "#9CA3AF" },
+];
+
+// ── Resident Engagement — monthly active reporters ────────────────────────────
+export const RESIDENT_ENGAGEMENT = [
+  { month: "Jan", activeReporters: 2_640, newSignups: 180 },
+  { month: "Feb", activeReporters: 2_810, newSignups: 210 },
+  { month: "Mar", activeReporters: 3_050, newSignups: 240 },
+  { month: "Apr", activeReporters: 3_190, newSignups: 195 },
+  { month: "May", activeReporters: 3_412, newSignups: 222 },
+];
+
+// ── Recent Report Exports Log ─────────────────────────────────────────────────
+export const REPORT_EXPORTS = [
+  { id: "re1", name: "May 2025 Collection Summary",    generatedAt: "2025-05-18T09:00:00Z", generatedBy: "Super Admin", format: "PDF"  },
+  { id: "re2", name: "April 2025 Waste Volume Report", generatedAt: "2025-05-01T08:30:00Z", generatedBy: "Super Admin", format: "CSV"  },
+  { id: "re3", name: "Q1 2025 City Analytics",         generatedAt: "2025-04-02T10:00:00Z", generatedBy: "Super Admin", format: "PDF"  },
+  { id: "re4", name: "March 2025 Eco Token Report",    generatedAt: "2025-04-01T09:15:00Z", generatedBy: "Super Admin", format: "XLSX" },
+];
+
+// ─── Hierarchical Filter Data (Cluster → Barangay) ────────────────────────────
+
+// ── Cluster → Barangay mapping ────────────────────────────────────────────────
+export const CLUSTER_BARANGAY_MAP = {
+  c1: [
+    { id: "br_c1_1", name: "Brgy. Alangilan" },
+    { id: "br_c1_2", name: "Brgy. Cuta" },
+    { id: "br_c1_3", name: "Brgy. Kumintang Ibaba" },
+  ],
+  c2: [
+    { id: "br_c2_1", name: "Brgy. Kumintang Ilaya" },
+    { id: "br_c2_2", name: "Brgy. Libjo" },
+    { id: "br_c2_3", name: "Brgy. Sta. Clara" },
+  ],
+  c3: [
+    { id: "br_c3_1", name: "Brgy. Pallocan West" },
+    { id: "br_c3_2", name: "Brgy. Pallocan East" },
+    { id: "br_c3_3", name: "Brgy. Bolbok" },
+  ],
+  c4: [
+    { id: "br_c4_1", name: "Brgy. Sta. Rita Karsada" },
+    { id: "br_c4_2", name: "Brgy. Gulod Labac" },
+    { id: "br_c4_3", name: "Brgy. Dumuclay" },
+  ],
+  c5: [
+    { id: "br_c5_1", name: "Brgy. Balagtas" },
+    { id: "br_c5_2", name: "Brgy. Calicanto" },
+    { id: "br_c5_3", name: "Brgy. Tinga Labac" },
+  ],
+};
+
+// ── Scoped KPI by cluster ─────────────────────────────────────────────────────
+export const REPORT_KPI_BY_CLUSTER = {
+  c1: { totalCollections: 280, collectionGrowth: 14.2, avgCollectionRate: 84.2, collectionRateChange: 4.1, missedCollections: 14, missedChange: -12.0, activeResidents: 720, residentGrowth: 7.2, ecoTokensIssued: 14_800, tokenGrowth: 21.0, totalWasteKg: 5_420, wasteGrowth: 11.2 },
+  c2: { totalCollections: 261, collectionGrowth: 11.8, avgCollectionRate: 79.5, collectionRateChange: 2.8, missedCollections: 18, missedChange: -7.0,  activeResidents: 690, residentGrowth: 5.1, ecoTokensIssued: 13_200, tokenGrowth: 17.5, totalWasteKg: 5_100, wasteGrowth: 8.9  },
+  c3: { totalCollections: 248, collectionGrowth: 10.5, avgCollectionRate: 76.1, collectionRateChange: 2.2, missedCollections: 21, missedChange: -5.5,  activeResidents: 660, residentGrowth: 4.8, ecoTokensIssued: 12_600, tokenGrowth: 15.8, totalWasteKg: 4_870, wasteGrowth: 7.6  },
+  c4: { totalCollections: 235, collectionGrowth:  9.3, avgCollectionRate: 72.8, collectionRateChange: 1.9, missedCollections: 24, missedChange: -4.2,  activeResidents: 640, residentGrowth: 4.2, ecoTokensIssued: 11_980, tokenGrowth: 14.1, totalWasteKg: 4_620, wasteGrowth: 6.8  },
+  c5: { totalCollections: 260, collectionGrowth: 13.1, avgCollectionRate: 68.4, collectionRateChange: 3.5, missedCollections: 10, missedChange: -14.0, activeResidents: 702, residentGrowth: 6.5, ecoTokensIssued: 15_660, tokenGrowth: 19.3, totalWasteKg: 4_860, wasteGrowth: 10.1 },
+};
+
+// ── Scoped KPI by barangay ────────────────────────────────────────────────────
+export const REPORT_KPI_BY_BARANGAY = {
+  br_c1_1: { totalCollections: 98,  collectionGrowth: 15.0, avgCollectionRate: 87.5, collectionRateChange: 5.0, missedCollections: 4,  missedChange: -15.0, activeResidents: 248, residentGrowth: 8.1, ecoTokensIssued: 5_100, tokenGrowth: 22.0, totalWasteKg: 1_890, wasteGrowth: 12.5 },
+  br_c1_2: { totalCollections: 102, collectionGrowth: 13.5, avgCollectionRate: 83.0, collectionRateChange: 3.8, missedCollections: 5,  missedChange: -10.0, activeResidents: 252, residentGrowth: 7.0, ecoTokensIssued: 5_300, tokenGrowth: 20.5, totalWasteKg: 1_960, wasteGrowth: 11.0 },
+  br_c1_3: { totalCollections: 80,  collectionGrowth: 12.0, avgCollectionRate: 80.0, collectionRateChange: 3.2, missedCollections: 5,  missedChange: -9.0,  activeResidents: 220, residentGrowth: 6.2, ecoTokensIssued: 4_400, tokenGrowth: 18.0, totalWasteKg: 1_570, wasteGrowth: 9.8  },
+  br_c2_1: { totalCollections: 90,  collectionGrowth: 12.2, avgCollectionRate: 81.0, collectionRateChange: 3.0, missedCollections: 6,  missedChange: -8.0,  activeResidents: 235, residentGrowth: 5.5, ecoTokensIssued: 4_600, tokenGrowth: 18.5, totalWasteKg: 1_760, wasteGrowth: 9.2  },
+  br_c2_2: { totalCollections: 88,  collectionGrowth: 11.5, avgCollectionRate: 79.0, collectionRateChange: 2.5, missedCollections: 7,  missedChange: -6.5,  activeResidents: 228, residentGrowth: 5.0, ecoTokensIssued: 4_400, tokenGrowth: 17.0, totalWasteKg: 1_720, wasteGrowth: 8.5  },
+  br_c2_3: { totalCollections: 83,  collectionGrowth: 10.8, avgCollectionRate: 77.5, collectionRateChange: 2.2, missedCollections: 5,  missedChange: -7.0,  activeResidents: 227, residentGrowth: 4.8, ecoTokensIssued: 4_200, tokenGrowth: 16.5, totalWasteKg: 1_620, wasteGrowth: 8.0  },
+  br_c3_1: { totalCollections: 86,  collectionGrowth: 11.0, avgCollectionRate: 78.0, collectionRateChange: 2.4, missedCollections: 7,  missedChange: -5.0,  activeResidents: 222, residentGrowth: 4.9, ecoTokensIssued: 4_300, tokenGrowth: 16.0, totalWasteKg: 1_680, wasteGrowth: 7.8  },
+  br_c3_2: { totalCollections: 82,  collectionGrowth: 10.2, avgCollectionRate: 75.5, collectionRateChange: 2.0, missedCollections: 8,  missedChange: -4.5,  activeResidents: 218, residentGrowth: 4.5, ecoTokensIssued: 4_100, tokenGrowth: 15.5, totalWasteKg: 1_600, wasteGrowth: 7.4  },
+  br_c3_3: { totalCollections: 80,  collectionGrowth:  9.8, avgCollectionRate: 74.0, collectionRateChange: 1.8, missedCollections: 6,  missedChange: -6.0,  activeResidents: 220, residentGrowth: 4.6, ecoTokensIssued: 4_200, tokenGrowth: 15.8, totalWasteKg: 1_590, wasteGrowth: 7.2  },
+  br_c4_1: { totalCollections: 82,  collectionGrowth:  9.5, avgCollectionRate: 74.5, collectionRateChange: 2.0, missedCollections: 8,  missedChange: -4.0,  activeResidents: 215, residentGrowth: 4.3, ecoTokensIssued: 4_050, tokenGrowth: 14.5, totalWasteKg: 1_580, wasteGrowth: 7.0  },
+  br_c4_2: { totalCollections: 78,  collectionGrowth:  9.0, avgCollectionRate: 72.0, collectionRateChange: 1.7, missedCollections: 9,  missedChange: -3.8,  activeResidents: 212, residentGrowth: 4.0, ecoTokensIssued: 3_980, tokenGrowth: 13.8, totalWasteKg: 1_540, wasteGrowth: 6.5  },
+  br_c4_3: { totalCollections: 75,  collectionGrowth:  8.8, avgCollectionRate: 70.5, collectionRateChange: 1.5, missedCollections: 7,  missedChange: -4.5,  activeResidents: 213, residentGrowth: 4.1, ecoTokensIssued: 3_950, tokenGrowth: 13.5, totalWasteKg: 1_500, wasteGrowth: 6.2  },
+  br_c5_1: { totalCollections: 90,  collectionGrowth: 13.5, avgCollectionRate: 70.0, collectionRateChange: 3.8, missedCollections: 3,  missedChange: -16.0, activeResidents: 238, residentGrowth: 6.8, ecoTokensIssued: 5_300, tokenGrowth: 20.0, totalWasteKg: 1_660, wasteGrowth: 10.5 },
+  br_c5_2: { totalCollections: 88,  collectionGrowth: 13.0, avgCollectionRate: 68.5, collectionRateChange: 3.5, missedCollections: 4,  missedChange: -14.5, activeResidents: 232, residentGrowth: 6.4, ecoTokensIssued: 5_180, tokenGrowth: 19.5, totalWasteKg: 1_620, wasteGrowth: 10.0 },
+  br_c5_3: { totalCollections: 82,  collectionGrowth: 12.5, avgCollectionRate: 66.5, collectionRateChange: 3.2, missedCollections: 3,  missedChange: -13.0, activeResidents: 232, residentGrowth: 6.2, ecoTokensIssued: 5_180, tokenGrowth: 18.8, totalWasteKg: 1_580, wasteGrowth: 9.5  },
+};
+
+// ── Monthly collections scoped by cluster ─────────────────────────────────────
+export const MONTHLY_COLLECTIONS_BY_CLUSTER = {
+  c1: [
+    { month: "Jan", collected: 48, missed: 4, target: 52 },
+    { month: "Feb", collected: 52, missed: 3, target: 55 },
+    { month: "Mar", collected: 58, missed: 2, target: 60 },
+    { month: "Apr", collected: 55, missed: 3, target: 58 },
+    { month: "May", collected: 67, missed: 2, target: 68 },
+  ],
+  c2: [
+    { month: "Jan", collected: 44, missed: 5, target: 49 },
+    { month: "Feb", collected: 47, missed: 4, target: 51 },
+    { month: "Mar", collected: 52, missed: 3, target: 55 },
+    { month: "Apr", collected: 49, missed: 4, target: 53 },
+    { month: "May", collected: 69, missed: 2, target: 71 },
+  ],
+  c3: [
+    { month: "Jan", collected: 40, missed: 5, target: 45 },
+    { month: "Feb", collected: 43, missed: 4, target: 47 },
+    { month: "Mar", collected: 48, missed: 4, target: 52 },
+    { month: "Apr", collected: 45, missed: 5, target: 50 },
+    { month: "May", collected: 72, missed: 3, target: 75 },
+  ],
+  c4: [
+    { month: "Jan", collected: 38, missed: 6, target: 44 },
+    { month: "Feb", collected: 40, missed: 5, target: 45 },
+    { month: "Mar", collected: 44, missed: 4, target: 48 },
+    { month: "Apr", collected: 42, missed: 5, target: 47 },
+    { month: "May", collected: 71, missed: 4, target: 75 },
+  ],
+  c5: [
+    { month: "Jan", collected: 28, missed: 2, target: 30 },
+    { month: "Feb", collected: 30, missed: 2, target: 32 },
+    { month: "Mar", collected: 33, missed: 2, target: 35 },
+    { month: "Apr", collected: 30, missed: 2, target: 32 },
+    { month: "May", collected: 69, missed: 2, target: 71 },
+  ],
+};
+
+// ── Monthly collections scoped by barangay ────────────────────────────────────
+export const MONTHLY_COLLECTIONS_BY_BARANGAY = {
+  br_c1_1: [
+    { month: "Jan", collected: 17, missed: 1, target: 18 },
+    { month: "Feb", collected: 18, missed: 1, target: 19 },
+    { month: "Mar", collected: 21, missed: 1, target: 22 },
+    { month: "Apr", collected: 19, missed: 1, target: 20 },
+    { month: "May", collected: 23, missed: 0, target: 23 },
+  ],
+  br_c1_2: [
+    { month: "Jan", collected: 18, missed: 2, target: 20 },
+    { month: "Feb", collected: 19, missed: 1, target: 20 },
+    { month: "Mar", collected: 22, missed: 1, target: 23 },
+    { month: "Apr", collected: 20, missed: 1, target: 21 },
+    { month: "May", collected: 23, missed: 1, target: 24 },
+  ],
+  br_c1_3: [
+    { month: "Jan", collected: 13, missed: 1, target: 14 },
+    { month: "Feb", collected: 15, missed: 1, target: 16 },
+    { month: "Mar", collected: 15, missed: 0, target: 15 },
+    { month: "Apr", collected: 16, missed: 1, target: 17 },
+    { month: "May", collected: 21, missed: 1, target: 21 },
+  ],
+  br_c2_1: [{ month: "Jan", collected: 31, missed: 2, target: 33 }, { month: "Feb", collected: 33, missed: 1, target: 34 }, { month: "Mar", collected: 36, missed: 1, target: 37 }, { month: "Apr", collected: 34, missed: 2, target: 36 }, { month: "May", collected: 23, missed: 1, target: 24 }],
+  br_c2_2: [{ month: "Jan", collected: 30, missed: 2, target: 32 }, { month: "Feb", collected: 31, missed: 2, target: 33 }, { month: "Mar", collected: 34, missed: 1, target: 35 }, { month: "Apr", collected: 32, missed: 1, target: 33 }, { month: "May", collected: 23, missed: 1, target: 24 }],
+  br_c2_3: [{ month: "Jan", collected: 28, missed: 1, target: 29 }, { month: "Feb", collected: 29, missed: 1, target: 30 }, { month: "Mar", collected: 32, missed: 1, target: 33 }, { month: "Apr", collected: 30, missed: 1, target: 31 }, { month: "May", collected: 23, missed: 0, target: 23 }],
+  br_c3_1: [{ month: "Jan", collected: 29, missed: 2, target: 31 }, { month: "Feb", collected: 30, missed: 2, target: 32 }, { month: "Mar", collected: 33, missed: 1, target: 34 }, { month: "Apr", collected: 31, missed: 2, target: 33 }, { month: "May", collected: 25, missed: 1, target: 26 }],
+  br_c3_2: [{ month: "Jan", collected: 27, missed: 2, target: 29 }, { month: "Feb", collected: 28, missed: 1, target: 29 }, { month: "Mar", collected: 31, missed: 2, target: 33 }, { month: "Apr", collected: 29, missed: 2, target: 31 }, { month: "May", collected: 24, missed: 1, target: 25 }],
+  br_c3_3: [{ month: "Jan", collected: 26, missed: 1, target: 27 }, { month: "Feb", collected: 27, missed: 1, target: 28 }, { month: "Mar", collected: 30, missed: 1, target: 31 }, { month: "Apr", collected: 28, missed: 1, target: 29 }, { month: "May", collected: 23, missed: 1, target: 24 }],
+  br_c4_1: [{ month: "Jan", collected: 28, missed: 3, target: 31 }, { month: "Feb", collected: 29, missed: 2, target: 31 }, { month: "Mar", collected: 32, missed: 2, target: 34 }, { month: "Apr", collected: 30, missed: 2, target: 32 }, { month: "May", collected: 24, missed: 2, target: 26 }],
+  br_c4_2: [{ month: "Jan", collected: 26, missed: 2, target: 28 }, { month: "Feb", collected: 27, missed: 2, target: 29 }, { month: "Mar", collected: 30, missed: 1, target: 31 }, { month: "Apr", collected: 28, missed: 2, target: 30 }, { month: "May", collected: 23, missed: 1, target: 24 }],
+  br_c4_3: [{ month: "Jan", collected: 24, missed: 1, target: 25 }, { month: "Feb", collected: 25, missed: 1, target: 26 }, { month: "Mar", collected: 28, missed: 1, target: 29 }, { month: "Apr", collected: 26, missed: 1, target: 27 }, { month: "May", collected: 24, missed: 1, target: 25 }],
+  br_c5_1: [{ month: "Jan", collected: 10, missed: 1, target: 11 }, { month: "Feb", collected: 11, missed: 1, target: 12 }, { month: "Mar", collected: 12, missed: 0, target: 12 }, { month: "Apr", collected: 11, missed: 1, target: 12 }, { month: "May", collected: 24, missed: 1, target: 25 }],
+  br_c5_2: [{ month: "Jan", collected: 10, missed: 0, target: 10 }, { month: "Feb", collected: 10, missed: 1, target: 11 }, { month: "Mar", collected: 11, missed: 1, target: 12 }, { month: "Apr", collected: 10, missed: 0, target: 10 }, { month: "May", collected: 23, missed: 1, target: 24 }],
+  br_c5_3: [{ month: "Jan", collected: 8,  missed: 1, target: 9  }, { month: "Feb", collected: 9,  missed: 0, target: 9  }, { month: "Mar", collected: 10, missed: 1, target: 11 }, { month: "Apr", collected: 9,  missed: 1, target: 10 }, { month: "May", collected: 22, missed: 0, target: 22 }],
+};
+
+// ── Waste by type scoped by cluster ──────────────────────────────────────────
+export const WASTE_BY_TYPE_BY_CLUSTER = {
+  c1: [{ type: "Biodegradable", kg: 2_180, color: "#2E7D32" }, { type: "Recyclable", kg: 1_590, color: "#1976D2" }, { type: "Residual", kg: 1_200, color: "#F57C00" }, { type: "Special Waste", kg: 450, color: "#D32F2F" }],
+  c2: [{ type: "Biodegradable", kg: 2_040, color: "#2E7D32" }, { type: "Recyclable", kg: 1_490, color: "#1976D2" }, { type: "Residual", kg: 1_140, color: "#F57C00" }, { type: "Special Waste", kg: 430, color: "#D32F2F" }],
+  c3: [{ type: "Biodegradable", kg: 1_950, color: "#2E7D32" }, { type: "Recyclable", kg: 1_420, color: "#1976D2" }, { type: "Residual", kg: 1_080, color: "#F57C00" }, { type: "Special Waste", kg: 420, color: "#D32F2F" }],
+  c4: [{ type: "Biodegradable", kg: 1_850, color: "#2E7D32" }, { type: "Recyclable", kg: 1_350, color: "#1976D2" }, { type: "Residual", kg: 1_020, color: "#F57C00" }, { type: "Special Waste", kg: 400, color: "#D32F2F" }],
+  c5: [{ type: "Biodegradable", kg: 1_820, color: "#2E7D32" }, { type: "Recyclable", kg: 1_360, color: "#1976D2" }, { type: "Residual", kg: 1_190, color: "#F57C00" }, { type: "Special Waste", kg: 490, color: "#D32F2F" }],
+};
+
+// ── Waste by type scoped by barangay ─────────────────────────────────────────
+export const WASTE_BY_TYPE_BY_BARANGAY = {
+  br_c1_1: [{ type: "Biodegradable", kg: 760, color: "#2E7D32" }, { type: "Recyclable", kg: 555, color: "#1976D2" }, { type: "Residual", kg: 420, color: "#F57C00" }, { type: "Special Waste", kg: 155, color: "#D32F2F" }],
+  br_c1_2: [{ type: "Biodegradable", kg: 790, color: "#2E7D32" }, { type: "Recyclable", kg: 575, color: "#1976D2" }, { type: "Residual", kg: 435, color: "#F57C00" }, { type: "Special Waste", kg: 160, color: "#D32F2F" }],
+  br_c1_3: [{ type: "Biodegradable", kg: 630, color: "#2E7D32" }, { type: "Recyclable", kg: 460, color: "#1976D2" }, { type: "Residual", kg: 345, color: "#F57C00" }, { type: "Special Waste", kg: 135, color: "#D32F2F" }],
+  br_c2_1: [{ type: "Biodegradable", kg: 705, color: "#2E7D32" }, { type: "Recyclable", kg: 515, color: "#1976D2" }, { type: "Residual", kg: 390, color: "#F57C00" }, { type: "Special Waste", kg: 150, color: "#D32F2F" }],
+  br_c2_2: [{ type: "Biodegradable", kg: 690, color: "#2E7D32" }, { type: "Recyclable", kg: 500, color: "#1976D2" }, { type: "Residual", kg: 380, color: "#F57C00" }, { type: "Special Waste", kg: 150, color: "#D32F2F" }],
+  br_c2_3: [{ type: "Biodegradable", kg: 645, color: "#2E7D32" }, { type: "Recyclable", kg: 475, color: "#1976D2" }, { type: "Residual", kg: 370, color: "#F57C00" }, { type: "Special Waste", kg: 130, color: "#D32F2F" }],
+  br_c3_1: [{ type: "Biodegradable", kg: 672, color: "#2E7D32" }, { type: "Recyclable", kg: 490, color: "#1976D2" }, { type: "Residual", kg: 372, color: "#F57C00" }, { type: "Special Waste", kg: 146, color: "#D32F2F" }],
+  br_c3_2: [{ type: "Biodegradable", kg: 640, color: "#2E7D32" }, { type: "Recyclable", kg: 466, color: "#1976D2" }, { type: "Residual", kg: 354, color: "#F57C00" }, { type: "Special Waste", kg: 140, color: "#D32F2F" }],
+  br_c3_3: [{ type: "Biodegradable", kg: 638, color: "#2E7D32" }, { type: "Recyclable", kg: 464, color: "#1976D2" }, { type: "Residual", kg: 354, color: "#F57C00" }, { type: "Special Waste", kg: 134, color: "#D32F2F" }],
+  br_c4_1: [{ type: "Biodegradable", kg: 632, color: "#2E7D32" }, { type: "Recyclable", kg: 460, color: "#1976D2" }, { type: "Residual", kg: 348, color: "#F57C00" }, { type: "Special Waste", kg: 140, color: "#D32F2F" }],
+  br_c4_2: [{ type: "Biodegradable", kg: 616, color: "#2E7D32" }, { type: "Recyclable", kg: 448, color: "#1976D2" }, { type: "Residual", kg: 340, color: "#F57C00" }, { type: "Special Waste", kg: 136, color: "#D32F2F" }],
+  br_c4_3: [{ type: "Biodegradable", kg: 602, color: "#2E7D32" }, { type: "Recyclable", kg: 442, color: "#1976D2" }, { type: "Residual", kg: 332, color: "#F57C00" }, { type: "Special Waste", kg: 124, color: "#D32F2F" }],
+  br_c5_1: [{ type: "Biodegradable", kg: 664, color: "#2E7D32" }, { type: "Recyclable", kg: 484, color: "#1976D2" }, { type: "Residual", kg: 348, color: "#F57C00" }, { type: "Special Waste", kg: 164, color: "#D32F2F" }],
+  br_c5_2: [{ type: "Biodegradable", kg: 648, color: "#2E7D32" }, { type: "Recyclable", kg: 472, color: "#1976D2" }, { type: "Residual", kg: 340, color: "#F57C00" }, { type: "Special Waste", kg: 160, color: "#D32F2F" }],
+  br_c5_3: [{ type: "Biodegradable", kg: 508, color: "#2E7D32" }, { type: "Recyclable", kg: 404, color: "#1976D2" }, { type: "Residual", kg: 502, color: "#F57C00" }, { type: "Special Waste", kg: 166, color: "#D32F2F" }],
+};
+
+// ── Missed reasons scoped by cluster ─────────────────────────────────────────
+export const MISSED_REASONS_BY_CLUSTER = {
+  c1: [{ reason: "Truck Breakdown", count: 5, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 4, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 3, color: "#1976D2" }, { reason: "Weather / Road", count: 1, color: "#6B7280" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  c2: [{ reason: "Truck Breakdown", count: 6, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 5, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 4, color: "#1976D2" }, { reason: "Weather / Road", count: 2, color: "#6B7280" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  c3: [{ reason: "Truck Breakdown", count: 7, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 5, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 5, color: "#1976D2" }, { reason: "Weather / Road", count: 3, color: "#6B7280" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  c4: [{ reason: "Truck Breakdown", count: 8, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 6, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 5, color: "#1976D2" }, { reason: "Weather / Road", count: 3, color: "#6B7280" }, { reason: "Other", count: 2, color: "#9CA3AF" }],
+  c5: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Weather / Road", count: 2, color: "#6B7280" }, { reason: "Other", count: 2, color: "#9CA3AF" }],
+};
+
+// ── Missed reasons scoped by barangay ────────────────────────────────────────
+export const MISSED_REASONS_BY_BARANGAY = {
+  br_c1_1: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 0, color: "#9CA3AF" }],
+  br_c1_2: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 0, color: "#9CA3AF" }],
+  br_c1_3: [{ reason: "Truck Breakdown", count: 1, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 2, color: "#9CA3AF" }],
+  br_c2_1: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c2_2: [{ reason: "Truck Breakdown", count: 3, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c2_3: [{ reason: "Truck Breakdown", count: 1, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c3_1: [{ reason: "Truck Breakdown", count: 3, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c3_2: [{ reason: "Truck Breakdown", count: 3, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c3_3: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c4_1: [{ reason: "Truck Breakdown", count: 3, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c4_2: [{ reason: "Truck Breakdown", count: 4, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 2, color: "#1976D2" }, { reason: "Other", count: 1, color: "#9CA3AF" }],
+  br_c4_3: [{ reason: "Truck Breakdown", count: 1, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 2, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 3, color: "#9CA3AF" }],
+  br_c5_1: [{ reason: "Truck Breakdown", count: 1, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 0, color: "#9CA3AF" }],
+  br_c5_2: [{ reason: "Truck Breakdown", count: 2, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 1, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 1, color: "#1976D2" }, { reason: "Other", count: 0, color: "#9CA3AF" }],
+  br_c5_3: [{ reason: "Truck Breakdown", count: 1, color: "#D32F2F" }, { reason: "Route Not Assigned", count: 0, color: "#F57C00" }, { reason: "Bin Not Accessible", count: 0, color: "#1976D2" }, { reason: "Other", count: 2, color: "#9CA3AF" }],
+};
