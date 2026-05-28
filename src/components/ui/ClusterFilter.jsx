@@ -8,11 +8,11 @@
  */
 
 const DEFAULT_CLUSTERS = [
-  { id: "c1", label: "Cluster 1 (North Zone)" },
-  { id: "c2", label: "Cluster 2" },
-  { id: "c3", label: "Cluster 3" },
-  { id: "c4", label: "Cluster 4" },
-  { id: "c5", label: "Cluster 5" },
+  { id: "c1", label: "Solid East" },
+  { id: "c2", label: "Solid North" },
+  { id: "c3", label: "Solid Poblacion" },
+  { id: "c4", label: "Solid Baybay" },
+  { id: "c5", label: "Solid Upland" },
 ];
 
 export default function ClusterFilter({

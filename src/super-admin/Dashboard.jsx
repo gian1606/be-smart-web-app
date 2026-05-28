@@ -57,7 +57,7 @@ export default function Dashboard() {
             Refresh
           </button>
           <button
-            onClick={() => navigate("/super-admin/map")}
+            onClick={() => navigate("/super-admin/routes")}
             className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white transition-opacity hover:opacity-90"
             style={{ fontSize: 13, background: "#2E7D32" }}
           >
@@ -160,13 +160,6 @@ export default function Dashboard() {
                 ))
               )}
             </div>
-            <button
-              onClick={() => navigate("/super-admin/map")}
-              className="w-full rounded-lg py-2.5 font-semibold text-white mt-1 transition-opacity hover:opacity-90"
-              style={{ fontSize: 13, background: "#2E7D32" }}
-            >
-              Optimize Collection Route
-            </button>
           </div>
 
           {/* Recent Activity */}
