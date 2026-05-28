@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { Plus, Pencil, UserX, Search, ChevronDown } from "lucide-react";
+import { Plus, Trash2, Search, ChevronDown } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
 import { BARANGAY_ACCOUNTS, CLUSTERS } from "./mock/data";
@@ -32,8 +32,7 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
 export default function BarangayManagement() {
   const [barangays, setBarangays] = useState(BARANGAY_ACCOUNTS);
   const [modalOpen, setModalOpen] = useState(false);
-  const [deactivateTarget, setDeactivateTarget] = useState(null);
-  const [editItem, setEditItem] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [formErrors, setFormErrors] = useState({});
   const [filterCluster, setFilterCluster] = useState("all");
@@ -62,15 +61,7 @@ export default function BarangayManagement() {
 
   // ── Modal helpers ───────────────────────────────────────────────────────────
   function openAdd() {
-    setEditItem(null);
     setForm(EMPTY_FORM);
-    setFormErrors({});
-    setModalOpen(true);
-  }
-
-  function openEdit(item) {
-    setEditItem(item);
-    setForm({ name: item.name, captain: item.captain, email: item.email, cluster: item.cluster, tempPassword: "" });
     setFormErrors({});
     setModalOpen(true);
   }
@@ -82,48 +73,33 @@ export default function BarangayManagement() {
     if (!form.email.trim())   e.email   = "Email is required.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) e.email = "Enter a valid email.";
     if (!form.cluster)        e.cluster = "Assign a cluster.";
-    if (!editItem && !form.tempPassword) e.tempPassword = "Temporary password is required.";
+    if (!form.tempPassword)   e.tempPassword = "Temporary password is required.";
     return e;
   }
 
   function handleSave() {
     const e = validateForm();
     if (Object.keys(e).length) { setFormErrors(e); return; }
-
-    if (editItem) {
-      setBarangays((prev) =>
-        prev.map((b) =>
-          b.id === editItem.id
-            ? { ...b, name: form.name, captain: form.captain, email: form.email, cluster: form.cluster }
-            : b
-        )
-      );
-    } else {
-      setBarangays((prev) => [
-        ...prev,
-        {
-          id: `ba${Date.now()}`,
-          name: form.name,
-          captain: form.captain,
-          email: form.email,
-          cluster: form.cluster,
-          totalBins: 0,
-          activeResidents: 0,
-          status: "active",
-          lastActivity: new Date().toISOString().split("T")[0],
-        },
-      ]);
-    }
+    setBarangays((prev) => [
+      ...prev,
+      {
+        id: `ba${Date.now()}`,
+        name: form.name,
+        captain: form.captain,
+        email: form.email,
+        cluster: form.cluster,
+        totalBins: 0,
+        activeResidents: 0,
+        status: "active",
+        lastActivity: new Date().toISOString().split("T")[0],
+      },
+    ]);
     setModalOpen(false);
   }
 
-  function handleToggleStatus(id) {
-    setBarangays((prev) =>
-      prev.map((b) =>
-        b.id === id ? { ...b, status: b.status === "active" ? "inactive" : "active" } : b
-      )
-    );
-    setDeactivateTarget(null);
+  function handleDelete(id) {
+    setBarangays((prev) => prev.filter((b) => b.id !== id));
+    setDeleteTarget(null);
   }
 
   return (
@@ -164,7 +140,6 @@ export default function BarangayManagement() {
 
       {/* Filters */}
       <div className="flex items-center gap-3 flex-wrap">
-        {/* Search */}
         <div className="relative flex items-center flex-1" style={{ minWidth: 220 }}>
           <Search size={14} className="absolute left-3 text-text-muted" />
           <input
@@ -175,8 +150,6 @@ export default function BarangayManagement() {
             style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#F9FAFB" }}
           />
         </div>
-
-        {/* Cluster filter */}
         <div className="relative flex items-center">
           <select
             value={filterCluster}
@@ -189,8 +162,6 @@ export default function BarangayManagement() {
           </select>
           <ChevronDown size={13} className="absolute right-2.5 pointer-events-none text-text-muted" />
         </div>
-
-        {/* Status filter */}
         <div className="relative flex items-center">
           <select
             value={filterStatus}
@@ -204,7 +175,6 @@ export default function BarangayManagement() {
           </select>
           <ChevronDown size={13} className="absolute right-2.5 pointer-events-none text-text-muted" />
         </div>
-
         {(filterCluster !== "all" || filterStatus !== "all" || search) && (
           <button
             onClick={() => { setFilterCluster("all"); setFilterStatus("all"); setSearch(""); }}
@@ -255,17 +225,15 @@ export default function BarangayManagement() {
                   <td className="px-4 py-3"><StatusBadge status={b.status} /></td>
                   <td className="px-4 py-3 text-text-secondary" style={{ fontSize: 13 }}>{b.lastActivity}</td>
                   <td className="px-4 py-3">
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => openEdit(b)}
-                        className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors" title="Edit">
-                        <Pencil size={15} color="#6B7280" />
-                      </button>
-                      <button onClick={() => setDeactivateTarget(b)}
-                        className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-                        title={b.status === "active" ? "Deactivate" : "Activate"}>
-                        <UserX size={15} color={b.status === "active" ? "#D32F2F" : "#2E7D32"} />
-                      </button>
-                    </div>
+                    <button
+                      onClick={() => setDeleteTarget(b)}
+                      className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-red-50"
+                      style={{ fontSize: 12, color: "#D32F2F", border: "1px solid #FECACA" }}
+                      title="Delete barangay"
+                    >
+                      <Trash2 size={13} />
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))
@@ -274,11 +242,11 @@ export default function BarangayManagement() {
         </table>
       </div>
 
-      {/* Add / Edit Modal */}
+      {/* ── ADD BARANGAY MODAL ────────────────────────────────────────────── */}
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editItem ? "Edit Barangay Account" : "Add Barangay Account"}
+        title="Add Barangay Account"
         footer={
           <>
             <button onClick={() => setModalOpen(false)}
@@ -289,7 +257,7 @@ export default function BarangayManagement() {
             <button onClick={handleSave}
               className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
               style={{ fontSize: 14, background: "#2E7D32" }}>
-              {editItem ? "Save Changes" : "Create Account"}
+              Create Account
             </button>
           </>
         }
@@ -304,8 +272,6 @@ export default function BarangayManagement() {
           <FormField label="Email Address" type="email" value={form.email}
             onChange={(v) => setForm((p) => ({ ...p, email: v }))}
             error={formErrors.email} placeholder="barangay@besmart.gov.ph" />
-
-          {/* Cluster selector */}
           <div className="flex flex-col gap-1">
             <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Assigned Cluster</label>
             <select
@@ -319,52 +285,61 @@ export default function BarangayManagement() {
             </select>
             {formErrors.cluster && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.cluster}</span>}
           </div>
-
-          {!editItem && (
-            <FormField label="Temporary Password" type="password" value={form.tempPassword}
-              onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))}
-              error={formErrors.tempPassword} placeholder="Min. 8 characters" />
-          )}
+          <FormField label="Temporary Password" type="password" value={form.tempPassword}
+            onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))}
+            error={formErrors.tempPassword} placeholder="Min. 8 characters" />
         </div>
       </Modal>
 
-      {/* Deactivate / Activate Confirmation Modal */}
+      {/* ── DELETE CONFIRMATION MODAL ─────────────────────────────────────── */}
       <Modal
-        open={!!deactivateTarget}
-        onClose={() => setDeactivateTarget(null)}
-        title={deactivateTarget?.status === "active" ? "Deactivate Barangay" : "Activate Barangay"}
+        open={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete Barangay Account"
         footer={
           <>
-            <button onClick={() => setDeactivateTarget(null)}
+            <button onClick={() => setDeleteTarget(null)}
               className="rounded-lg px-4 py-2 font-medium"
               style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}>
               Cancel
             </button>
             <button
-              onClick={() => handleToggleStatus(deactivateTarget?.id)}
-              className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
-              style={{ fontSize: 14, background: deactivateTarget?.status === "active" ? "#D32F2F" : "#2E7D32" }}
+              onClick={() => handleDelete(deleteTarget.id)}
+              className="flex items-center gap-2 rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
+              style={{ fontSize: 14, background: "#D32F2F" }}
             >
-              {deactivateTarget?.status === "active" ? "Deactivate" : "Activate"}
+              <Trash2 size={14} />
+              Delete
             </button>
           </>
         }
       >
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-center rounded-full mx-auto"
-            style={{ width: 56, height: 56, background: deactivateTarget?.status === "active" ? "#FFEBEE" : "#E8F5E9" }}>
-            <UserX size={26} color={deactivateTarget?.status === "active" ? "#D32F2F" : "#2E7D32"} />
+        {deleteTarget && (
+          <div className="flex flex-col gap-4">
+            <div className="flex items-start gap-3 rounded-xl px-4 py-3"
+              style={{ background: "#FFEBEE", border: "1px solid #FFCDD2" }}>
+              <Trash2 size={16} color="#D32F2F" className="flex-shrink-0 mt-0.5" />
+              <p style={{ fontSize: 13, color: "#B71C1C" }}>
+                This will permanently delete the barangay account. This action cannot be undone.
+              </p>
+            </div>
+            <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #F3F4F6" }}>
+              {[
+                { label: "Barangay Name", value: deleteTarget.name },
+                { label: "Captain",       value: deleteTarget.captain },
+                { label: "Email",         value: deleteTarget.email },
+                { label: "Cluster",       value: getClusterLabel(deleteTarget.cluster) },
+                { label: "Status",        value: deleteTarget.status === "active" ? "Active" : "Inactive" },
+              ].map(({ label, value }) => (
+                <div key={label} className="flex items-center justify-between px-4 py-2.5 border-b last:border-0"
+                  style={{ borderColor: "#F3F4F6" }}>
+                  <span className="text-text-muted font-medium" style={{ fontSize: 13 }}>{label}</span>
+                  <span className="text-text-primary font-semibold" style={{ fontSize: 13 }}>{value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <p className="text-center font-semibold text-text-primary" style={{ fontSize: 15 }}>
-            {deactivateTarget?.status === "active" ? "Deactivate" : "Activate"}{" "}
-            <strong>{deactivateTarget?.name}</strong>?
-          </p>
-          <p className="text-center text-text-secondary" style={{ fontSize: 13 }}>
-            {deactivateTarget?.status === "active"
-              ? "This will suspend the barangay account and restrict access."
-              : "This will restore the barangay account and re-enable access."}
-          </p>
-        </div>
+        )}
       </Modal>
     </div>
   );

@@ -1,8 +1,33 @@
-﻿import { useState } from "react";
-import { Plus, Eye, Send, ChevronLeft, ChevronRight, Route, MapPin, Clock, CheckCircle, Truck, X, AlertTriangle } from "lucide-react";
+﻿import { useState, useMemo } from "react";
+import { Plus, Eye, Send, ChevronLeft, ChevronRight, Route, MapPin, Clock, CheckCircle, Truck, X, AlertTriangle, Cpu, Ruler } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
-import { ROUTES, CLUSTERS, CLUSTER_ADMINS, BINS } from "../mock/data";
+import MapView from "../components/ui/MapView";
+import { ROUTES, CLUSTERS, CLUSTER_ADMINS, BINS, TRUCKS, MRF_LOCATIONS, OPTIMIZED_ROUTE } from "../mock/data";
+
+// ── Per-cluster optimized route builder ──────────────────────────────────────
+function buildClusterRoute(clusterId, allBins) {
+  const fullBins = allBins.filter((b) => b.cluster === clusterId && b.status === "full");
+  if (fullBins.length === 0) return null;
+  const order = [
+    { label: "Truck Depot", type: "depot", posX: 0.10, posY: 0.85 },
+    ...fullBins.map((b) => ({ binId: b.id, label: b.name, street: b.street, posX: b.posX, posY: b.posY })),
+  ];
+  const distanceKm = parseFloat((fullBins.length * 1.4 + 0.8).toFixed(1));
+  const estimatedMinutes = Math.round(fullBins.length * 11 + 8);
+  const clusterNum = clusterId.replace("c", "");
+  const routeNum = String(parseInt(clusterNum) + 5).padStart(3, "0");
+  return {
+    routeId: `RT-2025-0${routeNum}`,
+    cluster: clusterId,
+    bins: fullBins.map((b) => b.id),
+    distanceKm,
+    estimatedMinutes,
+    algorithm: "Nearest Neighbor",
+    optimizedAt: new Date().toISOString(),
+    order,
+  };
+}
 
 const PAGE_SIZE = 5;
 
@@ -25,6 +50,67 @@ function InfoRow({ label, value }) {
 
 export default function RouteManagement() {
   const [routes, setRoutes] = useState(ROUTES);
+
+  // ── Optimize Route state ─────────────────────────────────────────────────────
+  const [selectedCluster, setSelectedCluster]     = useState("c1");
+  const [optimized, setOptimized]                 = useState(false);
+  const [sending, setSending]                     = useState(false);
+  const [sent, setSent]                           = useState(false);
+  const [showRouteDetails, setShowRouteDetails]   = useState(false); // modal after optimize
+
+  function handleClusterChange(val) {
+    setSelectedCluster(val);
+    setOptimized(false);
+    setSent(false);
+    setShowRouteDetails(false);
+  }
+
+  const filteredBins = useMemo(() =>
+    BINS.filter((b) => b.cluster === selectedCluster),
+    [selectedCluster]
+  );
+  const filteredMRFs = useMemo(() =>
+    MRF_LOCATIONS.filter((m) => m.cluster === selectedCluster),
+    [selectedCluster]
+  );
+  const fullBinCount = filteredBins.filter((b) => b.status === "full").length;
+
+  const optimizeRoute = useMemo(() => {
+    return buildClusterRoute(selectedCluster, BINS) ?? OPTIMIZED_ROUTE;
+  }, [selectedCluster]);
+
+  const clusterLabel = CLUSTERS.find((c) => c.id === selectedCluster)?.label ?? selectedCluster;
+
+  const sentToAdmin = CLUSTER_ADMINS.find((u) => u.assignedCluster === selectedCluster);
+
+  function handleOptimize() { setOptimized(true); setSent(false); setShowRouteDetails(true); }
+  function handleSendRoute() {
+    setSending(true);
+    setTimeout(() => {
+      setSending(false);
+      setSent(true);
+      setShowRouteDetails(false);
+      const admin = sentToAdmin;
+      const newRoute = {
+        id:               `r${Date.now()}`,
+        routeId:          optimizeRoute.routeId,
+        date:             new Date().toISOString().split("T")[0],
+        cluster:          selectedCluster === "all" ? optimizeRoute.cluster : selectedCluster,
+        bins:             optimizeRoute.bins,
+        distanceKm:       optimizeRoute.distanceKm,
+        estimatedMinutes: optimizeRoute.estimatedMinutes,
+        sentTo:           admin?.name ?? "Cluster Admin",
+        status:           "delivered",
+        optimizedAt:      optimizeRoute.optimizedAt,
+        sentAt:           new Date().toISOString(),
+      };
+      setRoutes((prev) => [newRoute, ...prev]);
+    }, 800);
+  }
+
+  const optimizedAt = new Date(optimizeRoute.optimizedAt).toLocaleTimeString("en-PH", {
+    hour: "2-digit", minute: "2-digit",
+  });
 
   // ── Filters ─────────────────────────────────────────────────────────────────
   const [dateFrom, setDateFrom]         = useState("");
@@ -147,14 +233,201 @@ export default function RouteManagement() {
       {/* Page header */}
       <div className="flex items-center justify-between">
         <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Route Management</h1>
-        <button
-          onClick={openCreate}
-          className="flex items-center gap-2 rounded-lg px-4 py-2.5 font-semibold text-white hover:opacity-90 transition-opacity"
-          style={{ fontSize: 14, background: "#2E7D32" }}
-        >
-          <Plus size={15} />
-          Generate New Route
-        </button>
+      </div>
+
+      {/* ── OPTIMIZE ROUTE PANEL ──────────────────────────────────────────── */}
+      <div className="bg-white rounded-xl overflow-hidden"
+        style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
+        {/* Panel header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b" style={{ borderColor: "#E5E7EB" }}>
+          <div className="flex items-center gap-2">
+            <Cpu size={17} color="#2E7D32" />
+            <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>Optimize Route</h2>
+          </div>
+          {sent && (
+            <span className="flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold"
+              style={{ fontSize: 12, background: "#E8F5E9", color: "#2E7D32" }}>
+              <CheckCircle size={13} /> Sent Successfully
+            </span>
+          )}
+        </div>
+
+        <div className="p-5 flex flex-col gap-4">
+          {/* Controls row */}
+          <div className="flex items-end gap-4 flex-wrap">
+            <div className="flex flex-col gap-1">
+              <label className="text-text-muted font-medium" style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                Optimize for
+              </label>
+              <select
+                value={selectedCluster}
+                onChange={(e) => handleClusterChange(e.target.value)}
+                className="rounded-lg px-3 py-2 font-semibold outline-none"
+                style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#fff", color: "#1A1A1A", minWidth: 200 }}
+              >
+                {CLUSTERS.map((c) => (
+                  <option key={c.id} value={c.id}>{c.label}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex flex-col gap-1">
+                <label className="text-text-muted font-medium" style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "0.05em" }}>
+                  Full bins
+                </label>
+                <span className="rounded-lg px-3 py-2 font-bold text-center"
+                  style={{
+                    fontSize: 13,
+                    background: fullBinCount > 0 ? "#FFEBEE" : "#E8F5E9",
+                    color: fullBinCount > 0 ? "#D32F2F" : "#2E7D32",
+                    border: `1.5px solid ${fullBinCount > 0 ? "#FFCDD2" : "#C8E6C9"}`,
+                    minWidth: 60,
+                  }}>
+                  {fullBinCount} {fullBinCount === 1 ? "bin" : "bins"}
+                </span>
+              </div>
+
+            {!optimized ? (
+              <button
+                onClick={handleOptimize}
+                disabled={fullBinCount === 0}
+                className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ fontSize: 13, background: "#2E7D32" }}
+              >
+                <Cpu size={14} />
+                Optimize Route
+              </button>
+            ) : sent ? (
+              <button
+                onClick={() => { setOptimized(false); setSent(false); setSelectedCluster("c1"); }}
+                className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold transition-colors"
+                style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#fff", color: "#6B7280" }}
+              >
+                Optimize Another
+              </button>
+            ) : (
+              <button
+                onClick={() => setShowRouteDetails(true)}
+                className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
+                style={{ fontSize: 13, background: "#2E7D32" }}
+              >
+                <Send size={14} />
+                Send to Collector Admin
+              </button>
+            )}
+          </div>
+
+          {optimized && (
+            <div className="flex items-center gap-3 rounded-xl px-4 py-3"
+              style={{ background: "#E8F5E9", border: "1px solid #A5D6A7" }}>
+              <CheckCircle size={16} color="#2E7D32" />
+              <span className="font-semibold" style={{ fontSize: 13, color: "#2E7D32" }}>
+                Route Optimized — {clusterLabel}
+              </span>
+              <span className="text-text-secondary" style={{ fontSize: 13 }}>
+                · {optimizeRoute.bins.length} bins · Est. {optimizeRoute.estimatedMinutes} min · {optimizeRoute.distanceKm} km
+              </span>
+            </div>
+          )}
+
+          {fullBinCount === 0 && !optimized && (
+            <div className="flex items-center gap-3 rounded-xl px-4 py-3"
+              style={{ background: "#FFF3E0", border: "1px solid #FFE0B2" }}>
+              <MapPin size={16} color="#F57C00" className="flex-shrink-0" />
+              <p style={{ fontSize: 13, color: "#E65100" }}>
+                No full bins in <strong>{clusterLabel}</strong>. Select a different cluster or switch to City-wide view.
+              </p>
+            </div>
+          )}
+
+          <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 340px" }}>
+            <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #F3F4F6" }}>
+              <MapView
+                bins={filteredBins}
+                trucks={TRUCKS}
+                mrfs={filteredMRFs}
+                routeOrder={optimized ? optimizeRoute.order : []}
+                showRoute={optimized}
+                height={380}
+              />
+            </div>
+
+            <div className="rounded-xl p-4 flex flex-col gap-3"
+              style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
+              {!optimized ? (
+                <div className="flex flex-col items-center justify-center h-full gap-3 py-8">
+                  <MapPin size={36} color="#9CA3AF" />
+                  <p className="text-text-muted text-center" style={{ fontSize: 13 }}>
+                    Click "Optimize Route" to calculate the best collection path for {clusterLabel}.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-semibold text-text-primary" style={{ fontSize: 15 }}>Route Details</h3>
+                    <span className="rounded-full px-2.5 py-0.5 font-semibold"
+                      style={{ fontSize: 11, background: "#E8F5E9", color: "#2E7D32" }}>
+                      {clusterLabel}
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { icon: <Ruler size={13} color="#6B7280" />, label: "Distance",   value: `${optimizeRoute.distanceKm} km` },
+                      { icon: <Clock size={13} color="#6B7280" />, label: "Est. Time",  value: `${optimizeRoute.estimatedMinutes} min` },
+                      { icon: <MapPin size={13} color="#6B7280" />, label: "Bins",      value: optimizeRoute.bins.length },
+                      { icon: <Cpu size={13} color="#6B7280" />,   label: "Algorithm", value: "Nearest Neighbor" },
+                    ].map((t) => (
+                      <div key={t.label} className="rounded-lg p-2.5 flex flex-col gap-1"
+                        style={{ background: "#fff", border: "1px solid #E5E7EB" }}>
+                        <div className="flex items-center gap-1">
+                          {t.icon}
+                          <span className="text-text-muted" style={{ fontSize: 10 }}>{t.label}</span>
+                        </div>
+                        <span className="font-semibold text-text-primary" style={{ fontSize: 13 }}>{t.value}</span>
+                      </div>
+                    ))}
+                  </div>
+                  {sentToAdmin && (
+                    <div className="rounded-lg px-3 py-2 flex items-center gap-2"
+                      style={{ background: "#fff", border: "1px solid #E5E7EB" }}>
+                      <div className="flex items-center justify-center rounded-full flex-shrink-0"
+                        style={{ width: 26, height: 26, background: "#E8F5E9" }}>
+                        <span style={{ fontSize: 11 }}>👤</span>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-text-primary" style={{ fontSize: 12 }}>{sentToAdmin.name}</p>
+                        <p className="text-text-muted" style={{ fontSize: 10 }}>Cluster Admin · {clusterLabel}</p>
+                      </div>
+                    </div>
+                  )}
+                  <p className="text-text-muted" style={{ fontSize: 11 }}>Optimized at {optimizedAt}</p>
+                  <div>
+                    <h4 className="font-semibold text-text-primary mb-2" style={{ fontSize: 13 }}>Collection Order</h4>
+                    <div className="flex flex-col gap-1.5 overflow-y-auto" style={{ maxHeight: 160 }}>
+                      {optimizeRoute.order.map((stop, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className="flex-shrink-0 flex items-center justify-center rounded-full font-bold text-white"
+                            style={{ width: 22, height: 22, fontSize: 10, background: stop.type === "depot" ? "#F57C00" : "#2E7D32" }}>
+                            {stop.type === "depot" ? "D" : i}
+                          </div>
+                          <div>
+                            <div className="font-semibold text-text-primary" style={{ fontSize: 12 }}>{stop.label}</div>
+                            {stop.street && <div className="text-text-muted" style={{ fontSize: 10 }}>{stop.street}</div>}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── ROUTE HISTORY ─────────────────────────────────────────────────── */}
+      <div className="flex items-center justify-between">
+        <h2 className="font-semibold text-text-primary" style={{ fontSize: 18 }}>Route History</h2>
       </div>
 
       {/* Filters */}
@@ -282,6 +555,77 @@ export default function RouteManagement() {
           </div>
         </div>
       </div>
+
+      {/* ── ROUTE DETAILS MODAL (shown after Optimize, before Send) ──────── */}
+      <Modal
+        open={showRouteDetails}
+        onClose={() => setShowRouteDetails(false)}
+        title="Route Details"
+        footer={
+          <>
+            <button
+              onClick={() => setShowRouteDetails(false)}
+              className="rounded-lg px-4 py-2 font-medium"
+              style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={handleSendRoute}
+              disabled={sending}
+              className="flex items-center gap-2 rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
+              style={{ fontSize: 14, background: "#2E7D32", opacity: sending ? 0.7 : 1 }}
+            >
+              <Send size={14} />
+              {sending ? "Sending…" : "Send to Collector Admin"}
+            </button>
+          </>
+        }
+      >
+        {/* Route ID banner */}
+        <div className="flex items-center justify-between rounded-xl px-4 py-3 mb-1"
+          style={{ background: "#FFF8F0", border: "1px solid #FFE0B2" }}>
+          <div className="flex items-center gap-2">
+            <Route size={18} color="#F57C00" />
+            <span className="font-bold text-text-primary" style={{ fontSize: 16 }}>{optimizeRoute.routeId}</span>
+          </div>
+          <span className="rounded-full px-3 py-0.5 font-semibold"
+            style={{ fontSize: 12, background: "#E8F5E9", color: "#2E7D32" }}>
+            Ready to Send
+          </span>
+        </div>
+
+        {/* Key info rows */}
+        <div className="rounded-xl overflow-hidden mb-4" style={{ border: "1px solid #F3F4F6" }}>
+          <InfoRow label="Date"           value={new Date().toISOString().split("T")[0]} />
+          <InfoRow label="Cluster"        value={clusterLabel} />
+          <InfoRow label="Sent To"        value={sentToAdmin?.name ?? "Cluster Admin"} />
+          <InfoRow label="Distance"       value={`${optimizeRoute.distanceKm} km`} />
+          <InfoRow label="Est. Duration"  value={`${optimizeRoute.estimatedMinutes} min`} />
+          <InfoRow label="Bins Scheduled" value={`${optimizeRoute.bins.length} bins`} />
+        </div>
+
+        {/* Scheduled bins */}
+        <p className="font-semibold text-text-primary mb-2" style={{ fontSize: 13 }}>Scheduled Bins</p>
+        <div className="flex flex-col gap-1.5">
+          {optimizeRoute.bins.map((binId, idx) => {
+            const bin = BINS.find((b) => b.id === binId);
+            return (
+              <div key={binId} className="flex items-center gap-3 rounded-lg px-3 py-2"
+                style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
+                <span className="flex items-center justify-center rounded-full font-bold text-white flex-shrink-0"
+                  style={{ width: 22, height: 22, fontSize: 10, background: "#2E7D32" }}>
+                  {idx + 1}
+                </span>
+                <MapPin size={13} color="#6B7280" className="flex-shrink-0" />
+                <span className="text-text-secondary" style={{ fontSize: 13 }}>
+                  {bin ? `${bin.name} — ${bin.street}, ${bin.barangay}` : binId}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </Modal>
 
       {/* ── VIEW DETAILS MODAL ─────────────────────────────────────────────── */}
       <Modal

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Pencil, UserX, Info } from "lucide-react";
+import { Plus, Trash2, Info } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
 import { MRF_PERSONNEL, MRF_LOCATIONS } from "../mock/data";
@@ -14,25 +14,12 @@ const EMPTY_FORM = {
 export default function MRFPersonnel() {
   const [users, setUsers] = useState(MRF_PERSONNEL);
   const [modalOpen, setModalOpen] = useState(false);
-  const [editUser, setEditUser] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [formErrors, setFormErrors] = useState({});
+  const [deleteTarget, setDeleteTarget] = useState(null);
 
   function openAdd() {
-    setEditUser(null);
     setForm(EMPTY_FORM);
-    setFormErrors({});
-    setModalOpen(true);
-  }
-
-  function openEdit(user) {
-    setEditUser(user);
-    setForm({
-      name: user.name,
-      email: user.email,
-      mrf: user.mrf,
-      tempPassword: "",
-    });
     setFormErrors({});
     setModalOpen(true);
   }
@@ -44,7 +31,7 @@ export default function MRFPersonnel() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
       e.email = "Enter a valid email.";
     if (!form.mrf) e.mrf = "Assign an MRF facility.";
-    if (!editUser && !form.tempPassword)
+    if (!form.tempPassword)
       e.tempPassword = "Temporary password is required.";
     return e;
   }
@@ -53,37 +40,22 @@ export default function MRFPersonnel() {
     const e = validateForm();
     if (Object.keys(e).length) { setFormErrors(e); return; }
 
-    if (editUser) {
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.id === editUser.id
-            ? { ...u, name: form.name, email: form.email, mrf: form.mrf }
-            : u
-        )
-      );
-    } else {
-      const newUser = {
-        id: `mp${Date.now()}`,
-        name: form.name,
-        email: form.email,
-        mrf: form.mrf,
-        role: "mrf_personnel",
-        status: "active",
-        lastLogin: null,
-      };
-      setUsers((prev) => [...prev, newUser]);
-    }
+    const newUser = {
+      id: `mp${Date.now()}`,
+      name: form.name,
+      email: form.email,
+      mrf: form.mrf,
+      role: "mrf_personnel",
+      status: "active",
+      lastLogin: null,
+    };
+    setUsers((prev) => [...prev, newUser]);
     setModalOpen(false);
   }
 
-  function handleToggleStatus(id) {
-    setUsers((prev) =>
-      prev.map((u) =>
-        u.id === id
-          ? { ...u, status: u.status === "active" ? "inactive" : "active" }
-          : u
-      )
-    );
+  function handleDelete(id) {
+    setUsers((prev) => prev.filter((u) => u.id !== id));
+    setDeleteTarget(null);
   }
 
   function formatLastLogin(ts) {
@@ -180,21 +152,11 @@ export default function MRFPersonnel() {
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() => openEdit(u)}
-                      className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-                      title="Edit"
+                      onClick={() => setDeleteTarget(u)}
+                      className="p-1.5 rounded-lg hover:bg-red-50 transition-colors"
+                      title="Delete"
                     >
-                      <Pencil size={15} color="#6B7280" />
-                    </button>
-                    <button
-                      onClick={() => handleToggleStatus(u.id)}
-                      className="p-1.5 rounded-lg hover:bg-gray-100 transition-colors"
-                      title={u.status === "active" ? "Deactivate" : "Activate"}
-                    >
-                      <UserX
-                        size={15}
-                        color={u.status === "active" ? "#D32F2F" : "#2E7D32"}
-                      />
+                      <Trash2 size={15} color="#D32F2F" />
                     </button>
                   </div>
                 </td>
@@ -204,11 +166,11 @@ export default function MRFPersonnel() {
         </table>
       </div>
 
-      {/* Add / Edit Modal */}
+      {/* Add Modal */}
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title={editUser ? "Edit MRF Account" : "Add MRF Account"}
+        title="Add MRF Account"
         footer={
           <>
             <button
@@ -223,7 +185,7 @@ export default function MRFPersonnel() {
               className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
               style={{ fontSize: 14, background: "#2E7D32" }}
             >
-              {editUser ? "Save Changes" : "Create Account"}
+              Create Account
             </button>
           </>
         }
@@ -286,16 +248,54 @@ export default function MRFPersonnel() {
               }}
             />
           </div>
-          {!editUser && (
-            <FormField
-              label="Temporary Password"
-              type="password"
-              value={form.tempPassword}
-              onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))}
-              error={formErrors.tempPassword}
-              placeholder="Min. 8 characters"
-            />
-          )}
+          <FormField
+            label="Temporary Password"
+            type="password"
+            value={form.tempPassword}
+            onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))}
+            error={formErrors.tempPassword}
+            placeholder="Min. 8 characters"
+          />
+        </div>
+      </Modal>
+
+      {/* Delete Confirmation Modal */}
+      <Modal
+        open={!!deleteTarget}
+        onClose={() => setDeleteTarget(null)}
+        title="Delete MRF Account"
+        footer={
+          <>
+            <button
+              onClick={() => setDeleteTarget(null)}
+              className="rounded-lg px-4 py-2 font-medium"
+              style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}
+            >
+              Cancel
+            </button>
+            <button
+              onClick={() => handleDelete(deleteTarget?.id)}
+              className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
+              style={{ fontSize: 14, background: "#D32F2F" }}
+            >
+              Delete
+            </button>
+          </>
+        }
+      >
+        <div className="flex flex-col gap-3">
+          <div
+            className="flex items-center justify-center rounded-full mx-auto"
+            style={{ width: 56, height: 56, background: "#FFEBEE" }}
+          >
+            <Trash2 size={26} color="#D32F2F" />
+          </div>
+          <p className="text-center font-semibold text-text-primary" style={{ fontSize: 15 }}>
+            Are you sure you want to delete <strong>{deleteTarget?.name}</strong>?
+          </p>
+          <p className="text-center text-text-secondary" style={{ fontSize: 13 }}>
+            This action cannot be undone.
+          </p>
         </div>
       </Modal>
     </div>
