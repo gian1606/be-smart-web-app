@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Pencil, Trash2, Users, Truck, ChevronDown, ChevronUp } from "lucide-react";
+import { Plus, Trash2, Users, Truck, ChevronDown, ChevronUp } from "lucide-react";
 import StatusBadge from "../../components/ui/StatusBadge";
 import Modal from "../../components/ui/Modal";
 import { COLLECTOR_UNITS, COLLECTORS } from "../../mock/data";
@@ -11,7 +11,6 @@ export default function CACollectorUnitManagement() {
   const [collectors, setCollectors] = useState(COLLECTORS);
   const [expandedUnit, setExpandedUnit] = useState(null);
   const [unitModalOpen, setUnitModalOpen] = useState(false);
-  const [editUnit, setEditUnit] = useState(null);
   const [unitForm, setUnitForm] = useState(EMPTY_UNIT_FORM);
   const [unitErrors, setUnitErrors] = useState({});
   const [assignModalOpen, setAssignModalOpen] = useState(false);
@@ -19,8 +18,7 @@ export default function CACollectorUnitManagement() {
   const [selectedCollector, setSelectedCollector] = useState("");
   const [assignError, setAssignError] = useState("");
 
-  function openAddUnit() { setEditUnit(null); setUnitForm(EMPTY_UNIT_FORM); setUnitErrors({}); setUnitModalOpen(true); }
-  function openEditUnit(unit) { setEditUnit(unit); setUnitForm({ name: unit.name, plateNumber: unit.plateNumber }); setUnitErrors({}); setUnitModalOpen(true); }
+  function openAddUnit() { setUnitForm(EMPTY_UNIT_FORM); setUnitErrors({}); setUnitModalOpen(true); }
 
   function validateUnit() {
     const e = {};
@@ -32,11 +30,7 @@ export default function CACollectorUnitManagement() {
   function handleSaveUnit() {
     const e = validateUnit();
     if (Object.keys(e).length) { setUnitErrors(e); return; }
-    if (editUnit) {
-      setUnits((prev) => prev.map((u) => u.id === editUnit.id ? { ...u, name: unitForm.name, plateNumber: unitForm.plateNumber } : u));
-    } else {
-      setUnits((prev) => [...prev, { id: `ct${Date.now()}`, name: unitForm.name, plateNumber: unitForm.plateNumber, cluster: "c1", status: "at_depot", collectorIds: [], posX: 0.15, posY: 0.90 }]);
-    }
+    setUnits((prev) => [...prev, { id: `ct${Date.now()}`, name: unitForm.name, plateNumber: unitForm.plateNumber, cluster: "c1", status: "at_depot", collectorIds: [], posX: 0.15, posY: 0.90 }]);
     setUnitModalOpen(false);
   }
 
@@ -73,9 +67,15 @@ export default function CACollectorUnitManagement() {
         <button onClick={openAddUnit} className="flex items-center gap-2 rounded-lg px-4 py-2.5 font-semibold text-white hover:opacity-90 transition-opacity" style={{ fontSize: 14, background: "#2E7D32" }}><Plus size={15} />Create Collector Unit</button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        {[{ label: "Total Units", value: units.length, color: "#1A1A1A" }, { label: "En Route", value: units.filter((u) => u.status === "en_route").length, color: "#1976D2" }, { label: "At Depot", value: units.filter((u) => u.status === "at_depot").length, color: "#6B7280" }].map((s) => (
-          <div key={s.label} className="bg-white rounded-xl px-5 py-4 flex items-center gap-4" style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+      <div className="grid grid-cols-4 gap-4">
+        {[
+          { label: "Total Units",        value: units.length,                                                color: "#1A1A1A", bg: "#F9FAFB" },
+          { label: "En Route",           value: units.filter((u) => u.status === "en_route").length,         color: "#1976D2", bg: "#E3F2FD" },
+          { label: "Idle / At Depot",    value: units.filter((u) => u.status !== "en_route").length,         color: "#6B7280", bg: "#F3F4F6" },
+          { label: "Collectors Assigned",value: units.reduce((sum, u) => sum + u.collectorIds.length, 0),    color: "#2E7D32", bg: "#E8F5E9" },
+        ].map((s) => (
+          <div key={s.label} className="rounded-xl px-5 py-4 flex items-center gap-4"
+            style={{ background: s.bg, border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <div className="font-bold" style={{ fontSize: 28, color: s.color, fontVariantNumeric: "tabular-nums" }}>{s.value}</div>
             <div className="text-text-secondary" style={{ fontSize: 13 }}>{s.label}</div>
           </div>
@@ -105,7 +105,6 @@ export default function CACollectorUnitManagement() {
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button onClick={() => openAssignModal(unit)} className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors" style={{ fontSize: 13, border: "1.5px solid #2E7D32", color: "#2E7D32", background: "#fff" }}><Plus size={13} />Add Collector</button>
-                  <button onClick={() => openEditUnit(unit)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Edit unit"><Pencil size={15} color="#6B7280" /></button>
                   <button onClick={() => handleDeleteUnit(unit.id)} className="p-2 rounded-lg hover:bg-red-50 transition-colors" title="Delete unit"><Trash2 size={15} color="#D32F2F" /></button>
                   <button onClick={() => setExpandedUnit(isExpanded ? null : unit.id)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors">{isExpanded ? <ChevronUp size={16} color="#6B7280" /> : <ChevronDown size={16} color="#6B7280" />}</button>
                 </div>
@@ -136,8 +135,8 @@ export default function CACollectorUnitManagement() {
         })}
       </div>
 
-      <Modal open={unitModalOpen} onClose={() => setUnitModalOpen(false)} title={editUnit ? "Edit Collector Unit" : "Create Collector Unit"}
-        footer={<><button onClick={() => setUnitModalOpen(false)} className="rounded-lg px-4 py-2 font-medium" style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}>Cancel</button><button onClick={handleSaveUnit} className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90" style={{ fontSize: 14, background: "#2E7D32" }}>{editUnit ? "Save Changes" : "Create Unit"}</button></>}
+      <Modal open={unitModalOpen} onClose={() => setUnitModalOpen(false)} title="Create Collector Unit"
+        footer={<><button onClick={() => setUnitModalOpen(false)} className="rounded-lg px-4 py-2 font-medium" style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}>Cancel</button><button onClick={handleSaveUnit} className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90" style={{ fontSize: 14, background: "#2E7D32" }}>Create Unit</button></>}
       >
         <div className="flex flex-col gap-4">
           <FormField label="Unit Name" value={unitForm.name} onChange={(v) => setUnitForm((p) => ({ ...p, name: v }))} error={unitErrors.name} placeholder="e.g. Unit Alpha" />

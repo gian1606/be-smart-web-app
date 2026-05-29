@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Trash2, Truck, CheckCircle, Eye, RefreshCw } from "lucide-react";
+import { Trash2, Truck, CheckCircle, RefreshCw } from "lucide-react";
 import StatCard from "../../components/ui/StatCard";
 import AlertRow from "../../components/ui/AlertRow";
 import ActivityRow from "../../components/ui/ActivityRow";
@@ -25,7 +25,7 @@ export default function CADashboard() {
               <div className="text-text-secondary" style={{ fontSize: 13 }}>Route {CA_INCOMING_ROUTE.routeId} sent by Super Admin · {CA_INCOMING_ROUTE.bins.length} bins · {CA_INCOMING_ROUTE.distanceKm} km</div>
             </div>
           </div>
-          <button onClick={() => navigate("/ca/map")} className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white hover:opacity-90 transition-opacity" style={{ fontSize: 13, background: "#2E7D32" }}><Eye size={14} />View Optimized Route</button>
+          <button onClick={() => navigate("/ca/map")} className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white hover:opacity-90 transition-opacity" style={{ fontSize: 13, background: "#2E7D32" }}>View Optimized Route</button>
         </div>
       )}
 
@@ -34,10 +34,7 @@ export default function CADashboard() {
           <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Dashboard</h1>
           <p className="text-text-secondary mt-0.5" style={{ fontSize: 14 }}>{today} · Cluster 1 (North Zone)</p>
         </div>
-        <div className="flex items-center gap-3">
-          <button className="flex items-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors" style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#fff", color: "#6B7280" }}><RefreshCw size={14} />Refresh</button>
-          <button onClick={() => navigate("/ca/map")} className="flex items-center gap-2 rounded-lg px-4 py-2 font-semibold text-white hover:opacity-90 transition-opacity" style={{ fontSize: 13, background: "#2E7D32" }}><Eye size={14} />View Optimized Route</button>
-        </div>
+        <button className="flex items-center gap-2 rounded-lg px-4 py-2 font-medium transition-colors" style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#fff", color: "#6B7280" }}><RefreshCw size={14} />Refresh</button>
       </div>
 
       <div className="grid grid-cols-4 gap-4">
@@ -70,7 +67,6 @@ export default function CADashboard() {
                 : fullBins.map((b) => <AlertRow key={b.id} name={b.name} description={`${b.street}, ${b.barangay} — Reported full`} timeReported={b.timeReported} />)
               }
             </div>
-            <button onClick={() => navigate("/ca/map")} className="w-full rounded-lg py-2.5 font-semibold text-white mt-1 hover:opacity-90 transition-opacity" style={{ fontSize: 13, background: "#2E7D32" }}>View Optimized Route</button>
           </div>
 
           <div className="bg-white rounded-xl p-4 flex flex-col gap-2 flex-1" style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>

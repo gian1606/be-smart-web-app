@@ -5,8 +5,8 @@ import { CA_CREDENTIALS } from "../../../mock/data";
 const NAV_ITEMS = [
   { to: "/ca/dashboard", icon: LayoutGrid, label: "Dashboard" },
   { to: "/ca/map",       icon: Map,        label: "Map & Collection" },
-  { to: "/ca/reports",   icon: BarChart2,  label: "Reports & Analytics", soon: true },
-  { to: "/ca/units",     icon: Truck,      label: "Collector Unit Mgmt." },
+  { to: "/ca/reports",   icon: BarChart2,  label: "Reports & Analytics" },
+  { to: "/ca/units",     icon: Truck,      label: "Collector Unit Management" },
   { to: "/ca/users",     icon: Users,      label: "User Management" },
 ];
 
