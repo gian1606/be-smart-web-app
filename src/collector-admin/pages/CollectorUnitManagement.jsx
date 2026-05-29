@@ -67,9 +67,15 @@ export default function CACollectorUnitManagement() {
         <button onClick={openAddUnit} className="flex items-center gap-2 rounded-lg px-4 py-2.5 font-semibold text-white hover:opacity-90 transition-opacity" style={{ fontSize: 14, background: "#2E7D32" }}><Plus size={15} />Create Collector Unit</button>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        {[{ label: "Total Units", value: units.length, color: "#1A1A1A" }, { label: "En Route", value: units.filter((u) => u.status === "en_route").length, color: "#1976D2" }, { label: "At Depot", value: units.filter((u) => u.status === "at_depot").length, color: "#6B7280" }].map((s) => (
-          <div key={s.label} className="bg-white rounded-xl px-5 py-4 flex items-center gap-4" style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+      <div className="grid grid-cols-4 gap-4">
+        {[
+          { label: "Total Units",        value: units.length,                                                color: "#1A1A1A", bg: "#F9FAFB" },
+          { label: "En Route",           value: units.filter((u) => u.status === "en_route").length,         color: "#1976D2", bg: "#E3F2FD" },
+          { label: "Idle / At Depot",    value: units.filter((u) => u.status !== "en_route").length,         color: "#6B7280", bg: "#F3F4F6" },
+          { label: "Collectors Assigned",value: units.reduce((sum, u) => sum + u.collectorIds.length, 0),    color: "#2E7D32", bg: "#E8F5E9" },
+        ].map((s) => (
+          <div key={s.label} className="rounded-xl px-5 py-4 flex items-center gap-4"
+            style={{ background: s.bg, border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <div className="font-bold" style={{ fontSize: 28, color: s.color, fontVariantNumeric: "tabular-nums" }}>{s.value}</div>
             <div className="text-text-secondary" style={{ fontSize: 13 }}>{s.label}</div>
           </div>
