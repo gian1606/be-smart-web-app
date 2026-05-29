@@ -95,7 +95,7 @@ export default function RouteManagement() {
         id:               `r${Date.now()}`,
         routeId:          optimizeRoute.routeId,
         date:             new Date().toISOString().split("T")[0],
-        cluster:          selectedCluster === "all" ? optimizeRoute.cluster : selectedCluster,
+        cluster:          selectedCluster,
         bins:             optimizeRoute.bins,
         distanceKm:       optimizeRoute.distanceKm,
         estimatedMinutes: optimizeRoute.estimatedMinutes,
@@ -113,11 +113,23 @@ export default function RouteManagement() {
   });
 
   // ── Filters ─────────────────────────────────────────────────────────────────
-  const [dateFrom, setDateFrom]         = useState("");
-  const [dateTo, setDateTo]             = useState("");
+  const [monthFilter, setMonthFilter]     = useState("all");
   const [clusterFilter, setClusterFilter] = useState("all");
   const [statusFilter, setStatusFilter]   = useState("all");
-  const [page, setPage]                 = useState(1);
+  const [page, setPage]                   = useState(1);
+
+  // Build last 12 months options (current month first)
+  const monthOptions = (() => {
+    const opts = [];
+    const now = new Date();
+    for (let i = 0; i < 12; i++) {
+      const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+      const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+      const label = d.toLocaleDateString("en-PH", { month: "long", year: "numeric" });
+      opts.push({ value, label });
+    }
+    return opts;
+  })();
 
   // ── Modal states ─────────────────────────────────────────────────────────────
   const [viewRoute,   setViewRoute]   = useState(null);   // View details modal
@@ -136,8 +148,7 @@ export default function RouteManagement() {
   const filtered = routes.filter((r) => {
     if (clusterFilter !== "all" && r.cluster !== clusterFilter) return false;
     if (statusFilter  !== "all" && r.status  !== statusFilter)  return false;
-    if (dateFrom && r.date < dateFrom) return false;
-    if (dateTo   && r.date > dateTo)   return false;
+    if (monthFilter   !== "all" && !r.date.startsWith(monthFilter)) return false;
     return true;
   });
 
@@ -431,22 +442,20 @@ export default function RouteManagement() {
       </div>
 
       {/* Filters */}
-      <div className="bg-white rounded-xl p-4 flex items-center gap-4 flex-wrap"
+      <div className="bg-white rounded-xl p-4 flex items-center gap-3 flex-wrap"
         style={{ border: "1px solid #E5E7EB" }}>
-        <div className="flex items-center gap-2">
-          <label className="text-text-secondary font-medium" style={{ fontSize: 13 }}>From</label>
-          <input type="date" value={dateFrom}
-            onChange={(e) => { setDateFrom(e.target.value); setPage(1); }}
-            className="rounded-lg px-3 py-1.5 outline-none"
-            style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
-        </div>
-        <div className="flex items-center gap-2">
-          <label className="text-text-secondary font-medium" style={{ fontSize: 13 }}>To</label>
-          <input type="date" value={dateTo}
-            onChange={(e) => { setDateTo(e.target.value); setPage(1); }}
-            className="rounded-lg px-3 py-1.5 outline-none"
-            style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
-        </div>
+        {/* Month & Year */}
+        <select value={monthFilter}
+          onChange={(e) => { setMonthFilter(e.target.value); setPage(1); }}
+          className="rounded-lg px-3 py-1.5 outline-none"
+          style={{ fontSize: 13, border: "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A", minWidth: 160 }}>
+          <option value="all">All Months</option>
+          {monthOptions.map((o) => (
+            <option key={o.value} value={o.value}>{o.label}</option>
+          ))}
+        </select>
+
+        {/* Cluster */}
         <select value={clusterFilter}
           onChange={(e) => { setClusterFilter(e.target.value); setPage(1); }}
           className="rounded-lg px-3 py-1.5 outline-none"
@@ -454,6 +463,8 @@ export default function RouteManagement() {
           <option value="all">All Clusters</option>
           {CLUSTERS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
         </select>
+
+        {/* Status */}
         <select value={statusFilter}
           onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
           className="rounded-lg px-3 py-1.5 outline-none"
@@ -463,9 +474,10 @@ export default function RouteManagement() {
           <option value="in_progress">In Progress</option>
           <option value="completed">Completed</option>
         </select>
-        {(dateFrom || dateTo || clusterFilter !== "all" || statusFilter !== "all") && (
+
+        {(monthFilter !== "all" || clusterFilter !== "all" || statusFilter !== "all") && (
           <button
-            onClick={() => { setDateFrom(""); setDateTo(""); setClusterFilter("all"); setStatusFilter("all"); setPage(1); }}
+            onClick={() => { setMonthFilter("all"); setClusterFilter("all"); setStatusFilter("all"); setPage(1); }}
             className="rounded-lg px-3 py-1.5 font-medium hover:bg-red-50 transition-colors"
             style={{ fontSize: 13, border: "1.5px solid #FECACA", color: "#D32F2F", background: "#FFF5F5" }}>
             ✕ Clear
