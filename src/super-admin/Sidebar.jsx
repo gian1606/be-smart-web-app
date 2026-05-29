@@ -7,6 +7,7 @@ import {
   Users,
   MapPin,
   Leaf,
+  Trophy,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
   { to: "/super-admin/users",     icon: Users,      label: "User Management" },
   { to: "/super-admin/barangays", icon: MapPin,     label: "Barangay Management" },
   { to: "/super-admin/reports",   icon: BarChart2,  label: "Reports & Analytics" },
+  { to: "/super-admin/leaderboard", icon: Trophy,   label: "Leaderboard" },
 ];
 
 export default function Sidebar() {

@@ -13,6 +13,7 @@ import SABarangayManagement from "./super-admin/BarangayManagement";
 import SAReports            from "./super-admin/Reports";
 import SAMRFManagement      from "./super-admin/MRFManagement";
 import SANotifications      from "./super-admin/Notifications";
+import SALeaderboard        from "./super-admin/Leaderboard";
 
 // ── Cluster Admin ──────────────────────────────────────────────────────────────
 import ClusterAdminShell from "./cluster-admin/layout/AppShell";
@@ -21,6 +22,7 @@ import CAMapCollection   from "./cluster-admin/pages/MapCollection";
 import CAUserManagement  from "./cluster-admin/pages/UserManagement";
 import CAReports         from "./cluster-admin/pages/Reports";
 import CANotifications   from "./cluster-admin/pages/Notifications";
+import CALeaderboard     from "./cluster-admin/pages/Leaderboard";
 
 // ── Collector Admin ────────────────────────────────────────────────────────────
 import CollectorAdminShell    from "./collector-admin/components/layout/AppShell";
@@ -64,6 +66,7 @@ export default function App() {
           <Route path="reports"       element={<SAReports />} />
           <Route path="mrf"           element={<SAMRFManagement />} />
           <Route path="notifications" element={<SANotifications />} />
+          <Route path="leaderboard"   element={<SALeaderboard />} />
           <Route
             path="settings"
             element={
@@ -85,6 +88,7 @@ export default function App() {
           <Route path="users"         element={<CAUserManagement />} />
           <Route path="reports"       element={<CAReports />} />
           <Route path="notifications" element={<CANotifications />} />
+          <Route path="leaderboard"   element={<CALeaderboard />} />
           <Route
             path="settings"
             element={

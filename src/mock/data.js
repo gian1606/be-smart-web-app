@@ -377,6 +377,64 @@ export const LEADERBOARD_PERIODS = {
 
 export const LEADERBOARD = LEADERBOARD_PERIODS["2025-05"];
 
+// ── Super Admin — City-wide Barangay Leaderboard ──────────────────────────────
+// Ranks all barangays across all clusters by household eco-activity.
+export const SA_LEADERBOARD_PERIODS = {
+  "2025-05": [
+    { rank: 1,  barangayId: "br_alangilan",    name: "Alangilan",          cluster: "Solid East",      totalHouseholds: 142, reportsSubmitted: 312, pointsEarned: 6240,  collectionRate: 97, badge: "gold"   },
+    { rank: 2,  barangayId: "br_cuta",         name: "Cuta",               cluster: "Solid East",      totalHouseholds: 198, reportsSubmitted: 289, pointsEarned: 5780,  collectionRate: 95, badge: "gold"   },
+    { rank: 3,  barangayId: "br_kumibaba",     name: "Kumintang Ibaba",    cluster: "Solid North",     totalHouseholds: 175, reportsSubmitted: 261, pointsEarned: 5220,  collectionRate: 93, badge: "gold"   },
+    { rank: 4,  barangayId: "br_kumiilaya",    name: "Kumintang Ilaya",    cluster: "Solid North",     totalHouseholds: 160, reportsSubmitted: 230, pointsEarned: 4600,  collectionRate: 90, badge: "silver" },
+    { rank: 5,  barangayId: "br_libjo",        name: "Libjo",              cluster: "Solid Poblacion", totalHouseholds: 134, reportsSubmitted: 198, pointsEarned: 3960,  collectionRate: 88, badge: "silver" },
+    { rank: 6,  barangayId: "br_pallocanw",    name: "Pallocan West",      cluster: "Solid Poblacion", totalHouseholds: 210, reportsSubmitted: 175, pointsEarned: 3500,  collectionRate: 85, badge: "silver" },
+    { rank: 7,  barangayId: "br_pallocane",    name: "Pallocan East",      cluster: "Solid Baybay",    totalHouseholds: 188, reportsSubmitted: 148, pointsEarned: 2960,  collectionRate: 80, badge: "bronze" },
+    { rank: 8,  barangayId: "br_starita",      name: "Sta. Rita Karsada",  cluster: "Solid Upland",    totalHouseholds: 120, reportsSubmitted: 112, pointsEarned: 2240,  collectionRate: 74, badge: "bronze" },
+  ],
+  "2025-04": [
+    { rank: 1,  barangayId: "br_kumibaba",     name: "Kumintang Ibaba",    cluster: "Solid North",     totalHouseholds: 175, reportsSubmitted: 340, pointsEarned: 6800,  collectionRate: 98, badge: "gold"   },
+    { rank: 2,  barangayId: "br_alangilan",    name: "Alangilan",          cluster: "Solid East",      totalHouseholds: 142, reportsSubmitted: 298, pointsEarned: 5960,  collectionRate: 96, badge: "gold"   },
+    { rank: 3,  barangayId: "br_libjo",        name: "Libjo",              cluster: "Solid Poblacion", totalHouseholds: 134, reportsSubmitted: 275, pointsEarned: 5500,  collectionRate: 94, badge: "gold"   },
+    { rank: 4,  barangayId: "br_cuta",         name: "Cuta",               cluster: "Solid East",      totalHouseholds: 198, reportsSubmitted: 250, pointsEarned: 5000,  collectionRate: 91, badge: "silver" },
+    { rank: 5,  barangayId: "br_kumiilaya",    name: "Kumintang Ilaya",    cluster: "Solid North",     totalHouseholds: 160, reportsSubmitted: 220, pointsEarned: 4400,  collectionRate: 89, badge: "silver" },
+    { rank: 6,  barangayId: "br_pallocane",    name: "Pallocan East",      cluster: "Solid Baybay",    totalHouseholds: 188, reportsSubmitted: 190, pointsEarned: 3800,  collectionRate: 86, badge: "silver" },
+    { rank: 7,  barangayId: "br_pallocanw",    name: "Pallocan West",      cluster: "Solid Poblacion", totalHouseholds: 210, reportsSubmitted: 160, pointsEarned: 3200,  collectionRate: 78, badge: "bronze" },
+    { rank: 8,  barangayId: "br_starita",      name: "Sta. Rita Karsada",  cluster: "Solid Upland",    totalHouseholds: 120, reportsSubmitted: 130, pointsEarned: 2600,  collectionRate: 72, badge: "bronze" },
+  ],
+  "2025-03": [
+    { rank: 1,  barangayId: "br_pallocanw",    name: "Pallocan West",      cluster: "Solid Poblacion", totalHouseholds: 210, reportsSubmitted: 360, pointsEarned: 7200,  collectionRate: 99, badge: "gold"   },
+    { rank: 2,  barangayId: "br_cuta",         name: "Cuta",               cluster: "Solid East",      totalHouseholds: 198, reportsSubmitted: 320, pointsEarned: 6400,  collectionRate: 97, badge: "gold"   },
+    { rank: 3,  barangayId: "br_alangilan",    name: "Alangilan",          cluster: "Solid East",      totalHouseholds: 142, reportsSubmitted: 280, pointsEarned: 5600,  collectionRate: 95, badge: "gold"   },
+    { rank: 4,  barangayId: "br_pallocane",    name: "Pallocan East",      cluster: "Solid Baybay",    totalHouseholds: 188, reportsSubmitted: 240, pointsEarned: 4800,  collectionRate: 92, badge: "silver" },
+    { rank: 5,  barangayId: "br_kumibaba",     name: "Kumintang Ibaba",    cluster: "Solid North",     totalHouseholds: 175, reportsSubmitted: 210, pointsEarned: 4200,  collectionRate: 88, badge: "silver" },
+    { rank: 6,  barangayId: "br_libjo",        name: "Libjo",              cluster: "Solid Poblacion", totalHouseholds: 134, reportsSubmitted: 180, pointsEarned: 3600,  collectionRate: 85, badge: "silver" },
+    { rank: 7,  barangayId: "br_kumiilaya",    name: "Kumintang Ilaya",    cluster: "Solid North",     totalHouseholds: 160, reportsSubmitted: 150, pointsEarned: 3000,  collectionRate: 80, badge: "bronze" },
+    { rank: 8,  barangayId: "br_starita",      name: "Sta. Rita Karsada",  cluster: "Solid Upland",    totalHouseholds: 120, reportsSubmitted: 100, pointsEarned: 2000,  collectionRate: 70, badge: "bronze" },
+  ],
+};
+
+// ── Cluster Admin — Barangay Leaderboard (within cluster) ────────────────────
+// Ranks barangays within Cluster 1 by household eco-activity.
+export const CA_LEADERBOARD_PERIODS = {
+  "2025-05": [
+    { rank: 1, barangayId: "br1", name: "Brgy. Cuta",            captain: "Maria Lim",    reportsSubmitted: 289, pointsEarned: 5780, collectionRate: 100, badge: "gold"   },
+    { rank: 2, barangayId: "br2", name: "Brgy. Alangilan",       captain: "Jose Reyes",   reportsSubmitted: 312, pointsEarned: 6240, collectionRate: 97,  badge: "gold"   },
+    { rank: 3, barangayId: "br3", name: "Brgy. Kumintang Ibaba", captain: "Pedro Santos", reportsSubmitted: 261, pointsEarned: 5220, collectionRate: 80,  badge: "silver" },
+    { rank: 4, barangayId: "br4", name: "Brgy. Pallocan West",   captain: "Ana Cruz",     reportsSubmitted: 175, pointsEarned: 3500, collectionRate: 50,  badge: "bronze" },
+  ],
+  "2025-04": [
+    { rank: 1, barangayId: "br3", name: "Brgy. Kumintang Ibaba", captain: "Pedro Santos", reportsSubmitted: 340, pointsEarned: 6800, collectionRate: 98,  badge: "gold"   },
+    { rank: 2, barangayId: "br2", name: "Brgy. Alangilan",       captain: "Jose Reyes",   reportsSubmitted: 298, pointsEarned: 5960, collectionRate: 96,  badge: "gold"   },
+    { rank: 3, barangayId: "br1", name: "Brgy. Cuta",            captain: "Maria Lim",    reportsSubmitted: 250, pointsEarned: 5000, collectionRate: 91,  badge: "silver" },
+    { rank: 4, barangayId: "br4", name: "Brgy. Pallocan West",   captain: "Ana Cruz",     reportsSubmitted: 160, pointsEarned: 3200, collectionRate: 78,  badge: "bronze" },
+  ],
+  "2025-03": [
+    { rank: 1, barangayId: "br4", name: "Brgy. Pallocan West",   captain: "Ana Cruz",     reportsSubmitted: 360, pointsEarned: 7200, collectionRate: 99,  badge: "gold"   },
+    { rank: 2, barangayId: "br1", name: "Brgy. Cuta",            captain: "Maria Lim",    reportsSubmitted: 320, pointsEarned: 6400, collectionRate: 97,  badge: "gold"   },
+    { rank: 3, barangayId: "br2", name: "Brgy. Alangilan",       captain: "Jose Reyes",   reportsSubmitted: 280, pointsEarned: 5600, collectionRate: 95,  badge: "silver" },
+    { rank: 4, barangayId: "br3", name: "Brgy. Kumintang Ibaba", captain: "Pedro Santos", reportsSubmitted: 210, pointsEarned: 4200, collectionRate: 88,  badge: "bronze" },
+  ],
+};
+
 // ── MRF Personnel ─────────────────────────────────────────────────────────────
 export const MRF_PERSONNEL = [
   { id: "mp1", name: "Roberto Navarro",  email: "roberto.navarro@besmart.gov.ph",  mrf: "MRF Alangilan",       role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T07:00:00Z" },

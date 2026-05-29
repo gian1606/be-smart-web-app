@@ -5,14 +5,16 @@ import {
   Users,
   BarChart2,
   Leaf,
+  Trophy,
 } from "lucide-react";
 import { CLUSTER_INFO } from "../mock/data";
 
 const NAV_ITEMS = [
-  { to: "/cluster-admin/dashboard", icon: LayoutGrid, label: "Dashboard" },
-  { to: "/cluster-admin/map",       icon: Map,        label: "Map & Collection" },
-  { to: "/cluster-admin/users",     icon: Users,      label: "User Management" },
-  { to: "/cluster-admin/reports",   icon: BarChart2,  label: "Reports & Analytics" },
+  { to: "/cluster-admin/dashboard",   icon: LayoutGrid, label: "Dashboard" },
+  { to: "/cluster-admin/map",         icon: Map,        label: "Map & Collection" },
+  { to: "/cluster-admin/users",       icon: Users,      label: "User Management" },
+  { to: "/cluster-admin/reports",     icon: BarChart2,  label: "Reports & Analytics" },
+  { to: "/cluster-admin/leaderboard", icon: Trophy,     label: "Leaderboard" },
 ];
 
 export default function Sidebar() {
