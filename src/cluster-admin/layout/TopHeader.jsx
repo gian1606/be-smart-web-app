@@ -7,11 +7,12 @@ import {
 import { NOTIFICATIONS, CLUSTER_INFO } from "../mock/data";
 
 const ROUTE_LABELS = {
-  "/cluster-admin/dashboard": "Dashboard",
-  "/cluster-admin/map":       "Map & Collection",
-  "/cluster-admin/users":     "User Management",
-  "/cluster-admin/reports":   "Reports & Analytics",
-  "/cluster-admin/settings":  "Settings",
+  "/cluster-admin/dashboard":   "Dashboard",
+  "/cluster-admin/map":         "Map & Collection",
+  "/cluster-admin/users":       "User Management",
+  "/cluster-admin/reports":     "Reports & Analytics",
+  "/cluster-admin/leaderboard": "Leaderboard",
+  "/cluster-admin/settings":    "Settings",
 };
 
 const NOTIF_TYPE_CONFIG = {
@@ -64,8 +65,8 @@ export default function TopHeader() {
 
   return (
     <header
-      className="fixed top-0 z-20 flex items-center justify-between px-6"
-      style={{ left: 240, right: 200, height: 60, background: "#fff", borderBottom: "1px solid #E5E7EB" }}
+      className="fixed top-0 right-0 z-20 flex items-center justify-between px-6"
+      style={{ left: 240, height: 60, background: "#fff", borderBottom: "1px solid #E5E7EB" }}
     >
       {/* Breadcrumb */}
       <div className="flex items-center gap-1.5" style={{ fontSize: 13 }}>

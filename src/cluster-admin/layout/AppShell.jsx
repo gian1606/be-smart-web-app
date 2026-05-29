@@ -1,7 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import TopHeader from "./TopHeader";
-import AdBanner from "./AdBanner";
 
 export default function ClusterAdminAppShell() {
   const isAuth =
@@ -13,12 +12,10 @@ export default function ClusterAdminAppShell() {
     <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
       <Sidebar />
       <TopHeader />
-      {/* Right ad banner */}
-      <AdBanner />
-      {/* Main content: sidebar 240px left, ad banner 200px right, header 60px top */}
+      {/* Main content: sidebar 240px left, header 60px top */}
       <main
         className="overflow-y-auto"
-        style={{ marginLeft: 240, marginRight: 200, paddingTop: 60, minHeight: "100vh" }}
+        style={{ marginLeft: 240, paddingTop: 60, minHeight: "100vh" }}
       >
         <div className="p-6">
           <Outlet />
