@@ -3,12 +3,12 @@
  * Matches mobile app status colors exactly.
  */
 const CONFIG = {
-  full:        { bg: "#FFEBEE", color: "#D32F2F", label: "Full" },
+  full:        { bg: "#FFEBEE", color: "#DC2626", label: "Full" },
   collected:   { bg: "#E8F5E9", color: "#2E7D32", label: "Collected" },
-  missed:      { bg: "#FFF3E0", color: "#F57C00", label: "Missed" },
+  missed:      { bg: "#FFF3E0", color: "#D97706", label: "Missed" },
   ok:          { bg: "#E8F5E9", color: "#2E7D32", label: "OK" },
   available:   { bg: "#E8F5E9", color: "#2E7D32", label: "Available" },
-  pending:     { bg: "#FFF3E0", color: "#F57C00", label: "Pending" },
+  pending:     { bg: "#FFF3E0", color: "#D97706", label: "Pending" },
   completed:   { bg: "#E8F5E9", color: "#2E7D32", label: "Completed" },
   delivered:   { bg: "#E8F5E9", color: "#2E7D32", label: "Delivered" },
   in_progress: { bg: "#E3F2FD", color: "#1976D2", label: "In Progress" },
@@ -33,3 +33,4 @@ export default function StatusBadge({ status, customLabel }) {
     </span>
   );
 }
+

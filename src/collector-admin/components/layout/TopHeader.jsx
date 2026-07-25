@@ -93,7 +93,7 @@ export default function CATopHeader() {
           >
             <Bell size={18} className="text-text-secondary" />
             {unread > 0 && (
-              <span className="absolute top-1 right-1 flex items-center justify-center rounded-full text-white font-bold" style={{ width: 16, height: 16, fontSize: 9, background: "#D32F2F" }}>
+              <span className="absolute top-1 right-1 flex items-center justify-center rounded-full text-white font-bold" style={{ width: 16, height: 16, fontSize: 9, background: "#DC2626" }}>
                 {unread}
               </span>
             )}
@@ -104,7 +104,7 @@ export default function CATopHeader() {
               <div className="flex items-center justify-between px-4 py-3 border-b flex-shrink-0" style={{ borderColor: "#F3F4F6" }}>
                 <div className="flex items-center gap-2">
                   <span className="font-semibold text-text-primary" style={{ fontSize: 14 }}>Notifications</span>
-                  {unread > 0 && <span className="rounded-full px-2 py-0.5 font-semibold text-white" style={{ fontSize: 11, background: "#D32F2F" }}>{unread}</span>}
+                  {unread > 0 && <span className="rounded-full px-2 py-0.5 font-semibold text-white" style={{ fontSize: 11, background: "#DC2626" }}>{unread}</span>}
                 </div>
                 {unread > 0 && (
                   <button onClick={markAllRead} className="text-text-muted hover:text-green-700 transition-colors" style={{ fontSize: 12 }}>Mark all read</button>
@@ -132,7 +132,7 @@ export default function CATopHeader() {
                             <span className="font-semibold text-text-primary truncate" style={{ fontSize: 13 }}>{n.title}</span>
                             {!n.read && <span className="rounded-full flex-shrink-0" style={{ width: 6, height: 6, background: "#2E7D32", display: "inline-block" }} />}
                             {n.priority === "urgent" && (
-                              <span className="flex items-center gap-0.5 rounded-full px-1.5 py-0.5 font-semibold flex-shrink-0" style={{ fontSize: 10, background: "#FFEBEE", color: "#D32F2F" }}>
+                              <span className="flex items-center gap-0.5 rounded-full px-1.5 py-0.5 font-semibold flex-shrink-0" style={{ fontSize: 10, background: "#FFEBEE", color: "#DC2626" }}>
                                 <AlertTriangle size={9} />Urgent
                               </span>
                             )}
@@ -179,9 +179,9 @@ export default function CATopHeader() {
               <button
                 onClick={handleLogout}
                 className="flex items-center gap-3 w-full px-4 py-3 hover:bg-red-50 transition-colors text-left"
-                style={{ fontSize: 14, color: "#D32F2F" }}
+                style={{ fontSize: 14, color: "#DC2626" }}
               >
-                <LogOut size={15} color="#D32F2F" />
+                <LogOut size={15} color="#DC2626" />
                 Sign Out
               </button>
             </div>
@@ -192,3 +192,5 @@ export default function CATopHeader() {
     </header>
   );
 }
+
+

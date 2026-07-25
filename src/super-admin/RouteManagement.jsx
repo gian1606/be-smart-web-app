@@ -1,11 +1,11 @@
-﻿import { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import { Plus, Eye, Send, ChevronLeft, ChevronRight, Route, MapPin, Clock, CheckCircle, Truck, X, AlertTriangle, Cpu, Ruler } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
 import MapView from "../components/ui/MapView";
 import { ROUTES, CLUSTERS, CLUSTER_ADMINS, BINS, TRUCKS, MRF_LOCATIONS, OPTIMIZED_ROUTE } from "../mock/data";
 
-// ── Per-cluster optimized route builder ──────────────────────────────────────
+// -- Per-cluster optimized route builder --------------------------------------
 function buildClusterRoute(clusterId, allBins) {
   const fullBins = allBins.filter((b) => b.cluster === clusterId && b.status === "full");
   if (fullBins.length === 0) return null;
@@ -31,11 +31,11 @@ function buildClusterRoute(clusterId, allBins) {
 
 const PAGE_SIZE = 5;
 
-// ── Status colour helper ──────────────────────────────────────────────────────
+// -- Status colour helper ------------------------------------------------------
 const STATUS_COLORS = {
   completed:   { bg: "#E8F5E9", color: "#2E7D32" },
   in_progress: { bg: "#E3F2FD", color: "#1976D2" },
-  delivered:   { bg: "#FFF3E0", color: "#F57C00" },
+  delivered:   { bg: "#FFF3E0", color: "#D97706" },
 };
 
 function InfoRow({ label, value }) {
@@ -51,7 +51,7 @@ function InfoRow({ label, value }) {
 export default function RouteManagement() {
   const [routes, setRoutes] = useState(ROUTES);
 
-  // ── Optimize Route state ─────────────────────────────────────────────────────
+  // -- Optimize Route state -----------------------------------------------------
   const [selectedCluster, setSelectedCluster]     = useState("c1");
   const [optimized, setOptimized]                 = useState(false);
   const [sending, setSending]                     = useState(false);
@@ -112,7 +112,7 @@ export default function RouteManagement() {
     hour: "2-digit", minute: "2-digit",
   });
 
-  // ── Filters ─────────────────────────────────────────────────────────────────
+  // -- Filters -----------------------------------------------------------------
   const [monthFilter, setMonthFilter]     = useState("all");
   const [clusterFilter, setClusterFilter] = useState("all");
   const [statusFilter, setStatusFilter]   = useState("all");
@@ -131,7 +131,7 @@ export default function RouteManagement() {
     return opts;
   })();
 
-  // ── Modal states ─────────────────────────────────────────────────────────────
+  // -- Modal states -------------------------------------------------------------
   const [viewRoute,   setViewRoute]   = useState(null);   // View details modal
   const [resendRoute, setResendRoute] = useState(null);   // Resend confirmation modal
   const [resendTo,    setResendTo]    = useState("");     // selected admin for resend
@@ -144,7 +144,7 @@ export default function RouteManagement() {
   });
   const [createErrors, setCreateErrors] = useState({});
 
-  // ── Derived data ─────────────────────────────────────────────────────────────
+  // -- Derived data -------------------------------------------------------------
   const filtered = routes.filter((r) => {
     if (clusterFilter !== "all" && r.cluster !== clusterFilter) return false;
     if (statusFilter  !== "all" && r.status  !== statusFilter)  return false;
@@ -166,14 +166,14 @@ export default function RouteManagement() {
   }
   function getBinLabel(binId) {
     const b = BINS.find((x) => x.id === binId);
-    return b ? `${b.name} — ${b.street}, ${b.barangay}` : binId;
+    return b ? `${b.name} � ${b.street}, ${b.barangay}` : binId;
   }
   function nextRouteId() {
     const nums = routes.map((r) => parseInt(r.routeId.replace("RT-2025-", ""), 10));
     return `RT-2025-${String(Math.max(...nums) + 1).padStart(3, "0")}`;
   }
 
-  // ── Resend ───────────────────────────────────────────────────────────────────
+  // -- Resend -------------------------------------------------------------------
   function openResend(r) {
     setResendRoute(r);
     setResendTo(getAdminsForCluster(r.cluster)[0]?.id ?? "");
@@ -191,7 +191,7 @@ export default function RouteManagement() {
     setResendDone(true);
   }
 
-  // ── Create ───────────────────────────────────────────────────────────────────
+  // -- Create -------------------------------------------------------------------
   function openCreate() {
     setCreateForm({ cluster: "", assignTo: "", date: new Date().toISOString().split("T")[0], bins: [] });
     setCreateErrors({});
@@ -220,7 +220,7 @@ export default function RouteManagement() {
       bins:               createForm.bins,
       distanceKm:         parseFloat((createForm.bins.length * 1.4 + 0.8).toFixed(1)),
       estimatedMinutes:   Math.round(createForm.bins.length * 11 + 8),
-      sentTo:             admin?.name ?? "—",
+      sentTo:             admin?.name ?? "�",
       status:             "delivered",
       optimizedAt:        new Date().toISOString(),
       sentAt:             new Date().toISOString(),
@@ -237,7 +237,7 @@ export default function RouteManagement() {
     }));
   }
 
-  // ── Render ───────────────────────────────────────────────────────────────────
+  // -- Render -------------------------------------------------------------------
   return (
     <div className="flex flex-col gap-6">
 
@@ -246,7 +246,7 @@ export default function RouteManagement() {
         <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Route Management</h1>
       </div>
 
-      {/* ── OPTIMIZE ROUTE PANEL ──────────────────────────────────────────── */}
+      {/* -- OPTIMIZE ROUTE PANEL -------------------------------------------- */}
       <div className="bg-white rounded-xl overflow-hidden"
         style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
         {/* Panel header */}
@@ -290,7 +290,7 @@ export default function RouteManagement() {
                   style={{
                     fontSize: 13,
                     background: fullBinCount > 0 ? "#FFEBEE" : "#E8F5E9",
-                    color: fullBinCount > 0 ? "#D32F2F" : "#2E7D32",
+                    color: fullBinCount > 0 ? "#DC2626" : "#2E7D32",
                     border: `1.5px solid ${fullBinCount > 0 ? "#FFCDD2" : "#C8E6C9"}`,
                     minWidth: 60,
                   }}>
@@ -333,10 +333,10 @@ export default function RouteManagement() {
               style={{ background: "#E8F5E9", border: "1px solid #A5D6A7" }}>
               <CheckCircle size={16} color="#2E7D32" />
               <span className="font-semibold" style={{ fontSize: 13, color: "#2E7D32" }}>
-                Route Optimized — {clusterLabel}
+                Route Optimized � {clusterLabel}
               </span>
               <span className="text-text-secondary" style={{ fontSize: 13 }}>
-                · {optimizeRoute.bins.length} bins · Est. {optimizeRoute.estimatedMinutes} min · {optimizeRoute.distanceKm} km
+                � {optimizeRoute.bins.length} bins � Est. {optimizeRoute.estimatedMinutes} min � {optimizeRoute.distanceKm} km
               </span>
             </div>
           )}
@@ -344,7 +344,7 @@ export default function RouteManagement() {
           {fullBinCount === 0 && !optimized && (
             <div className="flex items-center gap-3 rounded-xl px-4 py-3"
               style={{ background: "#FFF3E0", border: "1px solid #FFE0B2" }}>
-              <MapPin size={16} color="#F57C00" className="flex-shrink-0" />
+              <MapPin size={16} color="#D97706" className="flex-shrink-0" />
               <p style={{ fontSize: 13, color: "#E65100" }}>
                 No full bins in <strong>{clusterLabel}</strong>. Select a different cluster or switch to City-wide view.
               </p>
@@ -403,11 +403,11 @@ export default function RouteManagement() {
                       style={{ background: "#fff", border: "1px solid #E5E7EB" }}>
                       <div className="flex items-center justify-center rounded-full flex-shrink-0"
                         style={{ width: 26, height: 26, background: "#E8F5E9" }}>
-                        <span style={{ fontSize: 11 }}>👤</span>
+                        <span style={{ fontSize: 11 }}>??</span>
                       </div>
                       <div>
                         <p className="font-semibold text-text-primary" style={{ fontSize: 12 }}>{sentToAdmin.name}</p>
-                        <p className="text-text-muted" style={{ fontSize: 10 }}>Cluster Admin · {clusterLabel}</p>
+                        <p className="text-text-muted" style={{ fontSize: 10 }}>Cluster Admin � {clusterLabel}</p>
                       </div>
                     </div>
                   )}
@@ -418,7 +418,7 @@ export default function RouteManagement() {
                       {optimizeRoute.order.map((stop, i) => (
                         <div key={i} className="flex items-center gap-2">
                           <div className="flex-shrink-0 flex items-center justify-center rounded-full font-bold text-white"
-                            style={{ width: 22, height: 22, fontSize: 10, background: stop.type === "depot" ? "#F57C00" : "#2E7D32" }}>
+                            style={{ width: 22, height: 22, fontSize: 10, background: stop.type === "depot" ? "#D97706" : "#2E7D32" }}>
                             {stop.type === "depot" ? "D" : i}
                           </div>
                           <div>
@@ -436,7 +436,7 @@ export default function RouteManagement() {
         </div>
       </div>
 
-      {/* ── ROUTE HISTORY ─────────────────────────────────────────────────── */}
+      {/* -- ROUTE HISTORY --------------------------------------------------- */}
       <div className="flex items-center justify-between">
         <h2 className="font-semibold text-text-primary" style={{ fontSize: 18 }}>Route History</h2>
       </div>
@@ -479,8 +479,8 @@ export default function RouteManagement() {
           <button
             onClick={() => { setMonthFilter("all"); setClusterFilter("all"); setStatusFilter("all"); setPage(1); }}
             className="rounded-lg px-3 py-1.5 font-medium hover:bg-red-50 transition-colors"
-            style={{ fontSize: 13, border: "1.5px solid #FECACA", color: "#D32F2F", background: "#FFF5F5" }}>
-            ✕ Clear
+            style={{ fontSize: 13, border: "1.5px solid #FECACA", color: "#DC2626", background: "#FFF5F5" }}>
+            ? Clear
           </button>
         )}
       </div>
@@ -546,7 +546,7 @@ export default function RouteManagement() {
         {/* Pagination */}
         <div className="flex items-center justify-between px-4 py-3 border-t" style={{ borderColor: "#F3F4F6" }}>
           <span className="text-text-muted" style={{ fontSize: 13 }}>
-            Showing {filtered.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1}–{Math.min(page * PAGE_SIZE, filtered.length)} of {filtered.length} routes
+            Showing {filtered.length === 0 ? 0 : (page - 1) * PAGE_SIZE + 1}�{Math.min(page * PAGE_SIZE, filtered.length)} of {filtered.length} routes
           </span>
           <div className="flex items-center gap-2">
             <button onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={page === 1}
@@ -568,7 +568,7 @@ export default function RouteManagement() {
         </div>
       </div>
 
-      {/* ── ROUTE DETAILS MODAL (shown after Optimize, before Send) ──────── */}
+      {/* -- ROUTE DETAILS MODAL (shown after Optimize, before Send) -------- */}
       <Modal
         open={showRouteDetails}
         onClose={() => setShowRouteDetails(false)}
@@ -589,7 +589,7 @@ export default function RouteManagement() {
               style={{ fontSize: 14, background: "#2E7D32", opacity: sending ? 0.7 : 1 }}
             >
               <Send size={14} />
-              {sending ? "Sending…" : "Send to Collector Admin"}
+              {sending ? "Sending�" : "Send to Collector Admin"}
             </button>
           </>
         }
@@ -598,7 +598,7 @@ export default function RouteManagement() {
         <div className="flex items-center justify-between rounded-xl px-4 py-3 mb-1"
           style={{ background: "#FFF8F0", border: "1px solid #FFE0B2" }}>
           <div className="flex items-center gap-2">
-            <Route size={18} color="#F57C00" />
+            <Route size={18} color="#D97706" />
             <span className="font-bold text-text-primary" style={{ fontSize: 16 }}>{optimizeRoute.routeId}</span>
           </div>
           <span className="rounded-full px-3 py-0.5 font-semibold"
@@ -631,7 +631,7 @@ export default function RouteManagement() {
                 </span>
                 <MapPin size={13} color="#6B7280" className="flex-shrink-0" />
                 <span className="text-text-secondary" style={{ fontSize: 13 }}>
-                  {bin ? `${bin.name} — ${bin.street}, ${bin.barangay}` : binId}
+                  {bin ? `${bin.name} � ${bin.street}, ${bin.barangay}` : binId}
                 </span>
               </div>
             );
@@ -639,7 +639,7 @@ export default function RouteManagement() {
         </div>
       </Modal>
 
-      {/* ── VIEW DETAILS MODAL ─────────────────────────────────────────────── */}
+      {/* -- VIEW DETAILS MODAL ----------------------------------------------- */}
       <Modal
         open={!!viewRoute}
         onClose={() => setViewRoute(null)}
@@ -689,7 +689,7 @@ export default function RouteManagement() {
                       </span>
                       <MapPin size={13} color="#6B7280" className="flex-shrink-0" />
                       <span className="text-text-secondary" style={{ fontSize: 13 }}>
-                        {bin ? `${bin.name} — ${bin.street}, ${bin.barangay}` : binId}
+                        {bin ? `${bin.name} � ${bin.street}, ${bin.barangay}` : binId}
                       </span>
                     </div>
                   );
@@ -700,7 +700,7 @@ export default function RouteManagement() {
         )}
       </Modal>
 
-      {/* ── RESEND MODAL ───────────────────────────────────────────────────── */}
+      {/* -- RESEND MODAL ----------------------------------------------------- */}
       <Modal
         open={!!resendRoute}
         onClose={() => { setResendRoute(null); setResendDone(false); }}
@@ -747,14 +747,14 @@ export default function RouteManagement() {
             <div className="flex flex-col gap-4">
               <div className="flex items-center gap-3 rounded-xl px-4 py-3"
                 style={{ background: "#FFF3E0", border: "1px solid #FFE0B2" }}>
-                <AlertTriangle size={16} color="#F57C00" className="flex-shrink-0" />
+                <AlertTriangle size={16} color="#D97706" className="flex-shrink-0" />
                 <p style={{ fontSize: 13, color: "#E65100" }}>
                   This will mark the route as <strong>Delivered</strong> and notify the assigned admin.
                 </p>
               </div>
               <InfoRow label="Route ID" value={resendRoute.routeId} />
               <InfoRow label="Cluster"  value={getClusterLabel(resendRoute.cluster)} />
-              <InfoRow label="Bins"     value={`${resendRoute.bins.length} bins · ${resendRoute.distanceKm} km`} />
+              <InfoRow label="Bins"     value={`${resendRoute.bins.length} bins � ${resendRoute.distanceKm} km`} />
               <div className="flex flex-col gap-1">
                 <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Send To</label>
                 <select value={resendTo} onChange={(e) => setResendTo(e.target.value)}
@@ -773,7 +773,7 @@ export default function RouteManagement() {
         )}
       </Modal>
 
-      {/* ── CREATE ROUTE MODAL ─────────────────────────────────────────────── */}
+      {/* -- CREATE ROUTE MODAL ----------------------------------------------- */}
       <Modal
         open={createOpen}
         onClose={() => setCreateOpen(false)}
@@ -818,7 +818,7 @@ export default function RouteManagement() {
           )
         }
       >
-        {/* Step 1 — Form */}
+        {/* Step 1 � Form */}
         {createStep === 1 && (
           <div className="flex flex-col gap-4">
             {/* Cluster */}
@@ -831,12 +831,12 @@ export default function RouteManagement() {
                   setCreateErrors((p) => ({ ...p, cluster: undefined }));
                 }}
                 className="rounded-lg px-3 py-2.5 outline-none"
-                style={{ fontSize: 14, border: createErrors.cluster ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}
+                style={{ fontSize: 14, border: createErrors.cluster ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}
               >
-                <option value="">Select a cluster…</option>
+                <option value="">Select a cluster�</option>
                 {CLUSTERS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
               </select>
-              {createErrors.cluster && <span style={{ fontSize: 12, color: "#D32F2F" }}>{createErrors.cluster}</span>}
+              {createErrors.cluster && <span style={{ fontSize: 12, color: "#DC2626" }}>{createErrors.cluster}</span>}
             </div>
 
             {/* Assign To */}
@@ -850,14 +850,14 @@ export default function RouteManagement() {
                 }}
                 disabled={!createForm.cluster}
                 className="rounded-lg px-3 py-2.5 outline-none"
-                style={{ fontSize: 14, border: createErrors.assignTo ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: !createForm.cluster ? "#F3F4F6" : "#F9FAFB", color: !createForm.cluster ? "#9CA3AF" : "#1A1A1A" }}
+                style={{ fontSize: 14, border: createErrors.assignTo ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: !createForm.cluster ? "#F3F4F6" : "#F9FAFB", color: !createForm.cluster ? "#9CA3AF" : "#1A1A1A" }}
               >
-                <option value="">{createForm.cluster ? "Select a cluster admin…" : "Select a cluster first"}</option>
+                <option value="">{createForm.cluster ? "Select a cluster admin�" : "Select a cluster first"}</option>
                 {createForm.cluster && getAdminsForCluster(createForm.cluster).map((a) => (
                   <option key={a.id} value={a.id}>{a.name}</option>
                 ))}
               </select>
-              {createErrors.assignTo && <span style={{ fontSize: 12, color: "#D32F2F" }}>{createErrors.assignTo}</span>}
+              {createErrors.assignTo && <span style={{ fontSize: 12, color: "#DC2626" }}>{createErrors.assignTo}</span>}
             </div>
 
             {/* Date */}
@@ -890,7 +890,7 @@ export default function RouteManagement() {
                 </p>
               ) : (
                 <div className="rounded-lg overflow-hidden flex flex-col gap-0"
-                  style={{ border: createErrors.bins ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", maxHeight: 220, overflowY: "auto" }}>
+                  style={{ border: createErrors.bins ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", maxHeight: 220, overflowY: "auto" }}>
                   {getBinsForCluster(createForm.cluster).map((bin, i) => {
                     const selected = createForm.bins.includes(bin.id);
                     return (
@@ -926,7 +926,7 @@ export default function RouteManagement() {
                           style={{
                             fontSize: 10,
                             background: bin.status === "full" ? "#FFEBEE" : bin.status === "missed" ? "#FFF3E0" : "#F3F4F6",
-                            color: bin.status === "full" ? "#D32F2F" : bin.status === "missed" ? "#F57C00" : "#6B7280",
+                            color: bin.status === "full" ? "#DC2626" : bin.status === "missed" ? "#D97706" : "#6B7280",
                           }}
                         >
                           {bin.status}
@@ -936,12 +936,12 @@ export default function RouteManagement() {
                   })}
                 </div>
               )}
-              {createErrors.bins && <span style={{ fontSize: 12, color: "#D32F2F" }}>{createErrors.bins}</span>}
+              {createErrors.bins && <span style={{ fontSize: 12, color: "#DC2626" }}>{createErrors.bins}</span>}
             </div>
           </div>
         )}
 
-        {/* Step 2 — Preview */}
+        {/* Step 2 � Preview */}
         {createStep === 2 && (
           <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3 rounded-xl px-4 py-3"
@@ -956,7 +956,7 @@ export default function RouteManagement() {
               <InfoRow label="Route ID"       value={nextRouteId()} />
               <InfoRow label="Date"           value={createForm.date} />
               <InfoRow label="Cluster"        value={getClusterLabel(createForm.cluster)} />
-              <InfoRow label="Assign To"      value={CLUSTER_ADMINS.find((a) => a.id === createForm.assignTo)?.name ?? "—"} />
+              <InfoRow label="Assign To"      value={CLUSTER_ADMINS.find((a) => a.id === createForm.assignTo)?.name ?? "�"} />
               <InfoRow label="Bins Selected"  value={`${createForm.bins.length} bins`} />
               <InfoRow label="Est. Distance"  value={`${(createForm.bins.length * 1.4 + 0.8).toFixed(1)} km`} />
               <InfoRow label="Est. Duration"  value={`${Math.round(createForm.bins.length * 11 + 8)} min`} />
@@ -976,7 +976,7 @@ export default function RouteManagement() {
                       </span>
                       <MapPin size={13} color="#6B7280" className="flex-shrink-0" />
                       <span className="text-text-secondary" style={{ fontSize: 13 }}>
-                        {bin ? `${bin.name} — ${bin.street}, ${bin.barangay}` : binId}
+                        {bin ? `${bin.name} � ${bin.street}, ${bin.barangay}` : binId}
                       </span>
                     </div>
                   );
@@ -986,7 +986,7 @@ export default function RouteManagement() {
           </div>
         )}
 
-        {/* Step 3 — Success */}
+        {/* Step 3 � Success */}
         {createStep === 3 && (
           <div className="flex flex-col items-center gap-3 py-4">
             <div className="flex items-center justify-center rounded-full"
@@ -1029,3 +1029,4 @@ export default function RouteManagement() {
     </div>
   );
 }
+

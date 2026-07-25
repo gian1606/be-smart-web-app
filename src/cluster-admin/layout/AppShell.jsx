@@ -9,7 +9,7 @@ export default function ClusterAdminAppShell() {
   if (!isAuth) return <Navigate to="/login" replace />;  // redirects to shared login
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
+    <div className="min-h-screen" style={{ background: "#F4F6F9" }}>
       <Sidebar />
       <TopHeader />
       {/* Main content: sidebar 240px left, header 60px top */}
@@ -24,3 +24,4 @@ export default function ClusterAdminAppShell() {
     </div>
   );
 }
+

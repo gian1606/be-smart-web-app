@@ -22,8 +22,8 @@ function qrUrl(text, size = 200) {
 }
 
 function statusColor(s) {
-  if (s === "full")      return { bg: "#FFEBEE", color: "#D32F2F" };
-  if (s === "missed")    return { bg: "#FFF3E0", color: "#F57C00" };
+  if (s === "full")      return { bg: "#FFEBEE", color: "#DC2626" };
+  if (s === "missed")    return { bg: "#FFF3E0", color: "#D97706" };
   if (s === "collected") return { bg: "#E8F5E9", color: "#2E7D32" };
   return { bg: "#F3F4F6", color: "#6B7280" };
 }
@@ -89,16 +89,16 @@ function Field({ label, value, onChange, error, placeholder, required }) {
   return (
     <div className="flex flex-col gap-1">
       <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>
-        {label}{required && <span style={{ color: "#D32F2F" }}> *</span>}
+        {label}{required && <span style={{ color: "#DC2626" }}> *</span>}
       </label>
       <input
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
@@ -160,7 +160,7 @@ export default function BinQRCodes() {
         .name{font-weight:700;font-size:13px;text-align:center}
         .sub{font-size:11px;color:#6B7280;text-align:center}
         .badge{background:#E8F5E9;color:#2E7D32;border-radius:99px;padding:2px 8px;font-size:10px;font-weight:600}
-        h2{font-size:16px;margin-bottom:16px;color:#1B5E20}
+        h2{font-size:16px;margin-bottom:16px;color:#1C2B1E}
         @media print{@page{margin:12mm}}
       </style></head><body>
       <h2>BE-SMART · Brgy. ${PB_BARANGAY} · Bin QR Codes</h2>
@@ -270,7 +270,7 @@ export default function BinQRCodes() {
       <div className="flex items-start gap-3 rounded-xl px-4 py-3"
         style={{ background: "#E8F5E9", border: "1px solid #C8E6C9" }}>
         <QrCode size={16} color="#2E7D32" className="flex-shrink-0 mt-0.5" />
-        <p style={{ fontSize: 13, color: "#1B5E20" }}>
+        <p style={{ fontSize: 13, color: "#1C2B1E" }}>
           Each QR code encodes the bin's ID, name, street, and barangay. Residents scan these
           with the BE-SMART mobile app to report bin status. Print and attach them to the physical bins.
           <strong className="ml-1">Total: {bins.length} bins</strong>
@@ -543,3 +543,4 @@ export default function BinQRCodes() {
     </div>
   );
 }
+

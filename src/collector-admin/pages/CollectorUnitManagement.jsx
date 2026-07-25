@@ -105,7 +105,7 @@ export default function CACollectorUnitManagement() {
                 </div>
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button onClick={() => openAssignModal(unit)} className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors" style={{ fontSize: 13, border: "1.5px solid #2E7D32", color: "#2E7D32", background: "#fff" }}><Plus size={13} />Add Collector</button>
-                  <button onClick={() => handleDeleteUnit(unit.id)} className="p-2 rounded-lg hover:bg-red-50 transition-colors" title="Delete unit"><Trash2 size={15} color="#D32F2F" /></button>
+                  <button onClick={() => handleDeleteUnit(unit.id)} className="p-2 rounded-lg hover:bg-red-50 transition-colors" title="Delete unit"><Trash2 size={15} color="#DC2626" /></button>
                   <button onClick={() => setExpandedUnit(isExpanded ? null : unit.id)} className="p-2 rounded-lg hover:bg-gray-100 transition-colors">{isExpanded ? <ChevronUp size={16} color="#6B7280" /> : <ChevronDown size={16} color="#6B7280" />}</button>
                 </div>
               </div>
@@ -152,11 +152,11 @@ export default function CACollectorUnitManagement() {
           <p className="text-text-secondary" style={{ fontSize: 13 }}>Select an active collector to assign to this unit. Only unassigned collectors are shown.</p>
           <div className="flex flex-col gap-1">
             <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Collector</label>
-            <select value={selectedCollector} onChange={(e) => { setSelectedCollector(e.target.value); setAssignError(""); }} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: assignError ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
+            <select value={selectedCollector} onChange={(e) => { setSelectedCollector(e.target.value); setAssignError(""); }} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: assignError ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
               <option value="">Select a collector…</option>
               {assignTargetUnit && getAvailableCollectors(assignTargetUnit).map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
             </select>
-            {assignError && <span style={{ fontSize: 12, color: "#D32F2F" }}>{assignError}</span>}
+            {assignError && <span style={{ fontSize: 12, color: "#DC2626" }}>{assignError}</span>}
             {assignTargetUnit && getAvailableCollectors(assignTargetUnit).length === 0 && <span style={{ fontSize: 12, color: "#9CA3AF" }}>No available collectors. Add collectors in User Management first.</span>}
           </div>
         </div>
@@ -169,8 +169,9 @@ function FormField({ label, value, onChange, error, placeholder }) {
   return (
     <div className="flex flex-col gap-1">
       <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>{label}</label>
-      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      <input type="text" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+

@@ -13,12 +13,12 @@
 
 // Shared status color map — keep in sync with both mock data files
 const STATUS_COLORS = {
-  full:        "#D32F2F",
+  full:        "#DC2626",
   collected:   "#2E7D32",
-  missed:      "#F57C00",
+  missed:      "#D97706",
   ok:          "#2E7D32",
   available:   "#2E7D32",
-  pending:     "#F57C00",
+  pending:     "#D97706",
   completed:   "#2E7D32",
   delivered:   "#2E7D32",
   in_progress: "#1976D2",
@@ -146,7 +146,7 @@ export default function MapView({
             top: `calc(${t.posY * 100}% - 10px)`,
             width: 20,
             height: 20,
-            background: "#F57C00",
+            background: "#D97706",
             fontSize: 10,
             zIndex: 4,
           }}
@@ -167,7 +167,7 @@ export default function MapView({
               top: `calc(${stop.posY * 100}% - 11px)`,
               width: 22,
               height: 22,
-              background: stop.type === "depot" ? "#F57C00" : "#2E7D32",
+              background: stop.type === "depot" ? "#D97706" : "#2E7D32",
               color: "#fff",
               fontSize: 10,
               zIndex: 5,
@@ -183,9 +183,9 @@ export default function MapView({
         className="absolute top-3 right-3 rounded-lg p-2 flex flex-col gap-1.5"
         style={{ background: "rgba(255,255,255,0.92)", fontSize: 11 }}
       >
-        <LegendItem color="#D32F2F" label="Full" />
+        <LegendItem color="#DC2626" label="Full" />
         <LegendItem color="#2E7D32" label="OK / Collected" />
-        <LegendItem color="#F57C00" label="Truck" shape="circle" />
+        <LegendItem color="#D97706" label="Truck" shape="circle" />
         <LegendItem color="#1976D2" label="MRF" shape="square" />
       </div>
 
@@ -243,3 +243,4 @@ function LegendItem({ color, label, shape = "circle" }) {
     </div>
   );
 }
+

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RefreshCw, Truck } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import MapView from "../../components/ui/MapView";
 import { BINS, TRUCKS, ACTIVE_ROUTE, BARANGAYS, CLUSTER_INFO } from "../mock/data";
 
@@ -50,27 +50,12 @@ export default function MapCollection() {
         </div>
       </div>
 
-      {/* Full-width map */}
-      <div
-        className="bg-white rounded-xl p-4"
-        style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-      >
-        <MapView
-          bins={filteredBins}
-          trucks={TRUCKS}
-          mrfs={[]}
-          routeOrder={ACTIVE_ROUTE ? ACTIVE_ROUTE.order : []}
-          showRoute={!!ACTIVE_ROUTE}
-          height={520}
-        />
-      </div>
-
       {/* Bin status summary */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "Full Bins",  count: fullCount,      color: "#D32F2F", bg: "#FFEBEE" },
+          { label: "Full Bins",  count: fullCount,      color: "#DC2626", bg: "#FFEBEE" },
           { label: "Collected",  count: collectedCount, color: "#2E7D32", bg: "#E8F5E9" },
-          { label: "Missed",     count: missedCount,    color: "#F57C00", bg: "#FFF3E0" },
+          { label: "Missed",     count: missedCount,    color: "#D97706", bg: "#FFF3E0" },
         ].map((s) => (
           <div
             key={s.label}
@@ -89,50 +74,22 @@ export default function MapCollection() {
         ))}
       </div>
 
-      {/* Active route card */}
-      {ACTIVE_ROUTE && (
-        <div
-          className="bg-white rounded-xl p-5 flex flex-col gap-4"
-          style={{ border: "1px solid #80CBC4", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-        >
-          <div className="flex items-center gap-3">
-            <div
-              className="flex items-center justify-center rounded-lg"
-              style={{ width: 36, height: 36, background: "#E0F2F1" }}
-            >
-              <Truck size={18} color="#00796B" />
-            </div>
-            <div>
-              <div className="font-semibold" style={{ fontSize: 15, color: "#00796B" }}>
-                Active Route Received from Super Admin
-              </div>
-              <div className="text-text-secondary" style={{ fontSize: 13 }}>
-                {ACTIVE_ROUTE.routeId} · {ACTIVE_ROUTE.bins.length} bins · Est. {ACTIVE_ROUTE.estimatedMinutes} min · {ACTIVE_ROUTE.distanceKm} km
-              </div>
-            </div>
-          </div>
+      {/* Full-width map */}
+      <div
+        className="bg-white rounded-xl p-4"
+        style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+      >
+        <MapView
+          bins={filteredBins}
+          trucks={TRUCKS}
+          mrfs={[]}
+          routeOrder={ACTIVE_ROUTE ? ACTIVE_ROUTE.order : []}
+          showRoute={!!ACTIVE_ROUTE}
+          height={520}
+        />
+      </div>
 
-          <div>
-            <h3 className="font-semibold text-text-primary mb-3" style={{ fontSize: 14 }}>Collection Order</h3>
-            <div className="flex flex-col gap-2">
-              {ACTIVE_ROUTE.order.map((stop, i) => (
-                <div key={i} className="flex items-center gap-3">
-                  <div
-                    className="flex-shrink-0 flex items-center justify-center rounded-full font-bold text-white"
-                    style={{ width: 26, height: 26, fontSize: 11, background: stop.type === "depot" ? "#F57C00" : "#2E7D32" }}
-                  >
-                    {stop.type === "depot" ? "D" : i}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-text-primary" style={{ fontSize: 13 }}>{stop.label}</div>
-                    {stop.street && <div className="text-text-muted" style={{ fontSize: 11 }}>{stop.street}</div>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
+

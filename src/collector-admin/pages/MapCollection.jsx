@@ -91,7 +91,7 @@ export default function CAMapCollection() {
             <div className="flex flex-col gap-2">
               {route.order.map((stop, i) => (
                 <div key={i} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 flex items-center justify-center rounded-full font-bold text-white" style={{ width: 26, height: 26, fontSize: 11, background: stop.type === "depot" ? "#F57C00" : "#2E7D32" }}>{stop.type === "depot" ? "D" : i}</div>
+                  <div className="flex-shrink-0 flex items-center justify-center rounded-full font-bold text-white" style={{ width: 26, height: 26, fontSize: 11, background: stop.type === "depot" ? "#D97706" : "#2E7D32" }}>{stop.type === "depot" ? "D" : i}</div>
                   <div>
                     <div className="font-semibold text-text-primary" style={{ fontSize: 13 }}>{stop.label}</div>
                     {stop.street && <div className="text-text-muted" style={{ fontSize: 11 }}>{stop.street}</div>}
@@ -117,11 +117,11 @@ export default function CAMapCollection() {
           </div>
           <div className="flex flex-col gap-1">
             <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Assign Collector Unit</label>
-            <select value={selectedUnit} onChange={(e) => { setSelectedUnit(e.target.value); setFormError(""); }} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: formError ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
+            <select value={selectedUnit} onChange={(e) => { setSelectedUnit(e.target.value); setFormError(""); }} className="rounded-lg px-3 py-2.5 outline-none" style={{ fontSize: 14, border: formError ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
               <option value="">Select a unit…</option>
               {COLLECTOR_UNITS.map((u) => <option key={u.id} value={u.id}>{u.name} ({u.plateNumber}) — {u.status.replace("_", " ")}</option>)}
             </select>
-            {formError && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formError}</span>}
+            {formError && <span style={{ fontSize: 12, color: "#DC2626" }}>{formError}</span>}
           </div>
           <div className="grid grid-cols-2 gap-3">
             <div className="flex flex-col gap-1">
@@ -139,3 +139,4 @@ export default function CAMapCollection() {
     </div>
   );
 }
+

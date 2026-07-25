@@ -39,7 +39,7 @@ export default function CADashboard() {
 
       <div className="grid grid-cols-4 gap-4">
         <StatCard icon={<Trash2 size={18} color="#6B7280" />} value={CA_DASHBOARD_STATS.totalBins} label="Total Bins" subLabel="Cluster 1" />
-        <StatCard icon={<Trash2 size={18} color="#D32F2F" />} value={CA_DASHBOARD_STATS.fullBins} label="Full Bins" subLabel="Needs collection" subLabelColor="#D32F2F" />
+        <StatCard icon={<Trash2 size={18} color="#DC2626" />} value={CA_DASHBOARD_STATS.fullBins} label="Full Bins" subLabel="Needs collection" subLabelColor="#DC2626" />
         <StatCard icon={<CheckCircle size={18} color="#2E7D32" />} value={CA_DASHBOARD_STATS.collectedToday} label="Collected Today" subLabel={`${Math.round((CA_DASHBOARD_STATS.collectedToday / CA_DASHBOARD_STATS.totalBins) * 100)}% of target`} subLabelColor="#2E7D32" />
         <StatCard icon={<Truck size={18} color="#1976D2" />} value={CA_DASHBOARD_STATS.activeUnits} label="Collector Units" subLabel="1 en route" subLabelColor="#1976D2" />
       </div>
@@ -59,7 +59,7 @@ export default function CADashboard() {
           <div className="bg-white rounded-xl p-4 flex flex-col gap-2" style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>Full Bin Alerts</h2>
-              <span className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 12, background: "#FFEBEE", color: "#D32F2F" }}>{fullBins.length}</span>
+              <span className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 12, background: "#FFEBEE", color: "#DC2626" }}>{fullBins.length}</span>
             </div>
             <div className="overflow-y-auto" style={{ maxHeight: 220 }}>
               {fullBins.length === 0
@@ -80,3 +80,4 @@ export default function CADashboard() {
     </div>
   );
 }
+

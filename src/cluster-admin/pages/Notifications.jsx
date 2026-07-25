@@ -7,7 +7,7 @@ const TYPE_CONFIG = {
   announcement: { icon: Megaphone, color: "#2E7D32", bg: "#E8F5E9" },
   route:        { icon: Route,     color: "#1976D2", bg: "#E3F2FD" },
   report:       { icon: FileText,  color: "#6B7280", bg: "#F3F4F6" },
-  task:         { icon: Bell,      color: "#F57C00", bg: "#FFF3E0" },
+  task:         { icon: Bell,      color: "#D97706", bg: "#FFF3E0" },
 };
 
 const EMPTY_FORM = { title: "", body: "", target: "all", priority: "normal" };
@@ -131,7 +131,7 @@ export default function Notifications() {
                       <span className="rounded-full" style={{ width: 7, height: 7, background: "#2E7D32", display: "inline-block", flexShrink: 0 }} />
                     )}
                     {n.priority === "urgent" && (
-                      <span className="flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold" style={{ fontSize: 11, background: "#FFEBEE", color: "#D32F2F" }}>
+                      <span className="flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold" style={{ fontSize: 11, background: "#FFEBEE", color: "#DC2626" }}>
                         <AlertTriangle size={10} />
                         Urgent
                       </span>
@@ -182,9 +182,9 @@ export default function Notifications() {
               placeholder="Write your message here…"
               rows={4}
               className="rounded-lg px-3 py-2.5 outline-none resize-none"
-              style={{ fontSize: 14, border: formErrors.body ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+              style={{ fontSize: 14, border: formErrors.body ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
             />
-            {formErrors.body && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.body}</span>}
+            {formErrors.body && <span style={{ fontSize: 12, color: "#DC2626" }}>{formErrors.body}</span>}
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div className="flex flex-col gap-1">
@@ -229,9 +229,10 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+

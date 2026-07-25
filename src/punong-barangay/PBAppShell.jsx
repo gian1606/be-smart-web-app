@@ -7,7 +7,7 @@ export default function PBAppShell() {
   if (!isAuth) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
+    <div className="min-h-screen" style={{ background: "#F4F6F9" }}>
       <PBSidebar />
       <PBTopHeader />
       <main
@@ -21,3 +21,4 @@ export default function PBAppShell() {
     </div>
   );
 }
+

@@ -1,4 +1,4 @@
-﻿import { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
   Trash2, CheckCircle, Users, Leaf, TrendingUp, TrendingDown,
   Download, BarChart2, AlertTriangle, ChevronDown,
@@ -27,9 +27,9 @@ import {
   REPORT_EXPORTS,
 } from "../mock/data";
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// -- Helpers -------------------------------------------------------------------
 function fmt(n) {
-  if (typeof n !== "number") return "—";
+  if (typeof n !== "number") return "�";
   return n >= 1000 ? (n / 1000).toFixed(1) + "k" : n.toString();
 }
 
@@ -38,7 +38,7 @@ function GrowthBadge({ value }) {
   const Icon = up ? TrendingUp : TrendingDown;
   return (
     <span className="flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold"
-      style={{ fontSize: 11, background: up ? "#E8F5E9" : "#FFEBEE", color: up ? "#2E7D32" : "#D32F2F" }}>
+      style={{ fontSize: 11, background: up ? "#E8F5E9" : "#FFEBEE", color: up ? "#2E7D32" : "#DC2626" }}>
       <Icon size={10} />{Math.abs(value)}%
     </span>
   );
@@ -124,7 +124,7 @@ function Section({ title, children, action }) {
   );
 }
 
-// ── Styled select ─────────────────────────────────────────────────────────────
+// -- Styled select -------------------------------------------------------------
 function FilterSelect({ value, onChange, disabled, children }) {
   return (
     <div className="relative flex items-center">
@@ -150,7 +150,7 @@ function FilterSelect({ value, onChange, disabled, children }) {
   );
 }
 
-// ── Main Component ────────────────────────────────────────────────────────────
+// -- Main Component ------------------------------------------------------------
 export default function Reports() {
   const [period, setPeriod] = useState("monthly");
   const [selectedCluster, setSelectedCluster] = useState("all");
@@ -167,7 +167,7 @@ export default function Reports() {
     ? (CLUSTER_BARANGAY_MAP[selectedCluster] ?? [])
     : [];
 
-  // ── Derive scope label for subtitle ────────────────────────────────────────
+  // -- Derive scope label for subtitle ----------------------------------------
   const scopeLabel = useMemo(() => {
     if (selectedBarangay !== "all") {
       const br = barangayOptions.find((b) => b.id === selectedBarangay);
@@ -177,10 +177,10 @@ export default function Reports() {
       const cl = CLUSTERS.find((c) => c.id === selectedCluster);
       return cl ? cl.label : "Cluster";
     }
-    return "City-wide — Batangas City";
+    return "City-wide � Batangas City";
   }, [selectedCluster, selectedBarangay, barangayOptions]);
 
-  // ── Resolve scoped data ─────────────────────────────────────────────────────
+  // -- Resolve scoped data -----------------------------------------------------
   const kpi = useMemo(() => {
     if (selectedBarangay !== "all") return REPORT_KPI_BY_BARANGAY[selectedBarangay] ?? REPORT_KPI;
     if (selectedCluster !== "all") return REPORT_KPI_BY_CLUSTER[selectedCluster] ?? REPORT_KPI;
@@ -225,7 +225,7 @@ export default function Reports() {
             Reports &amp; Analytics
           </h1>
           <p className="text-text-secondary mt-0.5" style={{ fontSize: 14 }}>
-            {scopeLabel} · May 2025
+            {scopeLabel} � May 2025
           </p>
         </div>
 
@@ -233,7 +233,7 @@ export default function Reports() {
         <div className="flex items-center gap-2 flex-wrap justify-end">
           {/* Cluster dropdown */}
           <FilterSelect value={selectedCluster} onChange={handleClusterChange}>
-            <option value="all">🏙 City-wide (All)</option>
+            <option value="all">?? City-wide (All)</option>
             {CLUSTERS.map((c) => (
               <option key={c.id} value={c.id}>{c.label}</option>
             ))}
@@ -256,9 +256,9 @@ export default function Reports() {
             <button
               onClick={() => { setSelectedCluster("all"); setSelectedBarangay("all"); }}
               className="flex items-center gap-1.5 rounded-lg px-3 py-2 font-medium transition-colors hover:bg-red-50"
-              style={{ fontSize: 12, border: "1.5px solid #FECACA", color: "#D32F2F", background: "#FFF5F5" }}
+              style={{ fontSize: 12, border: "1.5px solid #FECACA", color: "#DC2626", background: "#FFF5F5" }}
             >
-              ✕ Clear filter
+              ? Clear filter
             </button>
           )}
 
@@ -287,7 +287,7 @@ export default function Reports() {
           </span>
           {selectedBarangay === "all" && (
             <span className="text-text-muted" style={{ fontSize: 12 }}>
-              — select a barangay below to drill down further
+              � select a barangay below to drill down further
             </span>
           )}
         </div>
@@ -299,9 +299,9 @@ export default function Reports() {
           value={fmt(kpi.totalCollections)} growth={kpi.collectionGrowth} sub="vs. previous period" />
         <KpiCard icon={<BarChart2 size={18} color="#1976D2" />} label="Avg Collection Rate"
           value={`${kpi.avgCollectionRate}%`} growth={kpi.collectionRateChange} sub="of scheduled bins collected" />
-        <KpiCard icon={<AlertTriangle size={18} color="#D32F2F" />} label="Missed Collections"
+        <KpiCard icon={<AlertTriangle size={18} color="#DC2626" />} label="Missed Collections"
           value={kpi.missedCollections} growth={kpi.missedChange} sub="lower is better" />
-        <KpiCard icon={<Users size={18} color="#F57C00" />} label="Active Residents"
+        <KpiCard icon={<Users size={18} color="#D97706" />} label="Active Residents"
           value={fmt(kpi.activeResidents)} growth={kpi.residentGrowth} sub="reporting this period" />
         <KpiCard icon={<Leaf size={18} color="#2E7D32" />} label="Eco Tokens Issued"
           value={fmt(kpi.ecoTokensIssued)} growth={kpi.tokenGrowth} sub="total this scope" />
@@ -327,7 +327,7 @@ export default function Reports() {
           }
         >
           <div className="flex items-center gap-4 mb-1">
-            {[["#2E7D32", "Collected"], ["#9CA3AF", "Target"], ["#D32F2F", "Missed"]].map(([color, label]) => (
+            {[["#2E7D32", "Collected"], ["#9CA3AF", "Target"], ["#DC2626", "Missed"]].map(([color, label]) => (
               <span key={label} className="flex items-center gap-1.5 text-text-muted" style={{ fontSize: 12 }}>
                 <span className="inline-block rounded-sm" style={{ width: 10, height: 10, background: color, opacity: label === "Target" ? 0.4 : 1 }} />
                 {label}
@@ -339,7 +339,7 @@ export default function Reports() {
             {collectionData.map((d, i) => (
               <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
                 <span className="rounded-full font-semibold text-white flex items-center justify-center"
-                  style={{ width: 20, height: 20, fontSize: 9, background: "#D32F2F" }}>
+                  style={{ width: 20, height: 20, fontSize: 9, background: "#DC2626" }}>
                   {d.missed}
                 </span>
                 <span className="text-text-muted" style={{ fontSize: 9 }}>missed</span>
@@ -348,19 +348,19 @@ export default function Reports() {
           </div>
         </Section>
 
-        {/* Cluster rates — only show at city-wide scope */}
+        {/* Cluster rates � only show at city-wide scope */}
         {selectedCluster === "all" ? (
           <Section title="Collection Rate by Cluster">
             <div className="flex flex-col gap-3">
               {CLUSTER_COLLECTION_RATES.map((c) => (
                 <HBar key={c.cluster} label={c.label.replace(" (North Zone)", "")} value={c.rate} max={100}
-                  color={c.rate >= 80 ? "#2E7D32" : c.rate >= 70 ? "#F57C00" : "#D32F2F"} />
+                  color={c.rate >= 80 ? "#2E7D32" : c.rate >= 70 ? "#D97706" : "#DC2626"} />
               ))}
             </div>
             <div className="rounded-lg px-3 py-2 mt-1" style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
               <p className="text-text-muted" style={{ fontSize: 11 }}>
                 City average: <strong style={{ color: "#2E7D32" }}>{REPORT_KPI.avgCollectionRate}%</strong>
-                &nbsp;·&nbsp;Target: <strong>85%</strong>
+                &nbsp;�&nbsp;Target: <strong>85%</strong>
               </p>
             </div>
           </Section>
@@ -373,7 +373,7 @@ export default function Reports() {
                 <svg viewBox="0 0 36 36" style={{ width: 120, height: 120, transform: "rotate(-90deg)" }}>
                   <circle cx="18" cy="18" r="15.9" fill="none" stroke="#F3F4F6" strokeWidth="3.2" />
                   <circle cx="18" cy="18" r="15.9" fill="none"
-                    stroke={kpi.avgCollectionRate >= 80 ? "#2E7D32" : kpi.avgCollectionRate >= 70 ? "#F57C00" : "#D32F2F"}
+                    stroke={kpi.avgCollectionRate >= 80 ? "#2E7D32" : kpi.avgCollectionRate >= 70 ? "#D97706" : "#DC2626"}
                     strokeWidth="3.2"
                     strokeDasharray={`${kpi.avgCollectionRate} ${100 - kpi.avgCollectionRate}`}
                     strokeLinecap="round" />
@@ -386,7 +386,7 @@ export default function Reports() {
               <div className="text-center">
                 <p className="font-semibold text-text-primary" style={{ fontSize: 14 }}>{scopeLabel}</p>
                 <p className="text-text-muted mt-0.5" style={{ fontSize: 12 }}>
-                  {kpi.totalCollections} collected · {kpi.missedCollections} missed
+                  {kpi.totalCollections} collected � {kpi.missedCollections} missed
                 </p>
               </div>
               <GrowthBadge value={kpi.collectionRateChange} />
@@ -394,7 +394,7 @@ export default function Reports() {
             <div className="rounded-lg px-3 py-2" style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
               <p className="text-text-muted" style={{ fontSize: 11 }}>
                 City average: <strong style={{ color: "#2E7D32" }}>{REPORT_KPI.avgCollectionRate}%</strong>
-                &nbsp;·&nbsp;Target: <strong>85%</strong>
+                &nbsp;�&nbsp;Target: <strong>85%</strong>
               </p>
             </div>
           </Section>
@@ -403,7 +403,7 @@ export default function Reports() {
 
       {/* Full bin trend + Waste by type */}
       <div className="grid grid-cols-2 gap-4">
-        <Section title="Full Bin Reports — Last 14 Days">
+        <Section title="Full Bin Reports � Last 14 Days">
           <div className="flex items-end justify-between mb-1">
             <div>
               <span className="font-bold text-text-primary" style={{ fontSize: 24 }}>
@@ -413,7 +413,7 @@ export default function Reports() {
             </div>
             <GrowthBadge value={-6} />
           </div>
-          <Sparkline data={FULL_BIN_TREND} valueKey="fullBins" color="#D32F2F" height={80} />
+          <Sparkline data={FULL_BIN_TREND} valueKey="fullBins" color="#DC2626" height={80} />
           <div className="flex items-center justify-between mt-1">
             {FULL_BIN_TREND.filter((_, i) => i % 2 === 0).map((d) => (
               <span key={d.date} className="text-text-muted" style={{ fontSize: 10 }}>{d.date}</span>
@@ -444,16 +444,16 @@ export default function Reports() {
           <div className="rounded-lg px-3 py-2 mt-1" style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
             <p className="text-text-muted" style={{ fontSize: 11 }}>
               Total: <strong style={{ color: "#1A1A1A" }}>{totalWaste.toLocaleString()} kg</strong>
-              &nbsp;·&nbsp;{(totalWaste / 1000).toFixed(1)} metric tons
+              &nbsp;�&nbsp;{(totalWaste / 1000).toFixed(1)} metric tons
             </p>
           </div>
         </Section>
       </div>
 
-      {/* Eco tokens + Resident engagement — city-wide only */}
+      {/* Eco tokens + Resident engagement � city-wide only */}
       {selectedCluster === "all" && (
         <div className="grid grid-cols-2 gap-4">
-          <Section title="Eco Token Issuance — Monthly">
+          <Section title="Eco Token Issuance � Monthly">
             <BarChart data={ECO_TOKEN_MONTHLY} valueKey="tokens" labelKey="month" height={140} />
             <div className="flex items-center justify-between mt-1">
               <span className="text-text-muted" style={{ fontSize: 12 }}>
@@ -462,7 +462,7 @@ export default function Reports() {
               <GrowthBadge value={REPORT_KPI.tokenGrowth} />
             </div>
           </Section>
-          <Section title="Resident Engagement — Monthly">
+          <Section title="Resident Engagement � Monthly">
             <BarChart data={RESIDENT_ENGAGEMENT} valueKey="activeReporters" labelKey="month" height={140} />
             <div className="flex items-center justify-between mt-1">
               <span className="text-text-muted" style={{ fontSize: 12 }}>
@@ -477,7 +477,7 @@ export default function Reports() {
       {/* Cluster performance table + Missed reasons */}
       <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 300px" }}>
 
-        {/* Cluster scorecard — city-wide only; scoped shows a summary card */}
+        {/* Cluster scorecard � city-wide only; scoped shows a summary card */}
         {selectedCluster === "all" ? (
           <Section title="Cluster Performance Scorecard">
             <div className="overflow-x-auto">
@@ -496,7 +496,7 @@ export default function Reports() {
                       style={{ borderBottom: i < CLUSTER_PERFORMANCE.length - 1 ? "1px solid #F9FAFB" : "none" }}>
                       <td className="py-2.5 font-medium text-text-primary" style={{ fontSize: 13, paddingRight: 16 }}>{c.label}</td>
                       <td className="py-2.5" style={{ fontSize: 13, paddingRight: 16 }}>
-                        <span style={{ color: c.collectionRate >= 80 ? "#2E7D32" : c.collectionRate >= 70 ? "#F57C00" : "#D32F2F", fontWeight: 600 }}>
+                        <span style={{ color: c.collectionRate >= 80 ? "#2E7D32" : c.collectionRate >= 70 ? "#D97706" : "#DC2626", fontWeight: 600 }}>
                           {c.collectionRate}%
                         </span>
                       </td>
@@ -504,7 +504,7 @@ export default function Reports() {
                       <td className="py-2.5 text-text-secondary" style={{ fontSize: 13, paddingRight: 16 }}>{c.avgResponseMin} min</td>
                       <td className="py-2.5" style={{ fontSize: 13 }}>
                         <span className="rounded-full px-2.5 py-0.5 font-semibold"
-                          style={{ background: c.score >= 85 ? "#E8F5E9" : c.score >= 75 ? "#FFF3E0" : "#FFEBEE", color: c.score >= 85 ? "#2E7D32" : c.score >= 75 ? "#F57C00" : "#D32F2F" }}>
+                          style={{ background: c.score >= 85 ? "#E8F5E9" : c.score >= 75 ? "#FFF3E0" : "#FFEBEE", color: c.score >= 85 ? "#2E7D32" : c.score >= 75 ? "#D97706" : "#DC2626" }}>
                           {c.score}
                         </span>
                       </td>
@@ -518,8 +518,8 @@ export default function Reports() {
           <Section title="Scoped Performance Summary">
             <div className="grid grid-cols-2 gap-3">
               {[
-                { label: "Collection Rate",    value: `${kpi.avgCollectionRate}%`,              color: kpi.avgCollectionRate >= 80 ? "#2E7D32" : kpi.avgCollectionRate >= 70 ? "#F57C00" : "#D32F2F" },
-                { label: "Resident Engagement",value: `${kpi.activeResidents.toLocaleString()}`, color: "#F57C00" },
+                { label: "Collection Rate",    value: `${kpi.avgCollectionRate}%`,              color: kpi.avgCollectionRate >= 80 ? "#2E7D32" : kpi.avgCollectionRate >= 70 ? "#D97706" : "#DC2626" },
+                { label: "Resident Engagement",value: `${kpi.activeResidents.toLocaleString()}`, color: "#D97706" },
                 { label: "Eco Tokens Issued",  value: fmt(kpi.ecoTokensIssued),                 color: "#2E7D32" },
                 { label: "Waste Collected",    value: `${(kpi.totalWasteKg / 1000).toFixed(1)}t`, color: "#6B7280" },
               ].map((item) => (
@@ -533,8 +533,8 @@ export default function Reports() {
           </Section>
         )}
 
-        {/* Missed reasons — always scoped */}
-        <Section title="Missed — Top Reasons">
+        {/* Missed reasons � always scoped */}
+        <Section title="Missed � Top Reasons">
           <div className="flex flex-col gap-3">
             {missedData.filter((r) => r.count > 0).map((r) => (
               <div key={r.reason} className="flex items-center gap-3">
@@ -554,7 +554,7 @@ export default function Reports() {
           </div>
           <div className="rounded-lg px-3 py-2 mt-1" style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
             <p className="text-text-muted" style={{ fontSize: 11 }}>
-              Total missed: <strong style={{ color: "#D32F2F" }}>{totalMissed}</strong> this period
+              Total missed: <strong style={{ color: "#DC2626" }}>{totalMissed}</strong> this period
             </p>
           </div>
         </Section>
@@ -573,12 +573,12 @@ export default function Reports() {
                 </div>
                 <div>
                   <div className="font-medium text-text-primary" style={{ fontSize: 13 }}>{r.name}</div>
-                  <div className="text-text-muted" style={{ fontSize: 11 }}>{formatExportDate(r.generatedAt)} · {r.generatedBy}</div>
+                  <div className="text-text-muted" style={{ fontSize: 11 }}>{formatExportDate(r.generatedAt)} � {r.generatedBy}</div>
                 </div>
               </div>
               <div className="flex items-center gap-3">
                 <span className="rounded-full px-2.5 py-0.5 font-semibold"
-                  style={{ fontSize: 11, background: r.format === "PDF" ? "#FFEBEE" : r.format === "CSV" ? "#E8F5E9" : "#E3F2FD", color: r.format === "PDF" ? "#D32F2F" : r.format === "CSV" ? "#2E7D32" : "#1976D2" }}>
+                  style={{ fontSize: 11, background: r.format === "PDF" ? "#FFEBEE" : r.format === "CSV" ? "#E8F5E9" : "#E3F2FD", color: r.format === "PDF" ? "#DC2626" : r.format === "CSV" ? "#2E7D32" : "#1976D2" }}>
                   {r.format}
                 </span>
                 <button className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium hover:bg-gray-100 transition-colors"
@@ -594,3 +594,5 @@ export default function Reports() {
     </div>
   );
 }
+
+

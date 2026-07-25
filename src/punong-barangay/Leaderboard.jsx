@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Trophy, Medal, Star, Home, Calendar } from "lucide-react";
+import { Trophy, Medal, Star, Calendar, Home } from "lucide-react";
 import { LEADERBOARD_PERIODS } from "../mock/data";
 
 const BADGE_CONFIG = {
@@ -101,65 +101,65 @@ export default function Leaderboard() {
 
       {/* Podium — top 3 */}
       {topThree.length >= 1 && (
-        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-          {[topThree[1], topThree[0], topThree[2]].map((r, podiumIdx) => {
-            if (!r) return <div key={podiumIdx} />;
-            const isFirst = r.displayRank === 1;
-            return (
-              <div
-                key={r.residentId}
-                className="flex flex-col items-center rounded-xl p-5 gap-3"
-                style={{
-                  background: isFirst ? "#FFFBEB" : "#fff",
-                  border: isFirst ? "2px solid #FDE68A" : "1px solid #E5E7EB",
-                  boxShadow: isFirst
-                    ? "0 4px 16px rgba(217,119,6,0.12)"
-                    : "0 2px 8px rgba(0,0,0,0.05)",
-                  marginTop: isFirst ? 0 : 16,
-                }}
-              >
-                <div style={{ fontSize: 36 }}>
-                  {r.displayRank === 1 ? "🥇" : r.displayRank === 2 ? "🥈" : "🥉"}
-                </div>
-                <div
-                  className="flex items-center justify-center rounded-full"
-                  style={{
-                    width: 52,
-                    height: 52,
-                    background:
-                      r.displayRank === 1 ? "#D97706" : r.displayRank === 2 ? "#9CA3AF" : "#C2410C",
-                  }}
-                >
-                  <Home size={22} color="#fff" />
-                </div>
-                <div className="text-center">
-                  <div className="font-bold text-text-primary" style={{ fontSize: 15 }}>
-                    {r.name}
-                  </div>
-                  <div className="text-text-muted" style={{ fontSize: 12 }}>
-                    {r.street}
-                  </div>
-                </div>
-                <div className="text-center">
-                  <div
-                    className="font-bold"
-                    style={{ fontSize: 24, color: isFirst ? "#D97706" : "#1A1A1A" }}
-                  >
-                    {r.pointsEarned.toLocaleString()}
-                  </div>
-                  <div className="text-text-muted" style={{ fontSize: 11 }}>
-                    Eco Points
-                  </div>
-                </div>
-                <div
-                  className="rounded-full px-3 py-1 font-medium"
-                  style={{ fontSize: 12, background: "#E8F5E9", color: "#2E7D32" }}
-                >
-                  {r.reportsSubmitted} reports
+        <div
+          className="bg-white rounded-xl p-6"
+          style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+        >
+          <div className="flex items-end gap-2">
+
+            {/* 2nd place — silver */}
+            <div
+              className="flex-1 flex flex-col items-center justify-between rounded-t-xl px-3 py-5 overflow-hidden"
+              style={{ height: 280, background: "linear-gradient(180deg, #BDC3C7 0%, #95A5A6 100%)" }}
+            >
+              <div className="flex flex-col items-center gap-1.5 w-full">
+                <div className="font-bold text-white text-center leading-tight" style={{ fontSize: 14 }}>{topThree[1]?.name ?? "—"}</div>
+                <div className="text-white/80 text-center" style={{ fontSize: 11 }}>{topThree[1]?.street ?? ""}</div>
+                <div className="font-black text-white" style={{ fontSize: 24 }}>{topThree[1]?.pointsEarned.toLocaleString() ?? "—"}</div>
+                <div className="text-white/70" style={{ fontSize: 10 }}>Eco Points</div>
+                <div className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 11, background: "rgba(255,255,255,0.25)", color: "#fff" }}>
+                  {topThree[1]?.reportsSubmitted} reports
                 </div>
               </div>
-            );
-          })}
+              <div className="font-black text-white/90" style={{ fontSize: 52 }}>2</div>
+            </div>
+
+            {/* 1st place — gold */}
+            <div
+              className="flex-1 flex flex-col items-center justify-between rounded-t-xl px-3 py-5 overflow-hidden"
+              style={{ height: 360, background: "linear-gradient(180deg, #F7DC6F 0%, #D4A017 100%)" }}
+            >
+              <div className="flex flex-col items-center gap-1.5 w-full">
+                <div className="font-bold text-white text-center leading-tight" style={{ fontSize: 15 }}>{topThree[0]?.name ?? "—"}</div>
+                <div className="text-white/80 text-center" style={{ fontSize: 11 }}>{topThree[0]?.street ?? ""}</div>
+                <div className="font-black text-white" style={{ fontSize: 28 }}>{topThree[0]?.pointsEarned.toLocaleString() ?? "—"}</div>
+                <div className="text-white/70" style={{ fontSize: 10 }}>Eco Points</div>
+                <div className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 11, background: "rgba(255,255,255,0.25)", color: "#fff" }}>
+                  {topThree[0]?.reportsSubmitted} reports
+                </div>
+              </div>
+              <div className="font-black text-white/90" style={{ fontSize: 64 }}>1</div>
+            </div>
+
+            {/* 3rd place — bronze */}
+            <div
+              className="flex-1 flex flex-col items-center justify-between rounded-t-xl px-3 py-5 overflow-hidden"
+              style={{ height: 230, background: "linear-gradient(180deg, #D4956A 0%, #A0522D 100%)" }}
+            >
+              <div className="flex flex-col items-center gap-1.5 w-full">
+                <div className="font-bold text-white text-center leading-tight" style={{ fontSize: 14 }}>{topThree[2]?.name ?? "—"}</div>
+                <div className="text-white/80 text-center" style={{ fontSize: 11 }}>{topThree[2]?.street ?? ""}</div>
+                <div className="font-black text-white" style={{ fontSize: 22 }}>{topThree[2]?.pointsEarned.toLocaleString() ?? "—"}</div>
+                <div className="text-white/70" style={{ fontSize: 10 }}>Eco Points</div>
+                <div className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 11, background: "rgba(255,255,255,0.25)", color: "#fff" }}>
+                  {topThree[2]?.reportsSubmitted} reports
+                </div>
+              </div>
+              <div className="font-black text-white/90" style={{ fontSize: 44 }}>3</div>
+            </div>
+
+          </div>
+          <div className="rounded-b-lg" style={{ height: 14, background: "#6B7280" }} />
         </div>
       )}
 
@@ -260,7 +260,7 @@ export default function Leaderboard() {
                     {/* Reports */}
                     <td className="px-5 py-3">
                       <div className="flex items-center gap-1.5">
-                        <Star size={13} color="#F57C00" />
+                        <Star size={13} color="#D97706" />
                         <span className="font-semibold text-text-primary" style={{ fontSize: 13 }}>
                           {r.reportsSubmitted}
                         </span>
@@ -298,3 +298,4 @@ export default function Leaderboard() {
     </div>
   );
 }
+

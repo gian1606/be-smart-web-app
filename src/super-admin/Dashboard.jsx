@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trash2, Truck, CheckCircle, Activity, RefreshCw, Route } from "lucide-react";
 import StatCard from "../components/ui/StatCard";
@@ -79,11 +79,11 @@ export default function Dashboard() {
           subLabel="City-wide"
         />
         <StatCard
-          icon={<Trash2 size={18} color="#D32F2F" />}
+          icon={<Trash2 size={18} color="#DC2626" />}
           value={stats.fullBins}
           label="Full Bins"
           subLabel={stats.fullBins > 5 ? `${Math.min(stats.fullBins, 3)} critical` : "Needs collection"}
-          subLabelColor="#D32F2F"
+          subLabelColor="#DC2626"
         />
         <StatCard
           icon={<CheckCircle size={18} color="#2E7D32" />}
@@ -139,7 +139,7 @@ export default function Dashboard() {
               </h2>
               <span
                 className="rounded-full px-2.5 py-0.5 font-semibold"
-                style={{ fontSize: 12, background: "#FFEBEE", color: "#D32F2F" }}
+                style={{ fontSize: 12, background: "#FFEBEE", color: "#DC2626" }}
               >
                 {fullBins.length}
               </span>
@@ -154,7 +154,7 @@ export default function Dashboard() {
                   <AlertRow
                     key={b.id}
                     name={b.name}
-                    description={`${b.street}, ${b.barangay} — Reported full`}
+                    description={`${b.street}, ${b.barangay} � Reported full`}
                     timeReported={b.timeReported}
                   />
                 ))
@@ -189,3 +189,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

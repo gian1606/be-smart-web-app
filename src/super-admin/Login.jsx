@@ -1,6 +1,6 @@
 ﻿import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Leaf, Lock, ShieldCheck } from "lucide-react";
+import { Eye, EyeOff, Leaf, Lock } from "lucide-react";
 import { MOCK_CREDENTIALS, PB_CREDENTIALS, CA_CREDENTIALS } from "../mock/data";
 import { MOCK_CREDENTIALS as CLUSTER_CREDENTIALS } from "../cluster-admin/mock/data";
 
@@ -51,13 +51,22 @@ export default function Login() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6"
-      style={{
-        background: "linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #1B5E20 100%)",
-      }}
+      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+      style={{ background: "#111827" }}
     >
+      {/* Background image with blur */}
       <div
-        className="w-full bg-white flex flex-col items-center"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/login-bg.png')",
+          filter: "blur(6px)",
+          transform: "scale(1.05)",
+        }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.45)" }} />
+      <div
+        className="relative z-10 w-full bg-white flex flex-col items-center"
         style={{
           maxWidth: 480,
           borderRadius: 16,
@@ -86,26 +95,14 @@ export default function Login() {
           Analytics &amp; Rewards Technology
         </div>
 
-        {/* Role chip */}
-        <div
-          className="flex items-center gap-2 rounded-full px-4 py-2 mb-6"
-          style={{
-            background: "#E8F5E9",
-            border: "1px solid #A5D6A7",
-            fontSize: 13,
-          }}
-        >
-          <ShieldCheck size={15} color="#2E7D32" />
-          <span className="font-semibold text-primary">Staff Portal</span>
-          <span className="text-text-secondary">· Sign in with your role credentials</span>
-        </div>
+
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4" noValidate>
           {errors.form && (
             <div
               className="rounded-lg px-4 py-3 text-center font-medium"
-              style={{ background: "#FFEBEE", color: "#D32F2F", fontSize: 13 }}
+              style={{ background: "#FFEBEE", color: "#DC2626", fontSize: 13 }}
             >
               {errors.form}
             </div>
@@ -124,14 +121,14 @@ export default function Login() {
               className="w-full rounded-lg px-4 py-2.5 outline-none transition-colors"
               style={{
                 fontSize: 14,
-                border: errors.email ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                border: errors.email ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
                 background: "#F9FAFB",
               }}
               onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
-              onBlur={(e) => (e.target.style.borderColor = errors.email ? "#D32F2F" : "#E5E7EB")}
+              onBlur={(e) => (e.target.style.borderColor = errors.email ? "#DC2626" : "#E5E7EB")}
             />
             {errors.email && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.email}</span>
+              <span style={{ fontSize: 12, color: "#DC2626" }}>{errors.email}</span>
             )}
           </div>
 
@@ -149,11 +146,11 @@ export default function Login() {
                 className="w-full rounded-lg px-4 py-2.5 pr-11 outline-none transition-colors"
                 style={{
                   fontSize: 14,
-                  border: errors.password ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                  border: errors.password ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
                   background: "#F9FAFB",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
-                onBlur={(e) => (e.target.style.borderColor = errors.password ? "#D32F2F" : "#E5E7EB")}
+                onBlur={(e) => (e.target.style.borderColor = errors.password ? "#DC2626" : "#E5E7EB")}
               />
               <button
                 type="button"
@@ -164,7 +161,7 @@ export default function Login() {
               </button>
             </div>
             {errors.password && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.password}</span>
+              <span style={{ fontSize: 12, color: "#DC2626" }}>{errors.password}</span>
             )}
           </div>
 
@@ -179,7 +176,7 @@ export default function Login() {
               opacity: loading ? 0.7 : 1,
             }}
           >
-            {loading ? "Signing in…" : "Sign In to Dashboard"}
+            {loading ? "Signing in..." : "Sign In to Dashboard"}
           </button>
         </form>
 
@@ -195,3 +192,5 @@ export default function Login() {
     </div>
   );
 }
+
+

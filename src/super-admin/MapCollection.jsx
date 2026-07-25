@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { RefreshCw } from "lucide-react";
 import MapView from "../components/ui/MapView";
 import ClusterFilter from "../components/ui/ClusterFilter";
@@ -38,25 +38,12 @@ export default function MapCollection() {
       {/* Cluster filter */}
       <ClusterFilter value={cluster} onChange={setCluster} />
 
-      {/* Full-width map */}
-      <div
-        className="bg-white rounded-xl p-4"
-        style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
-      >
-        <MapView
-          bins={filteredBins}
-          trucks={TRUCKS}
-          mrfs={filteredMRFs}
-          height={520}
-        />
-      </div>
-
       {/* Bin status summary */}
       <div className="grid grid-cols-3 gap-4">
         {[
-          { label: "Full Bins",  count: fullCount,      color: "#D32F2F", bg: "#FFEBEE" },
+          { label: "Full Bins",  count: fullCount,      color: "#DC2626", bg: "#FFEBEE" },
           { label: "Collected",  count: collectedCount, color: "#2E7D32", bg: "#E8F5E9" },
-          { label: "Missed",     count: missedCount,    color: "#F57C00", bg: "#FFF3E0" },
+          { label: "Missed",     count: missedCount,    color: "#D97706", bg: "#FFF3E0" },
         ].map((s) => (
           <div
             key={s.label}
@@ -74,6 +61,20 @@ export default function MapCollection() {
           </div>
         ))}
       </div>
+
+      {/* Full-width map */}
+      <div
+        className="bg-white rounded-xl p-4"
+        style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
+      >
+        <MapView
+          bins={filteredBins}
+          trucks={TRUCKS}
+          mrfs={filteredMRFs}
+          height={520}
+        />
+      </div>
     </div>
   );
 }
+

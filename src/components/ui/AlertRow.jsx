@@ -31,8 +31,9 @@ export default function AlertRow({ name, description, timeReported }) {
       {/* Red dot */}
       <div
         className="flex-shrink-0 rounded-full"
-        style={{ width: 8, height: 8, background: "#D32F2F" }}
+        style={{ width: 8, height: 8, background: "#DC2626" }}
       />
     </div>
   );
 }
+

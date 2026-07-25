@@ -2,7 +2,7 @@
  * ActivityRow — recent activity event item
  */
 const EVENT_COLORS = {
-  bin_reported:         "#D32F2F",
+  bin_reported:         "#DC2626",
   collection_confirmed: "#2E7D32",
   route_sent:           "#1976D2",
   route_received:       "#1976D2",
@@ -38,3 +38,4 @@ export default function ActivityRow({ event, description, timestamp }) {
     </div>
   );
 }
+

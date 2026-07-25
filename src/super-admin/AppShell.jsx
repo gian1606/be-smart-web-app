@@ -1,4 +1,4 @@
-﻿import { Outlet, Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import TopHeader from "./TopHeader";
 
@@ -9,7 +9,7 @@ export default function AppShell() {
   if (!isAuth) return <Navigate to="/login" replace />;
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
+    <div className="min-h-screen" style={{ background: "#F4F6F9" }}>
       <Sidebar />
       <TopHeader />
       <main
@@ -23,3 +23,4 @@ export default function AppShell() {
     </div>
   );
 }
+
