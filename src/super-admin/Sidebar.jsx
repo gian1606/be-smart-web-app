@@ -1,4 +1,4 @@
-﻿import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import {
   LayoutGrid,
   Map,
@@ -24,7 +24,7 @@ export default function Sidebar() {
   return (
     <aside
       className="fixed left-0 top-0 h-screen flex flex-col z-30"
-      style={{ width: 240, background: "#1B5E20" }}
+      style={{ width: 240, background: "#1C2B1E" }}
     >
       {/* Brand */}
       <div className="px-4 pt-6 pb-4 border-b border-white/10">
@@ -96,3 +96,4 @@ export default function Sidebar() {
     </aside>
   );
 }
+

@@ -111,7 +111,7 @@ export default function MRFPersonnel() {
                   <button
                     onClick={() => setDeleteTarget(u)}
                     className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-red-50"
-                    style={{ fontSize: 12, color: "#D32F2F", border: "1px solid #FECACA" }}
+                    style={{ fontSize: 12, color: "#DC2626", border: "1px solid #FECACA" }}
                   >
                     <Trash2 size={13} /> Delete
                   </button>
@@ -140,11 +140,11 @@ export default function MRFPersonnel() {
             <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Assigned MRF Facility</label>
             <select value={form.mrf} onChange={(e) => setForm((p) => ({ ...p, mrf: e.target.value }))}
               className="rounded-lg px-3 py-2.5 outline-none"
-              style={{ fontSize: 14, border: formErrors.mrf ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
+              style={{ fontSize: 14, border: formErrors.mrf ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}>
               <option value="">Select an MRF facility…</option>
               {MRF_LOCATIONS.map((m) => <option key={m.id} value={m.name}>{m.name}</option>)}
             </select>
-            {formErrors.mrf && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.mrf}</span>}
+            {formErrors.mrf && <span style={{ fontSize: 12, color: "#DC2626" }}>{formErrors.mrf}</span>}
           </div>
           <FormField label="Temporary Password" type="password" value={form.tempPassword} onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))} error={formErrors.tempPassword} placeholder="Min. 8 characters" />
         </div>
@@ -158,7 +158,7 @@ export default function MRFPersonnel() {
               style={{ fontSize: 14, border: "1.5px solid #E5E7EB", color: "#6B7280" }}>Cancel</button>
             <button onClick={() => handleDelete(deleteTarget.id)}
               className="flex items-center gap-2 rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
-              style={{ fontSize: 14, background: "#D32F2F" }}>
+              style={{ fontSize: 14, background: "#DC2626" }}>
               <Trash2 size={14} /> Delete
             </button>
           </>
@@ -168,7 +168,7 @@ export default function MRFPersonnel() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start gap-3 rounded-xl px-4 py-3"
               style={{ background: "#FFEBEE", border: "1px solid #FFCDD2" }}>
-              <Trash2 size={16} color="#D32F2F" className="flex-shrink-0 mt-0.5" />
+              <Trash2 size={16} color="#DC2626" className="flex-shrink-0 mt-0.5" />
               <p style={{ fontSize: 13, color: "#B71C1C" }}>This will permanently delete the account. This action cannot be undone.</p>
             </div>
             <div className="rounded-xl overflow-hidden" style={{ border: "1px solid #F3F4F6" }}>
@@ -192,8 +192,9 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
       <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>{label}</label>
       <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }} />
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+

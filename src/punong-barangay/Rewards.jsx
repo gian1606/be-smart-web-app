@@ -128,11 +128,11 @@ export default function Rewards() {
           color="#1976D2"
         />
         <SummaryChip
-          icon={<PackageX size={14} color="#F57C00" />}
+          icon={<PackageX size={14} color="#D97706" />}
           label="Out of Stock"
           value={rewards.filter((r) => r.stock === 0).length}
           bg="#FFF3E0"
-          color="#F57C00"
+          color="#D97706"
         />
       </div>
 
@@ -182,7 +182,7 @@ export default function Rewards() {
               <div>
                 <div
                   className="font-bold"
-                  style={{ fontSize: 20, color: r.stock === 0 ? "#D32F2F" : "#1A1A1A" }}
+                  style={{ fontSize: 20, color: r.stock === 0 ? "#DC2626" : "#1A1A1A" }}
                 >
                   {r.stock}
                 </div>
@@ -205,7 +205,7 @@ export default function Rewards() {
               <button
                 onClick={() => setDeleteModal(r)}
                 className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-red-50 ml-auto"
-                style={{ fontSize: 13, color: "#D32F2F" }}
+                style={{ fontSize: 13, color: "#DC2626" }}
               >
                 <Trash2 size={13} />
                 Delete
@@ -311,7 +311,7 @@ export default function Rewards() {
             <button
               onClick={() => handleDelete(deleteModal.id)}
               className="rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90"
-              style={{ fontSize: 14, background: "#D32F2F" }}
+              style={{ fontSize: 14, background: "#DC2626" }}
             >
               Delete
             </button>
@@ -357,11 +357,12 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
         className="rounded-lg px-3 py-2.5 outline-none"
         style={{
           fontSize: 14,
-          border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+          border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
           background: "#F9FAFB",
         }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+

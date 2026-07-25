@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Plus, Trash2, Info, History, ChevronDown, ChevronRight } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
@@ -6,7 +6,7 @@ import { CLUSTER_ADMINS, CLUSTERS } from "../mock/data";
 
 const EMPTY_FORM = { name: "", email: "", assignedCluster: "", tempPassword: "" };
 
-// ── Mock history of previous cluster admins ───────────────────────────────────
+// -- Mock history of previous cluster admins -----------------------------------
 const INITIAL_HISTORY = [
   { id: "h1", name: "Ricardo Villanueva", clusterLabel: "Solid East",      yearAssigned: 2022, yearEnded: 2023 },
   { id: "h2", name: "Lorna Castillo",     clusterLabel: "Solid North",     yearAssigned: 2022, yearEnded: 2024 },
@@ -26,7 +26,7 @@ export default function UserManagement() {
   const [formErrors, setFormErrors] = useState({});
   const [deleteTarget, setDeleteTarget] = useState(null);
 
-  // ── Year accordion state for history ─────────────────────────────────────
+  // -- Year accordion state for history -------------------------------------
   const historyYears = [...new Set(history.map((h) => h.yearAssigned))].sort((a, b) => b - a);
   const [openYears, setOpenYears] = useState({ [historyYears[0]]: true });
 
@@ -34,7 +34,7 @@ export default function UserManagement() {
     setOpenYears((prev) => ({ ...prev, [year]: !prev[year] }));
   }
 
-  // ── Clusters that already have an active admin ────────────────────────────
+  // -- Clusters that already have an active admin ----------------------------
   const assignedClusterIds = new Set(users.map((u) => u.assignedCluster));
 
   function openAdd() {
@@ -114,7 +114,7 @@ export default function UserManagement() {
         </p>
       </div>
 
-      {/* ── ACTIVE ADMINS TABLE ───────────────────────────────────────────── */}
+      {/* -- ACTIVE ADMINS TABLE --------------------------------------------- */}
       <div className="bg-white rounded-xl overflow-hidden"
         style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
         <table className="w-full border-collapse">
@@ -149,7 +149,7 @@ export default function UserManagement() {
                     <button
                       onClick={() => setDeleteTarget(u)}
                       className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-red-50"
-                      style={{ fontSize: 12, color: "#D32F2F", border: "1px solid #FECACA" }}
+                      style={{ fontSize: 12, color: "#DC2626", border: "1px solid #FECACA" }}
                     >
                       <Trash2 size={13} />
                       Delete
@@ -162,14 +162,14 @@ export default function UserManagement() {
         </table>
       </div>
 
-      {/* ── ADMIN HISTORY (grouped by year, accordion) ────────────────────── */}
+      {/* -- ADMIN HISTORY (grouped by year, accordion) ---------------------- */}
       <div className="bg-white rounded-xl overflow-hidden"
         style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}>
         <div className="flex items-center gap-2 px-5 py-4 border-b" style={{ borderColor: "#E5E7EB" }}>
           <History size={17} color="#6B7280" />
           <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>Admin History</h2>
           <span className="text-text-muted ml-1" style={{ fontSize: 13 }}>
-            — Previous cluster admins grouped by year
+            � Previous cluster admins grouped by year
           </span>
         </div>
 
@@ -179,7 +179,7 @@ export default function UserManagement() {
             const isOpen  = !!openYears[year];
             return (
               <div key={year} style={{ borderBottom: "1px solid #F3F4F6" }}>
-                {/* Year row — clickable */}
+                {/* Year row � clickable */}
                 <button
                   onClick={() => toggleYear(year)}
                   className="w-full flex items-center gap-3 px-5 py-3 hover:bg-gray-50 transition-colors"
@@ -233,7 +233,7 @@ export default function UserManagement() {
         </div>
       </div>
 
-      {/* ── ADD ACCOUNT MODAL ─────────────────────────────────────────────── */}
+      {/* -- ADD ACCOUNT MODAL ----------------------------------------------- */}
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
@@ -261,7 +261,7 @@ export default function UserManagement() {
             onChange={(v) => setForm((p) => ({ ...p, email: v }))}
             error={formErrors.email} placeholder="juan.delacruz@besmart.gov.ph" />
 
-          {/* Cluster selector — only shows clusters without an existing admin */}
+          {/* Cluster selector � only shows clusters without an existing admin */}
           <div className="flex flex-col gap-1">
             <label className="font-medium text-text-primary" style={{ fontSize: 13 }}>Assigned Cluster</label>
             {availableClusters.length === 0 ? (
@@ -276,19 +276,19 @@ export default function UserManagement() {
                 className="rounded-lg px-3 py-2.5 outline-none"
                 style={{
                   fontSize: 14,
-                  border: formErrors.assignedCluster ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                  border: formErrors.assignedCluster ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
                   background: "#F9FAFB",
                   color: "#1A1A1A",
                 }}
               >
-                <option value="">Select a cluster…</option>
+                <option value="">Select a cluster�</option>
                 {availableClusters.map((c) => (
                   <option key={c.id} value={c.id}>{c.label}</option>
                 ))}
               </select>
             )}
             {formErrors.assignedCluster && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.assignedCluster}</span>
+              <span style={{ fontSize: 12, color: "#DC2626" }}>{formErrors.assignedCluster}</span>
             )}
           </div>
 
@@ -298,7 +298,7 @@ export default function UserManagement() {
         </div>
       </Modal>
 
-      {/* ── DELETE CONFIRMATION MODAL ─────────────────────────────────────── */}
+      {/* -- DELETE CONFIRMATION MODAL --------------------------------------- */}
       <Modal
         open={!!deleteTarget}
         onClose={() => setDeleteTarget(null)}
@@ -313,7 +313,7 @@ export default function UserManagement() {
             <button
               onClick={() => handleDelete(deleteTarget.id)}
               className="flex items-center gap-2 rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
-              style={{ fontSize: 14, background: "#D32F2F" }}
+              style={{ fontSize: 14, background: "#DC2626" }}
             >
               <Trash2 size={14} />
               Delete
@@ -325,7 +325,7 @@ export default function UserManagement() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start gap-3 rounded-xl px-4 py-3"
               style={{ background: "#FFEBEE", border: "1px solid #FFCDD2" }}>
-              <Trash2 size={16} color="#D32F2F" className="flex-shrink-0 mt-0.5" />
+              <Trash2 size={16} color="#DC2626" className="flex-shrink-0 mt-0.5" />
               <p style={{ fontSize: 13, color: "#B71C1C" }}>
                 This will permanently delete the account. This action cannot be undone.
               </p>
@@ -361,9 +361,11 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+
+

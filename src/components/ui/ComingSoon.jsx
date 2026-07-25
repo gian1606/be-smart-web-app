@@ -30,3 +30,4 @@ export default function ComingSoon({ title, description }) {
     </div>
   );
 }
+

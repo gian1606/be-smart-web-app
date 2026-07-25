@@ -7,7 +7,7 @@ export default function CAAppShell() {
   if (!isAuth) return <Navigate to="/ca/login" replace />;
 
   return (
-    <div className="min-h-screen" style={{ background: "#F5F7F5" }}>
+    <div className="min-h-screen" style={{ background: "#F4F6F9" }}>
       <Sidebar />
       <TopHeader />
       <main
@@ -21,3 +21,4 @@ export default function CAAppShell() {
     </div>
   );
 }
+

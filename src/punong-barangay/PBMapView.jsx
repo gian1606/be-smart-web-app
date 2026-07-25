@@ -40,9 +40,9 @@ export default function PBMapView() {
       <div className="grid grid-cols-4 gap-3">
         {[
           { label: "Total Bins",  value: bins.length,     bg: "#F9FAFB", color: "#1A1A1A", border: "#E5E7EB" },
-          { label: "Full",        value: fullCount,       bg: "#FFEBEE", color: "#D32F2F", border: "#FFCDD2" },
+          { label: "Full",        value: fullCount,       bg: "#FFEBEE", color: "#DC2626", border: "#FFCDD2" },
           { label: "Collected",   value: collectedCount,  bg: "#E8F5E9", color: "#2E7D32", border: "#A5D6A7" },
-          { label: "Missed",      value: missedCount,     bg: "#FFF3E0", color: "#F57C00", border: "#FFCC80" },
+          { label: "Missed",      value: missedCount,     bg: "#FFF3E0", color: "#D97706", border: "#FFCC80" },
         ].map((s) => (
           <div
             key={s.label}
@@ -136,10 +136,10 @@ export default function PBMapView() {
 }
 
 const STATUS_STYLES = {
-  full:      { bg: "#FFEBEE", color: "#D32F2F", label: "Full" },
+  full:      { bg: "#FFEBEE", color: "#DC2626", label: "Full" },
   ok:        { bg: "#E8F5E9", color: "#2E7D32", label: "OK" },
   collected: { bg: "#E8F5E9", color: "#2E7D32", label: "Collected" },
-  missed:    { bg: "#FFF3E0", color: "#F57C00", label: "Missed" },
+  missed:    { bg: "#FFF3E0", color: "#D97706", label: "Missed" },
 };
 
 function StatusPill({ status }) {
@@ -153,3 +153,4 @@ function StatusPill({ status }) {
     </span>
   );
 }
+

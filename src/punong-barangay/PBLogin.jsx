@@ -42,13 +42,22 @@ export default function PBLogin() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center p-6"
-      style={{
-        background: "linear-gradient(135deg, #1B5E20 0%, #2E7D32 60%, #1B5E20 100%)",
-      }}
+      className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden"
+      style={{ background: "#111827" }}
     >
+      {/* Background image with blur */}
       <div
-        className="w-full bg-white flex flex-col items-center"
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/login-bg.png')",
+          filter: "blur(6px)",
+          transform: "scale(1.05)",
+        }}
+      />
+      {/* Dark overlay */}
+      <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.45)" }} />
+      <div
+        className="relative z-10 w-full bg-white flex flex-col items-center"
         style={{
           maxWidth: 480,
           borderRadius: 16,
@@ -96,7 +105,7 @@ export default function PBLogin() {
           {errors.form && (
             <div
               className="rounded-lg px-4 py-3 text-center font-medium"
-              style={{ background: "#FFEBEE", color: "#D32F2F", fontSize: 13 }}
+              style={{ background: "#FFEBEE", color: "#DC2626", fontSize: 13 }}
             >
               {errors.form}
             </div>
@@ -118,16 +127,16 @@ export default function PBLogin() {
               className="w-full rounded-lg px-4 py-2.5 outline-none transition-colors"
               style={{
                 fontSize: 14,
-                border: errors.email ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                border: errors.email ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
                 background: "#F9FAFB",
               }}
               onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
               onBlur={(e) =>
-                (e.target.style.borderColor = errors.email ? "#D32F2F" : "#E5E7EB")
+                (e.target.style.borderColor = errors.email ? "#DC2626" : "#E5E7EB")
               }
             />
             {errors.email && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.email}</span>
+              <span style={{ fontSize: 12, color: "#DC2626" }}>{errors.email}</span>
             )}
           </div>
 
@@ -148,12 +157,12 @@ export default function PBLogin() {
                 className="w-full rounded-lg px-4 py-2.5 pr-11 outline-none transition-colors"
                 style={{
                   fontSize: 14,
-                  border: errors.password ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB",
+                  border: errors.password ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB",
                   background: "#F9FAFB",
                 }}
                 onFocus={(e) => (e.target.style.borderColor = "#2E7D32")}
                 onBlur={(e) =>
-                  (e.target.style.borderColor = errors.password ? "#D32F2F" : "#E5E7EB")
+                  (e.target.style.borderColor = errors.password ? "#DC2626" : "#E5E7EB")
                 }
               />
               <button
@@ -165,7 +174,7 @@ export default function PBLogin() {
               </button>
             </div>
             {errors.password && (
-              <span style={{ fontSize: 12, color: "#D32F2F" }}>{errors.password}</span>
+              <span style={{ fontSize: 12, color: "#DC2626" }}>{errors.password}</span>
             )}
           </div>
 
@@ -196,3 +205,4 @@ export default function PBLogin() {
     </div>
   );
 }
+

@@ -97,9 +97,9 @@ export const LEADERBOARD = [
 
 // ── Status Color Map ───────────────────────────────────────────────────────────
 export const STATUS_COLORS = {
-  full:        "#D32F2F",
+  full:        "#DC2626",
   collected:   "#2E7D32",
-  missed:      "#F57C00",
+  missed:      "#D97706",
   ok:          "#2E7D32",
   on_route:    "#1976D2",
   active:      "#2E7D32",
@@ -114,3 +114,4 @@ export const MOCK_CREDENTIALS = {
   email: "cluster1@besmart.gov.ph",
   password: "cluster123",
 };
+

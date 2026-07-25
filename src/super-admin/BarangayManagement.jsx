@@ -22,9 +22,9 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
@@ -128,7 +128,7 @@ export default function BarangayManagement() {
         {[
           { label: "Total",    value: barangays.length, bg: "#F3F4F6", color: "#374151" },
           { label: "Active",   value: activeCount,      bg: "#E8F5E9", color: "#2E7D32" },
-          { label: "Inactive", value: inactiveCount,    bg: "#FFEBEE", color: "#D32F2F" },
+          { label: "Inactive", value: inactiveCount,    bg: "#FFEBEE", color: "#DC2626" },
         ].map((s) => (
           <div key={s.label} className="flex items-center gap-2 rounded-lg px-3 py-2"
             style={{ background: s.bg, border: "1px solid #E5E7EB" }}>
@@ -179,7 +179,7 @@ export default function BarangayManagement() {
           <button
             onClick={() => { setFilterCluster("all"); setFilterStatus("all"); setSearch(""); }}
             className="rounded-lg px-3 py-2 font-medium hover:bg-red-50 transition-colors"
-            style={{ fontSize: 13, border: "1.5px solid #FECACA", color: "#D32F2F", background: "#FFF5F5" }}
+            style={{ fontSize: 13, border: "1.5px solid #FECACA", color: "#DC2626", background: "#FFF5F5" }}
           >
             ✕ Clear
           </button>
@@ -228,7 +228,7 @@ export default function BarangayManagement() {
                     <button
                       onClick={() => setDeleteTarget(b)}
                       className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-red-50"
-                      style={{ fontSize: 12, color: "#D32F2F", border: "1px solid #FECACA" }}
+                      style={{ fontSize: 12, color: "#DC2626", border: "1px solid #FECACA" }}
                       title="Delete barangay"
                     >
                       <Trash2 size={13} />
@@ -278,12 +278,12 @@ export default function BarangayManagement() {
               value={form.cluster}
               onChange={(e) => setForm((p) => ({ ...p, cluster: e.target.value }))}
               className="rounded-lg px-3 py-2.5 outline-none"
-              style={{ fontSize: 14, border: formErrors.cluster ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}
+              style={{ fontSize: 14, border: formErrors.cluster ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB", color: "#1A1A1A" }}
             >
               <option value="">Select a cluster…</option>
               {CLUSTERS.map((c) => <option key={c.id} value={c.id}>{c.label}</option>)}
             </select>
-            {formErrors.cluster && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.cluster}</span>}
+            {formErrors.cluster && <span style={{ fontSize: 12, color: "#DC2626" }}>{formErrors.cluster}</span>}
           </div>
           <FormField label="Temporary Password" type="password" value={form.tempPassword}
             onChange={(v) => setForm((p) => ({ ...p, tempPassword: v }))}
@@ -306,7 +306,7 @@ export default function BarangayManagement() {
             <button
               onClick={() => handleDelete(deleteTarget.id)}
               className="flex items-center gap-2 rounded-lg px-5 py-2 font-semibold text-white hover:opacity-90 transition-opacity"
-              style={{ fontSize: 14, background: "#D32F2F" }}
+              style={{ fontSize: 14, background: "#DC2626" }}
             >
               <Trash2 size={14} />
               Delete
@@ -318,7 +318,7 @@ export default function BarangayManagement() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start gap-3 rounded-xl px-4 py-3"
               style={{ background: "#FFEBEE", border: "1px solid #FFCDD2" }}>
-              <Trash2 size={16} color="#D32F2F" className="flex-shrink-0 mt-0.5" />
+              <Trash2 size={16} color="#DC2626" className="flex-shrink-0 mt-0.5" />
               <p style={{ fontSize: 13, color: "#B71C1C" }}>
                 This will permanently delete the barangay account. This action cannot be undone.
               </p>
@@ -344,3 +344,4 @@ export default function BarangayManagement() {
     </div>
   );
 }
+

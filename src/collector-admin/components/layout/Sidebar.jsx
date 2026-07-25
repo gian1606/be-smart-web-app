@@ -12,7 +12,7 @@ const NAV_ITEMS = [
 
 export default function CASidebar() {
   return (
-    <aside className="fixed left-0 top-0 h-screen flex flex-col z-30" style={{ width: 240, background: "#1B5E20" }}>
+    <aside className="fixed left-0 top-0 h-screen flex flex-col z-30" style={{ width: 240, background: "#1C2B1E" }}>
       <div className="px-4 pt-6 pb-4 border-b border-white/10">
         <div className="flex items-center gap-3 mb-3">
           <div className="flex items-center justify-center rounded-lg flex-shrink-0" style={{ width: 36, height: 36, background: "#2E7D32" }}>
@@ -45,3 +45,4 @@ export default function CASidebar() {
     </aside>
   );
 }
+

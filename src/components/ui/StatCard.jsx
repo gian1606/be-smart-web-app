@@ -14,7 +14,7 @@ export default function StatCard({ icon, value, label, subLabel, subLabelColor =
       <div className="flex items-center justify-between">
         <div
           className="flex items-center justify-center rounded-lg"
-          style={{ width: 38, height: 38, background: "#F5F7F5" }}
+          style={{ width: 38, height: 38, background: "#F4F6F9" }}
         >
           {icon}
         </div>
@@ -34,3 +34,4 @@ export default function StatCard({ icon, value, label, subLabel, subLabelColor =
     </div>
   );
 }
+

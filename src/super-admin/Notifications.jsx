@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 import { Plus, Bell, Calendar, CheckCircle, FileText, Megaphone, AlertTriangle } from "lucide-react";
 import StatusBadge from "../components/ui/StatusBadge";
 import Modal from "../components/ui/Modal";
@@ -6,7 +6,7 @@ import { NOTIFICATIONS, CLUSTERS } from "../mock/data";
 
 const TYPE_CONFIG = {
   task:         { icon: Bell,        color: "#1976D2", bg: "#E3F2FD" },
-  schedule:     { icon: Calendar,    color: "#F57C00", bg: "#FFF3E0" },
+  schedule:     { icon: Calendar,    color: "#D97706", bg: "#FFF3E0" },
   complete:     { icon: CheckCircle, color: "#2E7D32", bg: "#E8F5E9" },
   report:       { icon: FileText,    color: "#6B7280", bg: "#F3F4F6" },
   announcement: { icon: Megaphone,   color: "#2E7D32", bg: "#E8F5E9" },
@@ -133,7 +133,7 @@ export default function Notifications() {
                     {n.priority === "urgent" && (
                       <span
                         className="flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold"
-                        style={{ fontSize: 11, background: "#FFEBEE", color: "#D32F2F" }}
+                        style={{ fontSize: 11, background: "#FFEBEE", color: "#DC2626" }}
                       >
                         <AlertTriangle size={10} />
                         Urgent
@@ -210,7 +210,7 @@ export default function Notifications() {
               <Megaphone size={16} color="#2E7D32" />
               <span className="font-bold text-text-primary" style={{ fontSize: 15 }}>{form.title}</span>
               {form.priority === "urgent" && (
-                <span className="rounded-full px-2 py-0.5 font-semibold" style={{ fontSize: 11, background: "#FFEBEE", color: "#D32F2F" }}>
+                <span className="rounded-full px-2 py-0.5 font-semibold" style={{ fontSize: 11, background: "#FFEBEE", color: "#DC2626" }}>
                   Urgent
                 </span>
               )}
@@ -221,7 +221,7 @@ export default function Notifications() {
                 Target: <strong>{getTargetLabel(form.target)}</strong>
               </span>
               <span className="text-text-muted" style={{ fontSize: 12 }}>
-                Priority: <strong style={{ color: form.priority === "urgent" ? "#D32F2F" : "#6B7280" }}>{form.priority}</strong>
+                Priority: <strong style={{ color: form.priority === "urgent" ? "#DC2626" : "#6B7280" }}>{form.priority}</strong>
               </span>
             </div>
           </div>
@@ -239,12 +239,12 @@ export default function Notifications() {
               <textarea
                 value={form.body}
                 onChange={(e) => setForm((p) => ({ ...p, body: e.target.value }))}
-                placeholder="Write your announcement here…"
+                placeholder="Write your announcement here�"
                 rows={4}
                 className="rounded-lg px-3 py-2.5 outline-none resize-none"
-                style={{ fontSize: 14, border: formErrors.body ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+                style={{ fontSize: 14, border: formErrors.body ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
               />
-              {formErrors.body && <span style={{ fontSize: 12, color: "#D32F2F" }}>{formErrors.body}</span>}
+              {formErrors.body && <span style={{ fontSize: 12, color: "#DC2626" }}>{formErrors.body}</span>}
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-1">
@@ -289,9 +289,10 @@ function FormField({ label, type = "text", value, onChange, error, placeholder }
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
         className="rounded-lg px-3 py-2.5 outline-none"
-        style={{ fontSize: 14, border: error ? "1.5px solid #D32F2F" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
+        style={{ fontSize: 14, border: error ? "1.5px solid #DC2626" : "1.5px solid #E5E7EB", background: "#F9FAFB" }}
       />
-      {error && <span style={{ fontSize: 12, color: "#D32F2F" }}>{error}</span>}
+      {error && <span style={{ fontSize: 12, color: "#DC2626" }}>{error}</span>}
     </div>
   );
 }
+

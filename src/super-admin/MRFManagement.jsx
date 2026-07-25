@@ -1,4 +1,4 @@
-﻿import ComingSoon from "../components/ui/ComingSoon";
+import ComingSoon from "../components/ui/ComingSoon";
 
 export default function MRFManagement() {
   return (
@@ -26,3 +26,4 @@ export default function MRFManagement() {
     </div>
   );
 }
+

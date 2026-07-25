@@ -101,11 +101,11 @@ export default function Dashboard() {
           subLabel="In this cluster"
         />
         <StatCard
-          icon={<Trash2 size={18} color="#D32F2F" />}
+          icon={<Trash2 size={18} color="#DC2626" />}
           value={stats.fullBins}
           label="Full Bins"
           subLabel={stats.fullBins > 3 ? "2 critical" : "Needs collection"}
-          subLabelColor="#D32F2F"
+          subLabelColor="#DC2626"
         />
         <StatCard
           icon={<CheckCircle size={18} color="#2E7D32" />}
@@ -139,7 +139,7 @@ export default function Dashboard() {
         <div className="rounded-full overflow-hidden" style={{ height: 10, background: "#E5E7EB" }}>
           <div
             className="h-full rounded-full transition-all"
-            style={{ width: `${collectionRate}%`, background: collectionRate >= 75 ? "#2E7D32" : collectionRate >= 50 ? "#F57C00" : "#D32F2F" }}
+            style={{ width: `${collectionRate}%`, background: collectionRate >= 75 ? "#2E7D32" : collectionRate >= 50 ? "#D97706" : "#DC2626" }}
           />
         </div>
       </div>
@@ -200,7 +200,7 @@ export default function Dashboard() {
           >
             <div className="flex items-center justify-between mb-1">
               <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>Full Bin Alerts</h2>
-              <span className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 12, background: "#FFEBEE", color: "#D32F2F" }}>
+              <span className="rounded-full px-2.5 py-0.5 font-semibold" style={{ fontSize: 12, background: "#FFEBEE", color: "#DC2626" }}>
                 {fullBins.length}
               </span>
             </div>
@@ -246,7 +246,7 @@ export default function Dashboard() {
         style={{ border: "1px solid #E5E7EB", boxShadow: "0 2px 8px rgba(0,0,0,0.05)" }}
       >
         <div className="flex items-center gap-2 px-5 py-4 border-b" style={{ borderColor: "#E5E7EB" }}>
-          <Trophy size={17} color="#F57C00" />
+          <Trophy size={17} color="#D97706" />
           <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>
             Barangay Collection Leaderboard
           </h2>
@@ -270,7 +270,7 @@ export default function Dashboard() {
                   borderBottom: "1px solid #F3F4F6",
                 }}
               >
-                <td className="px-5 py-3 font-bold" style={{ fontSize: 14, color: i === 0 ? "#F57C00" : "#6B7280" }}>
+                <td className="px-5 py-3 font-bold" style={{ fontSize: 14, color: i === 0 ? "#D97706" : "#6B7280" }}>
                   {i === 0 ? "🥇" : i === 1 ? "🥈" : i === 2 ? "🥉" : row.rank}
                 </td>
                 <td className="px-5 py-3 font-semibold text-text-primary" style={{ fontSize: 13 }}>{row.barangay}</td>
@@ -279,9 +279,9 @@ export default function Dashboard() {
                 <td className="px-5 py-3">
                   <div className="flex items-center gap-2">
                     <div className="flex-1 rounded-full overflow-hidden" style={{ height: 6, background: "#E5E7EB", maxWidth: 80 }}>
-                      <div className="h-full rounded-full" style={{ width: `${row.rate}%`, background: row.rate >= 80 ? "#2E7D32" : row.rate >= 60 ? "#F57C00" : "#D32F2F" }} />
+                      <div className="h-full rounded-full" style={{ width: `${row.rate}%`, background: row.rate >= 80 ? "#2E7D32" : row.rate >= 60 ? "#D97706" : "#DC2626" }} />
                     </div>
-                    <span className="font-semibold" style={{ fontSize: 13, color: row.rate >= 80 ? "#2E7D32" : row.rate >= 60 ? "#F57C00" : "#D32F2F" }}>
+                    <span className="font-semibold" style={{ fontSize: 13, color: row.rate >= 80 ? "#2E7D32" : row.rate >= 60 ? "#D97706" : "#DC2626" }}>
                       {row.rate}%
                     </span>
                   </div>
@@ -294,3 +294,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

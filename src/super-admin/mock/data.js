@@ -220,12 +220,12 @@ export const RECENT_ACTIVITY = [
 
 // ── Status Color Map (must match mobile app exactly) ──────────────────────────
 export const STATUS_COLORS = {
-  full:        "#D32F2F",
+  full:        "#DC2626",
   collected:   "#2E7D32",
-  missed:      "#F57C00",
+  missed:      "#D97706",
   ok:          "#2E7D32",
   available:   "#2E7D32",
-  pending:     "#F57C00",
+  pending:     "#D97706",
   completed:   "#2E7D32",
   delivered:   "#2E7D32",
   in_progress: "#1976D2",
@@ -239,3 +239,4 @@ export const MOCK_CREDENTIALS = {
   email: "superadmin@besmart.gov.ph",
   password: "admin123",
 };
+

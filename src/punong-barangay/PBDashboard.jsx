@@ -104,11 +104,11 @@ export default function PBDashboard() {
           subLabel={`Brgy. ${PB_BARANGAY}`}
         />
         <StatCard
-          icon={<Trash2 size={18} color="#D32F2F" />}
+          icon={<Trash2 size={18} color="#DC2626" />}
           value={stats.fullBins}
           label="Full Bins"
           subLabel={stats.fullBins > 0 ? "Needs collection" : "All clear"}
-          subLabelColor={stats.fullBins > 0 ? "#D32F2F" : "#2E7D32"}
+          subLabelColor={stats.fullBins > 0 ? "#DC2626" : "#2E7D32"}
         />
         <StatCard
           icon={<CheckCircle size={18} color="#2E7D32" />}
@@ -193,10 +193,10 @@ export default function PBDashboard() {
                 className="rounded-lg px-3 py-2 flex flex-col"
                 style={{ background: "#FFEBEE", minWidth: 100 }}
               >
-                <span className="font-bold" style={{ fontSize: 22, color: "#D32F2F" }}>
+                <span className="font-bold" style={{ fontSize: 22, color: "#DC2626" }}>
                   {WEEKLY_DATA.reduce((s, d) => s + d.full, 0)}
                 </span>
-                <span style={{ fontSize: 11, color: "#D32F2F" }}>Full Reports</span>
+                <span style={{ fontSize: 11, color: "#DC2626" }}>Full Reports</span>
               </div>
               <div
                 className="rounded-lg px-3 py-2 flex flex-col"
@@ -255,14 +255,14 @@ export default function PBDashboard() {
           >
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
-                <AlertTriangle size={16} color="#D32F2F" />
+                <AlertTriangle size={16} color="#DC2626" />
                 <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>
                   Full Bin Alerts
                 </h2>
               </div>
               <span
                 className="rounded-full px-2.5 py-0.5 font-semibold"
-                style={{ fontSize: 12, background: "#FFEBEE", color: "#D32F2F" }}
+                style={{ fontSize: 12, background: "#FFEBEE", color: "#DC2626" }}
               >
                 {fullBins.length}
               </span>
@@ -293,7 +293,7 @@ export default function PBDashboard() {
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Trophy size={16} color="#F57C00" />
+                <Trophy size={16} color="#D97706" />
                 <h2 className="font-semibold text-text-primary" style={{ fontSize: 17 }}>
                   Top Households
                 </h2>
@@ -384,3 +384,4 @@ export default function PBDashboard() {
     </div>
   );
 }
+

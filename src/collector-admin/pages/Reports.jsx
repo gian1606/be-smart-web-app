@@ -23,8 +23,8 @@ const DAILY_TREND = [
 ];
 
 const MISSED_REASONS = [
-  { reason: "Bin not accessible", count: 7, color: "#D32F2F" },
-  { reason: "Route not dispatched", count: 4, color: "#F57C00" },
+  { reason: "Bin not accessible", count: 7, color: "#DC2626" },
+  { reason: "Route not dispatched", count: 4, color: "#D97706" },
   { reason: "Truck breakdown", count: 3, color: "#1976D2" },
   { reason: "Weather conditions", count: 2, color: "#9C27B0" },
   { reason: "Other", count: 1, color: "#9CA3AF" },
@@ -36,7 +36,7 @@ function GrowthBadge({ value }) {
   const Icon = up ? TrendingUp : TrendingDown;
   return (
     <span className="flex items-center gap-1 rounded-full px-2 py-0.5 font-semibold"
-      style={{ fontSize: 11, background: up ? "#E8F5E9" : "#FFEBEE", color: up ? "#2E7D32" : "#D32F2F" }}>
+      style={{ fontSize: 11, background: up ? "#E8F5E9" : "#FFEBEE", color: up ? "#2E7D32" : "#DC2626" }}>
       <Icon size={10} />{Math.abs(value)}%
     </span>
   );
@@ -139,8 +139,8 @@ export default function CAReports() {
       {/* KPI Cards */}
       <div className="grid grid-cols-4 gap-4">
         <KpiCard icon={<CheckCircle size={18} color="#2E7D32" />} label="Bins Collected" value={collectedBins} growth={12} sub="this period" bg="#E8F5E9" />
-        <KpiCard icon={<Trash2 size={18} color="#D32F2F" />} label="Full Bins" value={fullBins} growth={-5} sub="awaiting collection" bg="#FFEBEE" />
-        <KpiCard icon={<AlertTriangle size={18} color="#F57C00" />} label="Missed Collections" value={missedBins} growth={-8} sub="lower is better" bg="#FFF3E0" />
+        <KpiCard icon={<Trash2 size={18} color="#DC2626" />} label="Full Bins" value={fullBins} growth={-5} sub="awaiting collection" bg="#FFEBEE" />
+        <KpiCard icon={<AlertTriangle size={18} color="#D97706" />} label="Missed Collections" value={missedBins} growth={-8} sub="lower is better" bg="#FFF3E0" />
         <KpiCard icon={<Truck size={18} color="#1976D2" />} label="Active Units" value={CA_DASHBOARD_STATS.activeUnits} growth={0} sub="collector units" bg="#E3F2FD" />
       </div>
 
@@ -155,7 +155,7 @@ export default function CAReports() {
             <svg viewBox="0 0 36 36" style={{ width: 130, height: 130, transform: "rotate(-90deg)" }}>
               <circle cx="18" cy="18" r="15.9" fill="none" stroke="#F3F4F6" strokeWidth="3.2" />
               <circle cx="18" cy="18" r="15.9" fill="none"
-                stroke={collectionRate >= 80 ? "#2E7D32" : collectionRate >= 60 ? "#F57C00" : "#D32F2F"}
+                stroke={collectionRate >= 80 ? "#2E7D32" : collectionRate >= 60 ? "#D97706" : "#DC2626"}
                 strokeWidth="3.2"
                 strokeDasharray={`${collectionRate} ${100 - collectionRate}`}
                 strokeLinecap="round" />
@@ -168,8 +168,8 @@ export default function CAReports() {
           <div className="w-full flex flex-col gap-1.5">
             {[
               { label: "Collected", value: collectedBins, color: "#2E7D32" },
-              { label: "Full",      value: fullBins,      color: "#D32F2F" },
-              { label: "Missed",    value: missedBins,    color: "#F57C00" },
+              { label: "Full",      value: fullBins,      color: "#DC2626" },
+              { label: "Missed",    value: missedBins,    color: "#D97706" },
             ].map((s) => (
               <div key={s.label} className="flex items-center justify-between">
                 <div className="flex items-center gap-1.5">
@@ -209,7 +209,7 @@ export default function CAReports() {
               {MONTHLY_COLLECTIONS.map((d, i) => (
                 <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
                   <span className="rounded-full font-semibold text-white flex items-center justify-center"
-                    style={{ width: 18, height: 18, fontSize: 9, background: "#D32F2F" }}>
+                    style={{ width: 18, height: 18, fontSize: 9, background: "#DC2626" }}>
                     {d.missed}
                   </span>
                   <span className="text-text-muted" style={{ fontSize: 9 }}>missed</span>
@@ -260,7 +260,7 @@ export default function CAReports() {
           </div>
           <div className="rounded-lg px-3 py-2 mt-1" style={{ background: "#F9FAFB", border: "1px solid #F3F4F6" }}>
             <p className="text-text-muted" style={{ fontSize: 11 }}>
-              Total missed: <strong style={{ color: "#D32F2F" }}>{totalMissed}</strong> this period
+              Total missed: <strong style={{ color: "#DC2626" }}>{totalMissed}</strong> this period
             </p>
           </div>
         </Section>
@@ -287,15 +287,15 @@ export default function CAReports() {
                   <td className="px-4 py-3 text-text-primary" style={{ fontSize: 13 }}>{u.binsCollected}</td>
                   <td className="px-4 py-3" style={{ fontSize: 13 }}>
                     <span className="rounded-full px-2 py-0.5 font-semibold"
-                      style={{ fontSize: 11, background: "#FFEBEE", color: "#D32F2F" }}>{u.missedBins}</span>
+                      style={{ fontSize: 11, background: "#FFEBEE", color: "#DC2626" }}>{u.missedBins}</span>
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <div className="flex-1 rounded-full overflow-hidden" style={{ height: 6, background: "#F3F4F6", maxWidth: 80 }}>
                         <div className="h-full rounded-full"
-                          style={{ width: `${u.rate}%`, background: u.rate >= 90 ? "#2E7D32" : u.rate >= 80 ? "#F57C00" : "#D32F2F" }} />
+                          style={{ width: `${u.rate}%`, background: u.rate >= 90 ? "#2E7D32" : u.rate >= 80 ? "#D97706" : "#DC2626" }} />
                       </div>
-                      <span className="font-semibold" style={{ fontSize: 13, color: u.rate >= 90 ? "#2E7D32" : u.rate >= 80 ? "#F57C00" : "#D32F2F" }}>
+                      <span className="font-semibold" style={{ fontSize: 13, color: u.rate >= 90 ? "#2E7D32" : u.rate >= 80 ? "#D97706" : "#DC2626" }}>
                         {u.rate}%
                       </span>
                     </div>
@@ -323,3 +323,4 @@ export default function CAReports() {
     </div>
   );
 }
+
