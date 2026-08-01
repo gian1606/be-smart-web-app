@@ -47,7 +47,6 @@ import BinQRCodes      from "./punong-barangay/BinQRCodes";
 import PBSettings      from "./punong-barangay/PBSettings";
 
 // ── Shared ─────────────────────────────────────────────────────────────────────
-import ComingSoon from "./components/ui/ComingSoon";
 
 export default function App() {
   return (

@@ -1,5 +1,5 @@
 import SettingsPage from "../../components/ui/Settings";
-import { CLUSTER_INFO, MOCK_CREDENTIALS } from "../mock/data";
+import { CLUSTER_INFO } from "../mock/data";
 
 export default function ClusterAdminSettings() {
   return (
