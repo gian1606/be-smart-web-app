@@ -4,25 +4,27 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./super-admin/Login";
 
 // ── Super Admin ────────────────────────────────────────────────────────────────
-import SuperAdminShell      from "./super-admin/AppShell";
-import SADashboard          from "./super-admin/Dashboard";
-import SAMapCollection      from "./super-admin/MapCollection";
-import SARouteManagement    from "./super-admin/RouteManagement";
-import SAUserManagement     from "./super-admin/UserManagement";
-import SABarangayManagement from "./super-admin/BarangayManagement";
-import SAReports            from "./super-admin/Reports";
-import SAMRFManagement      from "./super-admin/MRFManagement";
-import SANotifications      from "./super-admin/Notifications";
-import SALeaderboard        from "./super-admin/Leaderboard";
+import SuperAdminShell          from "./super-admin/AppShell";
+import SADashboard              from "./super-admin/Dashboard";
+import SAMapCollection          from "./super-admin/MapCollection";
+import SARouteManagement        from "./super-admin/RouteManagement";
+import SAUserManagement         from "./super-admin/UserManagement";
+import SAOrganizationManagement from "./super-admin/OrganizationManagement";
+import SAReports                from "./super-admin/Reports";
+import SAMRFManagement          from "./super-admin/MRFManagement";
+import SANotifications          from "./super-admin/Notifications";
+import SALeaderboard            from "./super-admin/Leaderboard";
+import SASettings               from "./super-admin/Settings";
 
 // ── Cluster Admin ──────────────────────────────────────────────────────────────
-import ClusterAdminShell from "./cluster-admin/layout/AppShell";
-import CADashboard       from "./cluster-admin/pages/Dashboard";
-import CAMapCollection   from "./cluster-admin/pages/MapCollection";
-import CAUserManagement  from "./cluster-admin/pages/UserManagement";
-import CAReports         from "./cluster-admin/pages/Reports";
-import CANotifications   from "./cluster-admin/pages/Notifications";
-import CALeaderboard     from "./cluster-admin/pages/Leaderboard";
+import ClusterAdminShell  from "./cluster-admin/layout/AppShell";
+import CADashboard        from "./cluster-admin/pages/Dashboard";
+import CAMapCollection    from "./cluster-admin/pages/MapCollection";
+import CAUserManagement   from "./cluster-admin/pages/UserManagement";
+import CAReports          from "./cluster-admin/pages/Reports";
+import CANotifications    from "./cluster-admin/pages/Notifications";
+import CALeaderboard      from "./cluster-admin/pages/Leaderboard";
+import CASettings         from "./cluster-admin/pages/Settings";
 
 // ── Collector Admin ────────────────────────────────────────────────────────────
 import CollectorAdminShell    from "./collector-admin/components/layout/AppShell";
@@ -34,14 +36,15 @@ import CollectorUserMgmt      from "./collector-admin/pages/UserManagement";
 import CollectorSettings      from "./collector-admin/pages/Settings";
 
 // ── Punong Barangay ────────────────────────────────────────────────────────────
-import PBAppShell       from "./punong-barangay/PBAppShell";
-import PBDashboard      from "./punong-barangay/PBDashboard";
-import PBMapView        from "./punong-barangay/PBMapView";
-import PBNotifications  from "./punong-barangay/PBNotifications";
-import Rewards          from "./punong-barangay/Rewards";
-import Leaderboard      from "./punong-barangay/Leaderboard";
-import MRFPersonnel     from "./punong-barangay/MRFPersonnel";
-import BinQRCodes       from "./punong-barangay/BinQRCodes";
+import PBAppShell      from "./punong-barangay/PBAppShell";
+import PBDashboard     from "./punong-barangay/PBDashboard";
+import PBMapView       from "./punong-barangay/PBMapView";
+import PBNotifications from "./punong-barangay/PBNotifications";
+import Rewards         from "./punong-barangay/Rewards";
+import Leaderboard     from "./punong-barangay/Leaderboard";
+import MRFPersonnel    from "./punong-barangay/MRFPersonnel";
+import BinQRCodes      from "./punong-barangay/BinQRCodes";
+import PBSettings      from "./punong-barangay/PBSettings";
 
 // ── Shared ─────────────────────────────────────────────────────────────────────
 import ComingSoon from "./components/ui/ComingSoon";
@@ -62,22 +65,12 @@ export default function App() {
           <Route path="map"           element={<SAMapCollection />} />
           <Route path="routes"        element={<SARouteManagement />} />
           <Route path="users"         element={<SAUserManagement />} />
-          <Route path="barangays"     element={<SABarangayManagement />} />
+          <Route path="organizations" element={<SAOrganizationManagement />} />
           <Route path="reports"       element={<SAReports />} />
           <Route path="mrf"           element={<SAMRFManagement />} />
           <Route path="notifications" element={<SANotifications />} />
           <Route path="leaderboard"   element={<SALeaderboard />} />
-          <Route
-            path="settings"
-            element={
-              <div className="flex flex-col gap-6">
-                <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Settings</h1>
-                <div className="bg-white rounded-xl" style={{ border: "1px solid #E5E7EB" }}>
-                  <ComingSoon title="Settings" description="System configuration and preferences are coming in a future update." />
-                </div>
-              </div>
-            }
-          />
+          <Route path="settings"      element={<SASettings />} />
         </Route>
 
         {/* ── Cluster Admin ─────────────────────────────────────────────────── */}
@@ -89,17 +82,7 @@ export default function App() {
           <Route path="reports"       element={<CAReports />} />
           <Route path="notifications" element={<CANotifications />} />
           <Route path="leaderboard"   element={<CALeaderboard />} />
-          <Route
-            path="settings"
-            element={
-              <div className="flex flex-col gap-6">
-                <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Settings</h1>
-                <div className="bg-white rounded-xl" style={{ border: "1px solid #E5E7EB" }}>
-                  <ComingSoon title="Settings" description="System configuration and preferences are coming in a future update." />
-                </div>
-              </div>
-            }
-          />
+          <Route path="settings"      element={<CASettings />} />
         </Route>
 
         {/* ── Collector Admin ───────────────────────────────────────────────── */}
@@ -123,17 +106,7 @@ export default function App() {
           <Route path="leaderboard"   element={<Leaderboard />} />
           <Route path="users"         element={<MRFPersonnel />} />
           <Route path="notifications" element={<PBNotifications />} />
-          <Route
-            path="settings"
-            element={
-              <div className="flex flex-col gap-6">
-                <h1 className="font-bold text-text-primary" style={{ fontSize: 28 }}>Settings</h1>
-                <div className="bg-white rounded-xl" style={{ border: "1px solid #E5E7EB" }}>
-                  <ComingSoon title="Settings" description="System configuration and preferences are coming in a future update." />
-                </div>
-              </div>
-            }
-          />
+          <Route path="settings"      element={<PBSettings />} />
         </Route>
 
         {/* ── Catch-all ─────────────────────────────────────────────────────── */}

@@ -33,7 +33,7 @@ export const DASHBOARD_STATS = {
 
 // -- Bins ----------------------------------------------------------------------
 // status: 'full' | 'ok' | 'collected' | 'missed'
-// posX / posY: 0–1 percentage values (same as mobile)
+// posX / posY: 0ï¿½1 percentage values (same as mobile)
 export const BINS = [
   { id: "b1",  name: "Bin A-01", street: "P. Burgos St.",       barangay: "Alangilan",        cluster: "c1", status: "full",      reportedBy: "resident_01", timeReported: "2025-05-18T06:12:00Z", posX: 0.28, posY: 0.22 },
   { id: "b2",  name: "Bin A-02", street: "Rizal Ave.",          barangay: "Alangilan",        cluster: "c1", status: "ok",        reportedBy: null,          timeReported: null,                   posX: 0.32, posY: 0.30 },
@@ -180,8 +180,8 @@ export const NOTIFICATIONS = [
   { id: "n1", type: "announcement", title: "System Maintenance Tonight",       body: "The BE-SMART system will undergo scheduled maintenance from 11 PM to 1 AM. Please complete all route assignments before 10 PM.", target: "all",  priority: "urgent",  sentAt: "2025-05-18T09:00:00Z", read: false },
   { id: "n2", type: "schedule",     title: "Route RT-2025-002 Dispatched",     body: "Collection route for Cluster 2 has been sent to Maria Santos. 3 bins scheduled.", target: "c2",   priority: "normal",  sentAt: "2025-05-18T06:10:00Z", read: true  },
   { id: "n3", type: "complete",     title: "Route RT-2025-001 Completed",      body: "Cluster 1 collection route completed successfully. 3 bins collected.", target: "c1",   priority: "normal",  sentAt: "2025-05-18T08:45:00Z", read: true  },
-  { id: "n4", type: "report",       title: "Weekly Collection Report Ready",   body: "The weekly collection summary for May 11–17 is now available in Reports.", target: "all",  priority: "normal",  sentAt: "2025-05-17T17:00:00Z", read: false },
-  { id: "n5", type: "task",         title: "Missed Collection — Cluster 5",    body: "Bin H-01 in Sta. Rita Karsada was not collected yesterday. Please reschedule.", target: "c5",   priority: "urgent",  sentAt: "2025-05-17T16:30:00Z", read: false },
+  { id: "n4", type: "report",       title: "Weekly Collection Report Ready",   body: "The weekly collection summary for May 11ï¿½17 is now available in Reports.", target: "all",  priority: "normal",  sentAt: "2025-05-17T17:00:00Z", read: false },
+  { id: "n5", type: "task",         title: "Missed Collection ï¿½ Cluster 5",    body: "Bin H-01 in Sta. Rita Karsada was not collected yesterday. Please reschedule.", target: "c5",   priority: "urgent",  sentAt: "2025-05-17T16:30:00Z", read: false },
   { id: "n6", type: "announcement", title: "New Eco Token Policy Effective",   body: "Updated Eco Token reward rates are now active across all clusters starting today.", target: "all",  priority: "normal",  sentAt: "2025-05-16T08:00:00Z", read: true  },
 ];
 
@@ -191,7 +191,7 @@ export const RECENT_ACTIVITY = [
   { id: "a1", event: "bin_reported",        description: "Bin H-02 (Sta. Rita Karsada) reported full by resident",    timestamp: "2025-05-18T10:00:00Z" },
   { id: "a2", event: "route_sent",          description: "Route RT-2025-002 sent to Maria Santos (Cluster 2)",        timestamp: "2025-05-18T06:10:00Z" },
   { id: "a3", event: "collection_confirmed",description: "Bin B-02 (Cuta) marked as collected by Truck 01",           timestamp: "2025-05-18T08:20:00Z" },
-  { id: "a4", event: "route_completed",     description: "Route RT-2025-001 completed — Cluster 1",                   timestamp: "2025-05-18T08:45:00Z" },
+  { id: "a4", event: "route_completed",     description: "Route RT-2025-001 completed ï¿½ Cluster 1",                   timestamp: "2025-05-18T08:45:00Z" },
   { id: "a5", event: "bin_reported",        description: "Bin G-02 (Pallocan East) reported full by resident",        timestamp: "2025-05-18T09:45:00Z" },
   { id: "a6", event: "bin_reported",        description: "Bin C-01 (Kumintang Ibaba) reported full by resident",      timestamp: "2025-05-18T08:00:00Z" },
   { id: "a7", event: "collection_confirmed",description: "Bin F-01 (Pallocan West) marked as collected by Truck 03",  timestamp: "2025-05-18T07:15:00Z" },
@@ -223,7 +223,9 @@ export const MOCK_CREDENTIALS = {
 
 // -- Punong Barangay Credentials -----------------------------------------------
 export const PB_CREDENTIALS = {
-  email: "punongbarangay@besmart.gov.ph",
+  name:     "Hon. Juan dela Cruz",
+  barangay: "Brgy. Alangilan",
+  email:    "punongbarangay@besmart.gov.ph",
   password: "pb123",
 };
 
@@ -301,7 +303,7 @@ export const REWARDS = [
   { id: "rw8", name: "Laundry Detergent (500 g)",  pointsCost: 55,  stock: 0,   status: "unavailable", description: "500 g powder detergent for laundry use." },
 ];
 
-// -- Leaderboard — Alangilan Barangay Households -------------------------------
+// -- Leaderboard ï¿½ Alangilan Barangay Households -------------------------------
 export const LEADERBOARD_PERIODS = {
   "2025-05": [
     { rank: 1,  residentId: "res_001", name: "Santos Household",      street: "P. Burgos St.",    reportsSubmitted: 42, pointsEarned: 840,  badge: "gold"   },
@@ -377,7 +379,7 @@ export const LEADERBOARD_PERIODS = {
 
 export const LEADERBOARD = LEADERBOARD_PERIODS["2025-05"];
 
-// -- Super Admin — City-wide Barangay Leaderboard ------------------------------
+// -- Super Admin ï¿½ City-wide Barangay Leaderboard ------------------------------
 // Ranks all barangays across all clusters by household eco-activity.
 export const SA_LEADERBOARD_PERIODS = {
   "2025-05": [
@@ -412,7 +414,7 @@ export const SA_LEADERBOARD_PERIODS = {
   ],
 };
 
-// -- Cluster Admin — Barangay Leaderboard (within cluster) --------------------
+// -- Cluster Admin ï¿½ Barangay Leaderboard (within cluster) --------------------
 // Ranks barangays within Cluster 1 by household eco-activity.
 export const CA_LEADERBOARD_PERIODS = {
   "2025-05": [
@@ -444,7 +446,7 @@ export const MRF_PERSONNEL = [
   { id: "mp5", name: "Ernesto Pascual",  email: "ernesto.pascual@besmart.gov.ph",  mrf: "MRF Pallocan West",   role: "mrf_personnel", status: "active",   lastLogin: "2025-05-18T08:15:00Z" },
 ];
 
-// --- Super Admin — Reports & Analytics (City-Level) ---------------------------
+// --- Super Admin ï¿½ Reports & Analytics (City-Level) ---------------------------
 
 // -- KPI Summary Cards ---------------------------------------------------------
 export const REPORT_KPI = {
@@ -462,7 +464,7 @@ export const REPORT_KPI = {
   wasteGrowth:           9.3,
 };
 
-// -- Monthly Collections — city-wide (Jan–May 2025) ----------------------------
+// -- Monthly Collections ï¿½ city-wide (Janï¿½May 2025) ----------------------------
 // Used for the main bar/line chart
 export const MONTHLY_COLLECTIONS = [
   { month: "Jan", collected: 198, missed: 22, target: 220 },
@@ -472,7 +474,7 @@ export const MONTHLY_COLLECTIONS = [
   { month: "May", collected: 248, missed: 13, target: 255 },
 ];
 
-// -- Weekly Collections — current month (May 2025) -----------------------------
+// -- Weekly Collections ï¿½ current month (May 2025) -----------------------------
 export const WEEKLY_COLLECTIONS = [
   { week: "May W1", collected: 58, missed: 4, target: 62 },
   { week: "May W2", collected: 63, missed: 3, target: 65 },
@@ -490,7 +492,7 @@ export const CLUSTER_COLLECTION_RATES = [
   { cluster: "c5", label: "Cluster 5",              rate: 68.4, collected: 167, total: 244 },
 ];
 
-// -- Full Bin Trend — daily for last 14 days -----------------------------------
+// -- Full Bin Trend ï¿½ daily for last 14 days -----------------------------------
 export const FULL_BIN_TREND = [
   { date: "May 5",  fullBins: 28 },
   { date: "May 6",  fullBins: 31 },
@@ -508,7 +510,7 @@ export const FULL_BIN_TREND = [
   { date: "May 18", fullBins: 31 },
 ];
 
-// -- Waste Volume by Type (kg) — city-wide, current month ---------------------
+// -- Waste Volume by Type (kg) ï¿½ city-wide, current month ---------------------
 export const WASTE_BY_TYPE = [
   { type: "Biodegradable",  kg: 9_840,  color: "#2E7D32" },
   { type: "Recyclable",     kg: 7_210,  color: "#1976D2" },
@@ -516,7 +518,7 @@ export const WASTE_BY_TYPE = [
   { type: "Special Waste",  kg: 2_190,  color: "#DC2626" },
 ];
 
-// -- Eco Token Issuance — monthly ----------------------------------------------
+// -- Eco Token Issuance ï¿½ monthly ----------------------------------------------
 export const ECO_TOKEN_MONTHLY = [
   { month: "Jan", tokens: 10_420 },
   { month: "Feb", tokens: 11_850 },
@@ -534,7 +536,7 @@ export const CLUSTER_PERFORMANCE = [
   { cluster: "c5", label: "Cluster 5",  collectionRate: 68.4, residentEngagement: 69, avgResponseMin: 63, score: 66 },
 ];
 
-// -- Missed Collection Reasons — city-wide -------------------------------------
+// -- Missed Collection Reasons ï¿½ city-wide -------------------------------------
 export const MISSED_REASONS = [
   { reason: "Truck Breakdown",    count: 28, color: "#DC2626" },
   { reason: "Route Not Assigned", count: 22, color: "#D97706" },
@@ -543,7 +545,7 @@ export const MISSED_REASONS = [
   { reason: "Other",              count:  7, color: "#9CA3AF" },
 ];
 
-// -- Resident Engagement — monthly active reporters ----------------------------
+// -- Resident Engagement ï¿½ monthly active reporters ----------------------------
 export const RESIDENT_ENGAGEMENT = [
   { month: "Jan", activeReporters: 2_640, newSignups: 180 },
   { month: "Feb", activeReporters: 2_810, newSignups: 210 },
