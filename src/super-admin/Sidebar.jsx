@@ -5,19 +5,21 @@ import {
   Route,
   BarChart2,
   Users,
-  MapPin,
+  Building2,
   Leaf,
   Trophy,
+  Settings,
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { to: "/super-admin/dashboard", icon: LayoutGrid, label: "Dashboard" },
-  { to: "/super-admin/map",       icon: Map,        label: "Map & Collection" },
-  { to: "/super-admin/routes",    icon: Route,      label: "Route Management" },
-  { to: "/super-admin/users",     icon: Users,      label: "User Management" },
-  { to: "/super-admin/barangays", icon: MapPin,     label: "Barangay Management" },
-  { to: "/super-admin/reports",   icon: BarChart2,  label: "Reports & Analytics" },
-  { to: "/super-admin/leaderboard", icon: Trophy,   label: "Leaderboard" },
+  { to: "/super-admin/dashboard",     icon: LayoutGrid, label: "Dashboard" },
+  { to: "/super-admin/map",           icon: Map,        label: "Map & Collection" },
+  { to: "/super-admin/routes",        icon: Route,      label: "Route Management" },
+  { to: "/super-admin/users",         icon: Users,      label: "User Management" },
+  { to: "/super-admin/organizations", icon: Building2,  label: "Organization Management" },
+  { to: "/super-admin/reports",       icon: BarChart2,  label: "Reports & Analytics" },
+  { to: "/super-admin/leaderboard",   icon: Trophy,     label: "Leaderboard" },
+  { to: "/super-admin/settings",      icon: Settings,   label: "Settings" },
 ];
 
 export default function Sidebar() {

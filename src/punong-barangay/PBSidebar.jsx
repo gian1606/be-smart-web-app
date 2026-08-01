@@ -7,6 +7,7 @@ import {
   Users,
   QrCode,
   Leaf,
+  Settings,
 } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ const NAV_ITEMS = [
   { to: "/pb/rewards",     icon: Gift,       label: "Rewards Management" },
   { to: "/pb/leaderboard", icon: Trophy,     label: "Leaderboard" },
   { to: "/pb/users",       icon: Users,      label: "MRF Personnel" },
+  { to: "/pb/settings",    icon: Settings,   label: "Settings" },
 ];
 
 export default function PBSidebar() {

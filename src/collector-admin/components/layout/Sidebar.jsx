@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutGrid, Map, BarChart2, Truck, Users, Leaf } from "lucide-react";
+import { LayoutGrid, Map, BarChart2, Truck, Users, Settings, Leaf } from "lucide-react";
 import { CA_CREDENTIALS } from "../../../mock/data";
 
 const NAV_ITEMS = [
@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: "/ca/reports",   icon: BarChart2,  label: "Reports & Analytics" },
   { to: "/ca/units",     icon: Truck,      label: "Collector Unit Management" },
   { to: "/ca/users",     icon: Users,      label: "User Management" },
+  { to: "/ca/settings",  icon: Settings,   label: "Settings" },
 ];
 
 export default function CASidebar() {

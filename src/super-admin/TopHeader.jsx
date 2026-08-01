@@ -7,15 +7,16 @@ import {
 import { NOTIFICATIONS } from "../mock/data";
 
 const ROUTE_LABELS = {
-  "/super-admin/dashboard":   "Dashboard",
-  "/super-admin/map":         "Map & Collection",
-  "/super-admin/routes":      "Route Management",
-  "/super-admin/reports":     "Reports & Analytics",
-  "/super-admin/mrf":         "MRF Management",
-  "/super-admin/users":       "User Management",
-  "/super-admin/barangays":   "Barangay Management",
-  "/super-admin/leaderboard": "Leaderboard",
-  "/super-admin/settings":    "Settings",
+  "/super-admin/dashboard":     "Dashboard",
+  "/super-admin/map":           "Map & Collection",
+  "/super-admin/routes":        "Route Management",
+  "/super-admin/users":         "User Management",
+  "/super-admin/organizations": "Organization Management",
+  "/super-admin/reports":       "Reports & Analytics",
+  "/super-admin/mrf":           "MRF Management",
+  "/super-admin/notifications": "Notifications",
+  "/super-admin/leaderboard":   "Leaderboard",
+  "/super-admin/settings":      "Settings",
 };
 
 const NOTIF_TYPE_CONFIG = {

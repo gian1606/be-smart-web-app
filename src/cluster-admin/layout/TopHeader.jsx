@@ -7,12 +7,13 @@ import {
 import { NOTIFICATIONS, CLUSTER_INFO } from "../mock/data";
 
 const ROUTE_LABELS = {
-  "/cluster-admin/dashboard":   "Dashboard",
-  "/cluster-admin/map":         "Map & Collection",
-  "/cluster-admin/users":       "User Management",
-  "/cluster-admin/reports":     "Reports & Analytics",
-  "/cluster-admin/leaderboard": "Leaderboard",
-  "/cluster-admin/settings":    "Settings",
+  "/cluster-admin/dashboard":     "Dashboard",
+  "/cluster-admin/map":           "Map & Collection",
+  "/cluster-admin/users":         "User Management",
+  "/cluster-admin/reports":       "Reports & Analytics",
+  "/cluster-admin/notifications": "Notifications",
+  "/cluster-admin/leaderboard":   "Leaderboard",
+  "/cluster-admin/settings":      "Settings",
 };
 
 const NOTIF_TYPE_CONFIG = {
