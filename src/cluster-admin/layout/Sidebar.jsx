@@ -3,7 +3,6 @@ import {
   LayoutGrid,
   Map,
   BarChart2,
-  Leaf,
   Trophy,
   Settings,
 } from "lucide-react";
@@ -26,12 +25,7 @@ export default function Sidebar() {
       {/* Brand */}
       <div className="px-4 pt-6 pb-4 border-b border-white/10">
         <div className="flex items-center gap-3 mb-3">
-          <div
-            className="flex items-center justify-center rounded-lg flex-shrink-0"
-            style={{ width: 36, height: 36, background: "#2E7D32" }}
-          >
-            <Leaf size={20} color="#fff" />
-          </div>
+          <img src="/Batangas_logo.png" alt="Batangas City Seal" style={{ width: 36, height: 36, objectFit: "contain", flexShrink: 0 }} />
           <div>
             <div className="font-bold text-white leading-tight" style={{ fontSize: 17 }}>
               BE-SMART

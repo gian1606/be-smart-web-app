@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, Leaf, Lock, Star } from "lucide-react";
+import { Eye, EyeOff, Lock, Star } from "lucide-react";
 import { PB_CREDENTIALS } from "../mock/data";
 
 export default function PBLogin() {
@@ -66,12 +66,7 @@ export default function PBLogin() {
         }}
       >
         {/* Icon */}
-        <div
-          className="flex items-center justify-center rounded-xl mb-4"
-          style={{ width: 56, height: 56, background: "#E8F5E9" }}
-        >
-          <Leaf size={28} color="#2E7D32" />
-        </div>
+        <img src="/Batangas_logo.png" alt="Batangas City Seal" className="mb-4" style={{ width: 80, height: 80, objectFit: "contain" }} />
 
         {/* Wordmark */}
         <div className="font-bold text-text-primary text-center" style={{ fontSize: 28 }}>
